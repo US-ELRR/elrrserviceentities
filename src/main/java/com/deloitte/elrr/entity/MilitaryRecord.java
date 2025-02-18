@@ -21,8 +21,8 @@ import lombok.Setter;
 public class MilitaryRecord extends Auditable<String> {
 
     @ManyToOne
-    @JoinColumn(name="employee")
-    private Person employee;
+    @JoinColumn(name="person_id")
+    private Person person;
 
     @Column(name="branch")
     private String branch;
@@ -62,7 +62,7 @@ public class MilitaryRecord extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "MilitaryRecord [id=" + id + ", employee=" + employee + ", branch=" + branch + ", country=" + country
+        return "MilitaryRecord [person=" + person + ", id=" + id + ", branch=" + branch + ", country=" + country
                 + ", inductionDate=" + inductionDate + ", inductionRank=" + inductionRank + ", releaseDate="
                 + releaseDate + ", currentRank=" + currentRank + ", currentStatus=" + currentStatus + ", dischargeDate="
                 + dischargeDate + ", dischargeCategory=" + dischargeCategory + ", dischargeRank=" + dischargeRank

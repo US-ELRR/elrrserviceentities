@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS association (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
     organization_id             UUID NOT NULL REFERENCES organization (id) ON DELETE CASCADE,
-    association_type            association_type VARCHAR(255) NOT NULL,
+    association_type            VARCHAR(255) NOT NULL,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE
