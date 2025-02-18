@@ -1,7 +1,7 @@
 package com.deloitte.elrr.entity;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,10 +41,10 @@ public class LearningResource extends Auditable<String> {
     private String instructionMethod;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column(name = "provider_name")
     private String providerName;

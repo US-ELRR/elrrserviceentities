@@ -1,7 +1,7 @@
 package com.deloitte.elrr.entity;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -37,10 +37,10 @@ public class AbstractQualification extends Auditable<String> {
     private String taxonomyId;
 
     @Column(name = "valid_start_date")
-    private Date validStartDate;
+    private LocalDate validStartDate;
 
     @Column(name = "valid_end_date")
-    private Date validEndDate;
+    private LocalDate validEndDate;
 
     @Column(name = "parent_id")
     private String parentId;
@@ -73,10 +73,10 @@ public class AbstractQualification extends Auditable<String> {
     private String frameworkSubject;
 
     @Column(name = "framework_valid_start_date")
-    private Date frameworkValidStartDate;
+    private LocalDate frameworkValidStartDate;
 
     @Column(name = "framework_valid_end_date")
-    private Date frameworkValidEndDate;
+    private LocalDate frameworkValidEndDate;
 
     @Column(name = "record_status")
     private String recordStatus;

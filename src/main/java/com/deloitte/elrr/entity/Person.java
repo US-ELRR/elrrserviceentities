@@ -1,7 +1,7 @@
 package com.deloitte.elrr.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -106,7 +106,7 @@ public class Person extends Auditable<String> {
     private Location birthplaceAddress;
 
     @Column(name = "birthdate")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @ManyToMany
     @JoinTable(name="person_phone",
@@ -131,6 +131,9 @@ public class Person extends Auditable<String> {
 
     @OneToMany(mappedBy="person")
     private Set<Association> associations;
+
+    @OneToMany(mappedBy="employee")
+    private Set<EmploymentRecord> employmentRecords;
 
     @Column(name = "citizenship")
     private String citizenship;

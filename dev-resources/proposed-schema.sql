@@ -2,22 +2,8 @@ SET search_path TO elrr;
 
 -- Service Database Schema for P2997 Alignment
 
-DO $$ BEGIN
-    CREATE TYPE military_status AS ENUM (
-        'ACTIVE', 'RESERVE', 'SEPARATED', 'RETIRED');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
 
-
--- needs expansion
-DO $$ BEGIN
-    CREATE TYPE association_type AS ENUM (
-        'UNION', 'PROFESSIONAL_ORGANIZATION');
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
-
+-- yes, we need this status
 DO $$ BEGIN
     CREATE TYPE learning_status AS ENUM (
         'ATTEMPTED', 'COMPLETED', 'PASSED', 'FAILED');
@@ -130,7 +116,7 @@ CREATE TABLE IF NOT EXISTS association (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
     organization_id             UUID NOT NULL REFERENCES organization (id) ON DELETE CASCADE,
-    association_type            association_type NOT NULL,
+    association_type            association_type VARCHAR(255) NOT NULL,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE
@@ -276,7 +262,7 @@ CREATE TABLE IF NOT EXISTS employment_record (
 );
 
 CREATE TABLE IF NOT EXISTS employment_qualification (
-    employment_record_id        UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
+    employment_record_id        UUID NOT NULL REFERENCES employment_record (id) ON DELETE CASCADE,
     qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE
 );
 
@@ -289,7 +275,7 @@ CREATE TABLE IF NOT EXISTS military_record (
     induction_rank              VARCHAR(100),
     release_date                DATE,
     current_rank                VARCHAR(100),
-    current_status              military_status NOT NULL,
+    current_status              VARCHAR(100),
     discharge_date              DATE,
     discharge_category          VARCHAR(100),
     discharge_rank              VARCHAR(100),

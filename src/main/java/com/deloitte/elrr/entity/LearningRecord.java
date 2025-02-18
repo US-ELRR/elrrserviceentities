@@ -1,8 +1,8 @@
 package com.deloitte.elrr.entity;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
@@ -38,7 +38,7 @@ public class LearningRecord extends Auditable<String> {
     private Person person;
 
     @Column(name = "enrollment_date")
-    private Date enrollmentDate;
+    private LocalDate enrollmentDate;
 
     @Column(name = "record_status", columnDefinition = "elrr.learning_status")
     @Enumerated(EnumType.STRING)
