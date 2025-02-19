@@ -44,4 +44,8 @@ public class IdentitySvc implements CommonSvc<Identity, UUID> {
         return CommonSvc.super.save(identity);
     }
 
+    public Identity getByIfi(String ifi) {
+        return identityRepository.findByIfi(ifi);
+    }
+
 }

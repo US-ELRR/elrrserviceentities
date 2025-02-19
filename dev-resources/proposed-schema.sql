@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS person (
 
 CREATE TABLE IF NOT EXISTS identity (
     id                          UUID PRIMARY KEY,
-    person_id                   UUID REFERENCES person (id),
+    person_id                   UUID REFERENCES person (id) NOT NULL,
     mbox                        VARCHAR(255),
     mbox_sha1sum                VARCHAR(255),
     openid                      VARCHAR(255),

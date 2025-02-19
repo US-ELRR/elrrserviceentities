@@ -11,4 +11,5 @@ import com.deloitte.elrr.entity.Identity;
 public interface IdentityRepository
         extends JpaRepository<Identity, UUID> {
 
+    Identity findByIfi(String ifi);
 }

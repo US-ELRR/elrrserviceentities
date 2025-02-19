@@ -41,12 +41,28 @@ public class Identity extends Auditable<String> {
 
     @Column(name="ifi", nullable=false, length=255, updatable=false, insertable=false)
     @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
     private String ifi;
+    
+    public String getIfi(){ 
+        final String ifiTemplate = "%s::%s";
+        final String accountTemplate = "%s@%s";
+        if (mboxSha1Sum != null) {
+            return String.format(ifiTemplate, "mbox_sha1sum", mboxSha1Sum);
+        } else if (openid != null) {
+            return String.format(ifiTemplate, "openid", openid);
+        } else if (homePage != null) {
+            return String.format(ifiTemplate, "account", 
+                    String.format(accountTemplate, name, homePage));
+        } else {
+            return String.format("mbox", mbox);
+        }
+    }
 
     @Override
     public String toString() {
         return "Identity [person=" + person + ", mboxSha1Sum=" + mboxSha1Sum + ", id=" + id + ", mbox=" + mbox
-                + ", openid=" + openid + ", homePage=" + homePage + ", name=" + name + ", ifi=" + ifi + "]";
+                + ", openid=" + openid + ", homePage=" + homePage + ", name=" + name + ", ifi=" + getIfi() + "]";
     }
 
 }
