@@ -62,11 +62,7 @@ public class MilitaryRecord extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "MilitaryRecord [person=" + person + ", id=" + id + ", branch=" + branch + ", country=" + country
-                + ", inductionDate=" + inductionDate + ", inductionRank=" + inductionRank + ", releaseDate="
-                + releaseDate + ", currentRank=" + currentRank + ", currentStatus=" + currentStatus + ", dischargeDate="
-                + dischargeDate + ", dischargeCategory=" + dischargeCategory + ", dischargeRank=" + dischargeRank
-                + ", highestRank=" + highestRank + ", militaryId=" + militaryId + "]";
+        return "MilitaryRecord [person=" + person + ", id=" + id + "]";
     }
 
 }

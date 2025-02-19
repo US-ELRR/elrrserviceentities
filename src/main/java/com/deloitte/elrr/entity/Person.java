@@ -135,6 +135,12 @@ public class Person extends Auditable<String> {
     @OneToMany(mappedBy="employee")
     private Set<EmploymentRecord> employmentRecords;
 
+    @OneToMany(mappedBy="person")
+    private Set<MilitaryRecord> militaryRecords;
+
+    @OneToMany(mappedBy="person")
+    private Set<Identity> identities;
+
     @Column(name = "citizenship")
     private String citizenship;
 
@@ -170,15 +176,26 @@ public class Person extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "Person [name=" + name + ", firstName=" + firstName + ", id=" + id + ", middleName=" + middleName
+        return "Person [id=" + id + ", name=" + name + ", firstName=" + firstName + ", middleName=" + middleName
                 + ", lastName=" + lastName + ", namePrefix=" + namePrefix + ", titleAffixCode=" + titleAffixCode
                 + ", nameSuffix=" + nameSuffix + ", qualificationAffixCode=" + qualificationAffixCode + ", maidenName="
-                + maidenName + ", birthdate=" + birthdate + ", citizenship=" + citizenship + ", height=" + height
-                + ", heightUnit=" + heightUnit + ", weight=" + weight + ", weightUnit=" + weightUnit
-                + ", interpupillaryDistance=" + interpupillaryDistance + ", handedness=" + handedness
+                + maidenName + ", mailingAddress=" + mailingAddress + ", physicalAddress=" + physicalAddress
+                + ", shippingAddress=" + shippingAddress + ", billingAddress=" + billingAddress + ", onCampusAddress="
+                + onCampusAddress + ", offCampusAddress=" + offCampusAddress + ", permanentStudentAddress="
+                + permanentStudentAddress + ", employmentAddress=" + employmentAddress + ", timeOfAdmissionAddress="
+                + timeOfAdmissionAddress + ", fatherAddress=" + fatherAddress + ", motherAddress=" + motherAddress
+                + ", guardianAddress=" + guardianAddress + ", birthplaceAddress=" + birthplaceAddress + ", birthdate="
+                + birthdate + ", phoneNumbers=" + phoneNumbers + ", emailAddresses=" + emailAddresses
+                + ", competencies=" + competencies + ", credentials=" + credentials + ", learningRecords="
+                + learningRecords + ", associations=" + associations + ", employmentRecords=" + employmentRecords
+                + ", militaryRecords=" + militaryRecords + ", identities=" + identities + ", citizenship=" + citizenship
+                + ", height=" + height + ", heightUnit=" + heightUnit + ", weight=" + weight + ", weightUnit="
+                + weightUnit + ", interpupillaryDistance=" + interpupillaryDistance + ", handedness=" + handedness
                 + ", primaryLanguage=" + primaryLanguage + ", currentSecurityClearance=" + currentSecurityClearance
                 + ", highestSecurityClearance=" + highestSecurityClearance + ", unionMembership=" + unionMembership
                 + "]";
     }
+
+    
 
 }

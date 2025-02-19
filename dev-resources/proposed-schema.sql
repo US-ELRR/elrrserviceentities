@@ -110,6 +110,26 @@ CREATE TABLE IF NOT EXISTS person (
     last_modified               TIMESTAMP WITH TIME ZONE
 );
 
+CREATE TABLE IF NOT EXISTS identity (
+    id                          UUID PRIMARY KEY,
+    person_id                   UUID REFERENCES person (id),
+    mbox                        VARCHAR(255),
+    mbox_sha1sum                VARCHAR(255),
+    openid                      VARCHAR(255),
+    home_page                   VARCHAR(255),
+    name                        VARCHAR(255),
+    ifi                         VARCHAR(255) GENERATED ALWAYS AS (
+        CASE 
+            WHEN mbox_sha1sum IS NOT NULL   THEN ('mbox_sha1sum::' || mbox_sha1sum)
+            WHEN openid IS NOT NULL         THEN ('openid::' || openid)
+            WHEN home_page IS NOT NULL      THEN ('account::' || name || '@' || home_page)
+            ELSE ('mbox::' || mbox)
+        end
+    ) STORED,
+    updated_by                  VARCHAR(20),
+    inserted_date               TIMESTAMP WITH TIME ZONE,
+    last_modified               TIMESTAMP WITH TIME ZONE
+);
 
 
 CREATE TABLE IF NOT EXISTS association (
