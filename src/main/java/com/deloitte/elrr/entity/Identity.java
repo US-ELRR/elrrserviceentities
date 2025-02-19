@@ -39,7 +39,7 @@ public class Identity extends Auditable<String> {
     @Column(name="name")
     private String name;
 
-    @Column(name="USER_ID", nullable=false, length=255, updatable=false, insertable=false)
+    @Column(name="ifi", nullable=false, length=255, updatable=false, insertable=false)
     @Setter(AccessLevel.NONE)
     private String ifi;
 
