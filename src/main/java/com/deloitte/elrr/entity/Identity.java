@@ -1,11 +1,11 @@
 package com.deloitte.elrr.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,8 +43,9 @@ public class Identity extends Auditable<String> {
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     private String ifi;
-    
-    public String getIfi(){ 
+
+    @Transient
+    public static String createIfi(String mboxSha1Sum, String mbox, String openid, String homePage, String name){
         final String ifiTemplate = "%s::%s";
         final String accountTemplate = "%s@%s";
         if (mboxSha1Sum != null) {
@@ -57,6 +58,10 @@ public class Identity extends Auditable<String> {
         } else {
             return String.format("mbox", mbox);
         }
+    }
+
+    public String getIfi(){ 
+        return createIfi(mboxSha1Sum, mbox, openid, homePage, name);
     }
 
     @Override
