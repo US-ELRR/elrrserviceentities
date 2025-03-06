@@ -56,7 +56,7 @@ public class Identity extends Auditable<String> {
             return String.format(ifiTemplate, "account", 
                     String.format(accountTemplate, name, homePage));
         } else {
-            return String.format("mbox", mbox);
+            return String.format(ifiTemplate, "mbox", mbox);
         }
     }
 
