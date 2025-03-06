@@ -36,7 +36,7 @@ public abstract class Auditable<U> extends Entity {
     @CreationTimestamp
     private LocalDateTime insertedDate;
 
-    @Column(name = "updated_by")
+    @Column(name = "updated_by", length = 20)
     @LastModifiedBy
     private U updatedBy;
 
