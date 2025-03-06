@@ -1,6 +1,5 @@
 package com.deloitte.elrr.entity;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -29,33 +28,44 @@ import lombok.Setter;
 @Setter
 public class LearningRecord extends Auditable<String> {
 
-    @ManyToOne
-    @JoinColumn(name="learning_resource_id")
-    private LearningResource learningResource;
-    
-    @ManyToOne
-    @JoinColumn(name="person_id")
-    private Person person;
+  @ManyToOne
+  @JoinColumn(name = "learning_resource_id")
+  private LearningResource learningResource;
 
-    @Column(name = "enrollment_date")
-    private LocalDate enrollmentDate;
+  @ManyToOne
+  @JoinColumn(name = "person_id")
+  private Person person;
 
-    @Column(name = "record_status", columnDefinition = "elrr.learning_status")
-    @Enumerated(EnumType.STRING)
-    @JdbcType(PostgreSQLEnumJdbcType.class)
-    private LearningStatus recordStatus;
+  @Column(name = "enrollment_date")
+  private LocalDate enrollmentDate;
 
-    @Column(name = "academic_grade")
-    private String academicGrade;
+  @Column(name = "record_status", columnDefinition = "elrr.learning_status")
+  @Enumerated(EnumType.STRING)
+  @JdbcType(PostgreSQLEnumJdbcType.class)
+  private LearningStatus recordStatus;
 
-    @Column(name = "event_time")
-    private LocalDateTime eventTime;
+  @Column(name = "academic_grade")
+  private String academicGrade;
 
-    @Override
-    public String toString() {
-        return "LearningRecord [id=" + id + ", learningResource=" + learningResource + ", person=" + person
-                + ", enrollmentDate=" + enrollmentDate + ", recordStatus=" + recordStatus + ", academicGrade="
-                + academicGrade + ", eventTime=" + eventTime + "]";
-    }
+  @Column(name = "event_time")
+  private LocalDateTime eventTime;
 
+  @Override
+  public String toString() {
+    return "LearningRecord [id="
+        + id
+        + ", learningResource="
+        + learningResource
+        + ", person="
+        + person
+        + ", enrollmentDate="
+        + enrollmentDate
+        + ", recordStatus="
+        + recordStatus
+        + ", academicGrade="
+        + academicGrade
+        + ", eventTime="
+        + eventTime
+        + "]";
+  }
 }
