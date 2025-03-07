@@ -45,7 +45,7 @@ public class LearningRecord extends Auditable<String> {
     @JdbcType(PostgreSQLEnumJdbcType.class)
     private LearningStatus recordStatus;
 
-    @Column(name = "academic_grade")
+    @Column(name = "academic_grade", length = 50)
     private String academicGrade;
 
     @Column(name = "event_time")

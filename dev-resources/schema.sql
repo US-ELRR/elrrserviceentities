@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS person (
     mother_address_id           UUID REFERENCES location (id),
     guardian_address_id         UUID REFERENCES location (id),
     birthdate                   DATE,
-    birthplace                  UUID REFERENCES location (id),
+    birthplace_id               UUID REFERENCES location (id),
     citizenship                 VARCHAR(255),
     height                      numeric(5, 2),
     height_unit                 VARCHAR(255), --check on this
@@ -170,9 +170,11 @@ CREATE TABLE IF NOT EXISTS qualification (
 );
 
 CREATE TABLE IF NOT EXISTS person_qualification (
+    id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
     qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE,
-    hasRecord                   BOOLEAN,
+    type                        qualification_type NOT NULL,
+    has_record                  BOOLEAN,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE
@@ -289,18 +291,18 @@ CREATE TABLE IF NOT EXISTS employment_qualification (
 CREATE TABLE IF NOT EXISTS military_record (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id)  ON DELETE CASCADE,
-    branch                      VARCHAR(100) NOT NULL, -- ENUM? CONTROLLED?
-    country                     VARCHAR(100) NOT NULL, -- VALIDATED?
+    branch                      VARCHAR(255) NOT NULL, -- ENUM? CONTROLLED?
+    country                     VARCHAR(255) NOT NULL, -- VALIDATED?
     induction_date              DATE,
-    induction_rank              VARCHAR(100),
+    induction_rank              VARCHAR(255),
     release_date                DATE,
-    current_rank                VARCHAR(100),
-    current_status              VARCHAR(100),
+    current_rank                VARCHAR(255),
+    current_status              VARCHAR(255),
     discharge_date              DATE,
-    discharge_category          VARCHAR(100),
-    discharge_rank              VARCHAR(100),
-    highest_rank                VARCHAR(100),
-    military_id                 VARCHAR(100),
+    discharge_category          VARCHAR(255),
+    discharge_rank              VARCHAR(255),
+    highest_rank                VARCHAR(255),
+    military_id                 VARCHAR(255),
     -- jobs: needs clarification
     -- duties: needs clarification
     -- honors: needs clarification

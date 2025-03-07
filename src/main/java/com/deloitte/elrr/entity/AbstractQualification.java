@@ -24,16 +24,16 @@ import lombok.Setter;
 @Setter
 public class AbstractQualification extends Auditable<String> {
 
-    @Column(name = "identifier")
+    @Column(name = "identifier", length = 100)
     private String identifier;
 
-    @Column(name = "identifier_url")
+    @Column(name = "identifier_url", columnDefinition = "TEXT")
     private String identifierUrl;
 
-    @Column(name = "code")
+    @Column(name = "code", length = 100)
     private String code;
 
-    @Column(name = "taxonomy_id")
+    @Column(name = "taxonomy_id", length = 100)
     private String taxonomyId;
 
     @Column(name = "valid_start_date")
@@ -42,34 +42,34 @@ public class AbstractQualification extends Auditable<String> {
     @Column(name = "valid_end_date")
     private LocalDate validEndDate;
 
-    @Column(name = "parent_id")
+    @Column(name = "parent_id", length = 100)
     private String parentId;
 
-    @Column(name = "parent_url")
+    @Column(name = "parent_url", columnDefinition = "TEXT")
     private String parentUrl;
 
-    @Column(name = "parent_code")
+    @Column(name = "parent_code", length = 100)
     private String parentCode;
 
-    @Column(name = "type_url")
+    @Column(name = "type_url", columnDefinition = "TEXT")
     private String typeUrl;
 
-    @Column(name = "statement")
+    @Column(name = "statement", columnDefinition = "TEXT")
     private String statement;
 
-    @Column(name = "framework_title")
+    @Column(name = "framework_title", length = 100)
     private String frameworkTitle;
 
-    @Column(name = "framework_version")
+    @Column(name = "framework_version", length = 100)
     private String frameworkVersion;
 
-    @Column(name = "framework_identifier")
+    @Column(name = "framework_identifier", length = 100)
     private String frameworkIdentifier;
 
-    @Column(name = "framework_description")
+    @Column(name = "framework_description", columnDefinition = "TEXT")
     private String frameworkDescription;
 
-    @Column(name = "framework_subject")
+    @Column(name = "framework_subject", length = 100)
     private String frameworkSubject;
 
     @Column(name = "framework_valid_start_date")
@@ -78,7 +78,7 @@ public class AbstractQualification extends Auditable<String> {
     @Column(name = "framework_valid_end_date")
     private LocalDate frameworkValidEndDate;
 
-    @Column(name = "record_status")
+    @Column(name = "record_status", length = 10)
     private String recordStatus;
 
     @Override

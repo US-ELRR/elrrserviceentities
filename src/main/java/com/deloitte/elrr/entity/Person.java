@@ -144,14 +144,14 @@ public class Person extends Auditable<String> {
     @Column(name = "citizenship")
     private String citizenship;
 
-    @Column(name = "height")
+    @Column(name = "height", precision = 5, scale = 2)
     private BigDecimal height;
     
     @Column(name = "height_unit")
     private String heightUnit;
     
-    @Column(name = "weight")
-    private String weight;
+    @Column(name = "weight", precision = 5, scale = 2)
+    private BigDecimal weight;
 
     @Column(name = "weight_unit")
     private String weightUnit;

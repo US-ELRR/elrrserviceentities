@@ -56,7 +56,7 @@ public class Identity extends Auditable<String> {
             return String.format(ifiTemplate, "account", 
                     String.format(accountTemplate, name, homePage));
         } else {
-            return String.format("mbox", mbox);
+            return String.format(ifiTemplate, "mbox", mbox);
         }
     }
 
@@ -66,7 +66,7 @@ public class Identity extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "Identity [person=" + person + ", mboxSha1Sum=" + mboxSha1Sum + ", id=" + id + ", mbox=" + mbox
+        return "Identity [person=" + person.getId() + ", mboxSha1Sum=" + mboxSha1Sum + ", id=" + id + ", mbox=" + mbox
                 + ", openid=" + openid + ", homePage=" + homePage + ", name=" + name + ", ifi=" + getIfi() + "]";
     }
 

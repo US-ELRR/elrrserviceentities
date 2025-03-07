@@ -28,7 +28,7 @@ public class LearningResource extends Auditable<String> {
     @Column(name = "subject_matter")
     private String subjectMatter;
 
-    @Column(name = "subject_abbreviation")
+    @Column(name = "subject_abbreviation", length = 20)
     private String subjectAbbreviation;
 
     @Column(name = "level")
@@ -61,7 +61,7 @@ public class LearningResource extends Auditable<String> {
     @Column(name = "lrs_endpoint")
     private String lrsEndpoint;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Override
