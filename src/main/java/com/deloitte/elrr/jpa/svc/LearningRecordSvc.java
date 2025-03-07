@@ -10,7 +10,7 @@ import com.deloitte.elrr.repository.LearningRecordRepository;
 
 @Service
 public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
-  /** */
+
   private final LearningRecordRepository learningRecordRepository;
 
   /**
@@ -20,21 +20,25 @@ public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
     this.learningRecordRepository = argsLearningRecordRepository;
   }
 
-  /** */
   @Override
   public CrudRepository<LearningRecord, UUID> getRepository() {
     return this.learningRecordRepository;
   }
 
-  /** */
   @Override
   public UUID getId(final LearningRecord learningRecord) {
     return learningRecord.getId();
   }
 
-  /** */
   @Override
   public LearningRecord save(final LearningRecord learningRecord) {
     return CommonSvc.super.save(learningRecord);
+  }
+
+  public LearningRecord findByPersonIdAndLearninResourceId(
+      UUID personId, UUID learningRessourceId) {
+    LearningRecord learningRecord =
+        learningRecordRepository.findByPersonIdAndLearningResourceId(personId, learningRessourceId);
+    return learningRecord;
   }
 }
