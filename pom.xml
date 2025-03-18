@@ -8,13 +8,6 @@
   <artifactId>elrrserviceentities</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.5</version>
-    <relativePath />
-  </parent>
-
   <name>elrrserviceentities</name>
   <description>A simple elrrserviceentities.</description>
   <!-- FIXME change it to the project's website -->
@@ -27,29 +20,41 @@
 
   <dependencies>
     <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-        <scope>provided</scope>
-        <exclusions>
-            <exclusion>
-                <groupId>jakarta.activation</groupId>
-                <artifactId>jakarta.activation-api</artifactId>
-            </exclusion>
-            <exclusion>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-            </exclusion>
-        </exclusions>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>3.2.0</version>
     </dependency>
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
+        <version>1.18.36</version>
         <scope>provided</scope>
-		</dependency>
+    </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>6.6.9.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-commons</artifactId>
+        <version>3.4.3</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-jpa</artifactId>
+        <version>3.4.3</version>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.12.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.openpojo</groupId>
+        <artifactId>openpojo</artifactId>
+        <version>0.9.1</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.uuid</groupId>
@@ -59,7 +64,7 @@
   </dependencies>
 
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -78,13 +83,52 @@
           <version>3.1.2</version>
         </plugin>
         <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.2</version>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.5.2</version>
+            <configuration>
+                <argLine>
+                    --add-opens java.base/java.time=ALL-UNNAMED
+                    --add-opens java.base/java.lang.reflect=ALL-UNNAMED <!-- handy for spying spring proxies -->
+                </argLine>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.8</version>
+            <executions>
+                <execution>
+                    <id>prepare-agent</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>report</id>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <rules>
+                    <rule>
+                        <element>BUNDLE</element>
+                        <limits>
+                            <limit>
+                                <counter>COMPLEXITY</counter>
+                                <value>COVEREDRATIO</value>
+                                <minimum>0.20</minimum>
+                            </limit>
+                        </limits>
+                    </rule>
+                </rules>
+            </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
   </build>
-
   <reporting>
     <plugins>
       <plugin>

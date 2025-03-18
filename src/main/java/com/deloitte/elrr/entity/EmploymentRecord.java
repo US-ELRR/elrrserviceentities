@@ -56,7 +56,7 @@ public class EmploymentRecord extends Auditable<String> {
     @Column(name="position_title")
     private String positionTitle;
 
-    @Column(name="position_description")
+    @Column(name="position_description", columnDefinition = "TEXT")
     private String positionDescription;
 
     @Column(name="job_level")

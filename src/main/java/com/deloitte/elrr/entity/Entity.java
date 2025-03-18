@@ -2,9 +2,8 @@ package com.deloitte.elrr.entity;
 
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.deloitte.elrr.util.SemiSeqId;
 
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
@@ -20,8 +19,7 @@ import lombok.Setter;
 public abstract class Entity {
 
     @Id
-    @GenericGenerator(name = "semi_seq_uuid", strategy = "com.deloitte.elrr.util.SemiSeqUUIdGenerator")
-    @GeneratedValue(generator = "semi_seq_uuid")  
+    @SemiSeqId
     protected UUID id;
 
 }

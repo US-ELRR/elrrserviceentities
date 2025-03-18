@@ -23,7 +23,7 @@ public class Organization extends Auditable<String> {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
     
     @Column(name = "profit_type")
@@ -44,7 +44,6 @@ public class Organization extends Auditable<String> {
     @Column(name = "organization_identifier")
     private String organizationIdentifier;
 
-    //
     @Column(name = "organization_duns")
     private String organizationDUNS;
 
@@ -75,7 +74,7 @@ public class Organization extends Auditable<String> {
     @Column(name = "has_verification_service")
     private Boolean hasVerificationService;
 
-    @Column(name = "institution_verification")
+    @Column(name = "institution_verification", columnDefinition = "TEXT")
     private String institutionVerification;
 
     @Column(name = "organizational_resource")
