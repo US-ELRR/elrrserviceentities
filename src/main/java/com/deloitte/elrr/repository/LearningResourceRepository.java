@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.LearningResource;
 
 @Repository
-public interface LearningResourceRepository
-        extends JpaRepository<LearningResource, UUID> {
+public interface LearningResourceRepository extends JpaRepository<LearningResource, UUID> {
 
+  LearningResource findByIri(String iri);
 }
