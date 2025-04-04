@@ -35,10 +35,10 @@ public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
     return CommonSvc.super.save(learningRecord);
   }
 
-  public LearningRecord findByPersonIdAndLearninResourceId(
-      UUID personId, UUID learningRessourceId) {
+  public LearningRecord findByPersonIdAndLearningResourceId(
+      UUID personId, UUID learningResourceId) {
     LearningRecord learningRecord =
-        learningRecordRepository.findByPersonIdAndLearningResourceId(personId, learningRessourceId);
+        learningRecordRepository.findByPersonIdAndLearningResourceId(personId, learningResourceId);
     return learningRecord;
   }
 }
