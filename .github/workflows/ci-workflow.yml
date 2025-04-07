@@ -8,7 +8,7 @@ on:
       - 'v*.*.*'
 
 jobs:  
-  build-push:
+  build:
     # Install/build maven dependencies
     runs-on: ubuntu-latest    
 
