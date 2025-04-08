@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.PersonalCompetency;
 
 @Repository
-public interface PersonalCompetencyRepository
-        extends JpaRepository<PersonalCompetency, UUID> {
+public interface PersonalCompetencyRepository extends JpaRepository<PersonalCompetency, UUID> {
 
+  PersonalCompetency findByPersonIdAndCompetencyId(UUID personId, UUID competencyId);
 }
