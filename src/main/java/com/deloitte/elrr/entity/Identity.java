@@ -66,7 +66,8 @@ public class Identity extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "Identity [person=" + person.getId() + ", mboxSha1Sum=" + mboxSha1Sum + ", id=" + id + ", mbox=" + mbox
+        String personValue =  (person != null) ? person.getId().toString() : null;
+        return "Identity [person=" + personValue + ", mboxSha1Sum=" + mboxSha1Sum + ", id=" + id + ", mbox=" + mbox
                 + ", openid=" + openid + ", homePage=" + homePage + ", name=" + name + ", ifi=" + getIfi() + "]";
     }
 
