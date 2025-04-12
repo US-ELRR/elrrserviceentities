@@ -10,38 +10,33 @@ import com.deloitte.elrr.repository.CredentialRepository;
 
 @Service
 public class CredentialSvc implements CommonSvc<Credential, UUID> {
-    /**
-     *
-     */
-    private final CredentialRepository credentialRepository;
-    /**
-     *
-     * @param argsCredentialRepository
-     */
-    public CredentialSvc(
-            final CredentialRepository argsCredentialRepository) {
-        this.credentialRepository = argsCredentialRepository;
-    }
-    /**
-     *
-     */
-    @Override
-    public CrudRepository<Credential, UUID> getRepository() {
-        return this.credentialRepository;
-    }
-    /**
-     *
-     */
-    @Override
-    public UUID getId(final Credential credential) {
-        return credential.getId();
-    }
-    /**
-     *
-     */
-    @Override
-    public Credential save(final Credential credential) {
-        return CommonSvc.super.save(credential);
-    }
 
+  private final CredentialRepository credentialRepository;
+
+  /**
+   * @param argsCredentialRepository
+   */
+  public CredentialSvc(final CredentialRepository argsCredentialRepository) {
+    this.credentialRepository = argsCredentialRepository;
+  }
+
+  @Override
+  public CrudRepository<Credential, UUID> getRepository() {
+    return this.credentialRepository;
+  }
+
+  @Override
+  public UUID getId(final Credential credential) {
+    return credential.getId();
+  }
+
+  @Override
+  public Credential save(final Credential credential) {
+    return CommonSvc.super.save(credential);
+  }
+
+  public Credential findByIdentifier(String identifier) {
+    Credential credential = credentialRepository.findByIdentifier(identifier);
+    return credential;
+  }
 }

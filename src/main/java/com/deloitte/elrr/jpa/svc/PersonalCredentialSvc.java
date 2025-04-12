@@ -10,38 +10,34 @@ import com.deloitte.elrr.repository.PersonalCredentialRepository;
 
 @Service
 public class PersonalCredentialSvc implements CommonSvc<PersonalCredential, UUID> {
-    /**
-     *
-     */
-    private final PersonalCredentialRepository personalCredentialRepository;
-    /**
-     *
-     * @param argsCredentialRepository
-     */
-    public PersonalCredentialSvc(
-            final PersonalCredentialRepository argsRepository) {
-        this.personalCredentialRepository = argsRepository;
-    }
-    /**
-     *
-     */
-    @Override
-    public CrudRepository<PersonalCredential, UUID> getRepository() {
-        return this.personalCredentialRepository;
-    }
-    /**
-     *
-     */
-    @Override
-    public UUID getId(final PersonalCredential pq) {
-        return pq.getId();
-    }
-    /**
-     *
-     */
-    @Override
-    public PersonalCredential save(final PersonalCredential pq) {
-        return CommonSvc.super.save(pq);
-    }
 
+  private final PersonalCredentialRepository personalCredentialRepository;
+
+  /**
+   * @param argsCredentialRepository
+   */
+  public PersonalCredentialSvc(final PersonalCredentialRepository argsRepository) {
+    this.personalCredentialRepository = argsRepository;
+  }
+
+  @Override
+  public CrudRepository<PersonalCredential, UUID> getRepository() {
+    return this.personalCredentialRepository;
+  }
+
+  @Override
+  public UUID getId(final PersonalCredential pq) {
+    return pq.getId();
+  }
+
+  @Override
+  public PersonalCredential save(final PersonalCredential pq) {
+    return CommonSvc.super.save(pq);
+  }
+
+  public PersonalCredential findByPersonIdAndCredentialId(UUID personId, UUID credentialId) {
+    PersonalCredential personalCredential =
+        personalCredentialRepository.findByPersonIdAndCredentialId(personId, credentialId);
+    return personalCredential;
+  }
 }

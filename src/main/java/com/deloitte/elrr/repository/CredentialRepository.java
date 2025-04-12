@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.Credential;
 
 @Repository
-public interface CredentialRepository
-        extends JpaRepository<Credential, UUID> {
+public interface CredentialRepository extends JpaRepository<Credential, UUID> {
 
+  Credential findByIdentifier(String identifier);
 }
