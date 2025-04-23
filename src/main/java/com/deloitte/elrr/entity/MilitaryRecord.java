@@ -21,47 +21,47 @@ import lombok.Setter;
 public class MilitaryRecord extends Auditable<String> {
 
     @ManyToOne
-    @JoinColumn(name="person_id")
+    @JoinColumn(name = "person_id")
     private Person person;
 
-    @Column(name="branch")
+    @Column(name = "branch")
     private String branch;
 
-    @Column(name="country")
+    @Column(name = "country")
     private String country;
 
-    @Column(name="induction_date")
+    @Column(name = "induction_date")
     private LocalDate inductionDate;
 
-    @Column(name="induction_rank")
+    @Column(name = "induction_rank")
     private String inductionRank;
 
-    @Column(name="release_date")
+    @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    @Column(name="current_rank")
+    @Column(name = "current_rank")
     private String currentRank;
 
-    @Column(name="current_status")
+    @Column(name = "current_status")
     private String currentStatus;
 
-    @Column(name="discharge_date")
+    @Column(name = "discharge_date")
     private LocalDate dischargeDate;
 
-    @Column(name="discharge_category")
+    @Column(name = "discharge_category")
     private String dischargeCategory;
 
-    @Column(name="discharge_rank")
+    @Column(name = "discharge_rank")
     private String dischargeRank;
 
-    @Column(name="highest_rank")
+    @Column(name = "highest_rank")
     private String highestRank;
 
-    @Column(name="military_id")
+    @Column(name = "military_id")
     private String militaryId;
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "MilitaryRecord [person=" + person + ", id=" + id + "]";
     }
 

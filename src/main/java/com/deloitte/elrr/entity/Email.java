@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Email extends Auditable<String> {
-    
+
     @Column(name = "email_address")
     private String emailAddress;
 
@@ -24,6 +24,7 @@ public class Email extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "Email [emailAddress=" + emailAddress + ", emailAddressType=" + emailAddressType + ", id=" + id + "]";
+        return "Email [emailAddress=" + emailAddress + ", emailAddressType="
+        + emailAddressType + ", id=" + id + "]";
     }
 }

@@ -16,13 +16,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Location extends Auditable<String> {
-    
+
     @Column(name = "street_number_and_name")
     private String streetNumberAndName;
 
     @Column(name = "apartment_room_suite_number")
     private String apartmentRoomSuiteNumber;
-    
+
     @Column(name = "city")
     private String city;
 
@@ -37,7 +37,7 @@ public class Location extends Auditable<String> {
 
     @Column(name = "country_code")
     private String countryCode;
-    
+
     @Column(name = "latitude")
     private String latitude;
 
@@ -46,10 +46,12 @@ public class Location extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "Location [streetNumberAndName=" + streetNumberAndName + ", apartmentRoomSuiteNumber="
-                + apartmentRoomSuiteNumber + ", id=" + id + ", city=" + city + ", stateAbbreviation="
-                + stateAbbreviation + ", postalCode=" + postalCode + ", county=" + county + ", countryCode="
-                + countryCode + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+        return "Location [streetNumberAndname = " + streetNumberAndName
+        + ", apartmentRoomSuiteNumber=" + apartmentRoomSuiteNumber + ", id="
+        + id + ", city=" + city + ", stateAbbreviation=" + stateAbbreviation
+        + ", postalCode=" + postalCode + ", county=" + county + ", countryCode="
+        + countryCode + ", latitude=" + latitude + ", longitude=" + longitude
+        + "]";
     }
 
 }
