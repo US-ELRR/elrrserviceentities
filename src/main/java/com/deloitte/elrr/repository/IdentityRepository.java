@@ -11,5 +11,11 @@ import com.deloitte.elrr.entity.Identity;
 public interface IdentityRepository
         extends JpaRepository<Identity, UUID> {
 
+    /**
+    * find method for Identity by inverse functional identifier.
+    *
+    * @param   ifi     inverse functional identifier to find Identity for
+    * @return  matching identity if exists
+    */
     Identity findByIfi(String ifi);
 }
