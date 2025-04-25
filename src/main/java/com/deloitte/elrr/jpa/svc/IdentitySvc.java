@@ -36,15 +36,19 @@ public class IdentitySvc implements CommonSvc<Identity, UUID> {
     public UUID getId(final Identity identity) {
         return identity.getId();
     }
-    /**
-     *
-     */
+
     @Override
     public Identity save(final Identity identity) {
         return CommonSvc.super.save(identity);
     }
 
-    public Identity getByIfi(String ifi) {
+    /**
+    * Search for Identity by IFI.
+    *
+    * @param   ifi  Inverse functional identifier to search with
+    * @return  Matching Identity
+    */
+    public Identity getByIfi(final String ifi) {
         return identityRepository.findByIfi(ifi);
     }
 

@@ -20,10 +20,9 @@ import lombok.Setter;
 public class PersonalQualification extends Auditable<String> {
 
     @ManyToOne
-    @JoinColumn(name="person_id")
-    public Person person;
-    
-    @Column(name = "has_record")
-    public Boolean hasRecord;
+    @JoinColumn(name = "person_id")
+    protected Person person;
 
+    @Column(name = "has_record")
+    protected Boolean hasRecord;
 }

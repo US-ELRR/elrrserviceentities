@@ -9,7 +9,8 @@ import com.deloitte.elrr.entity.PersonalCredential;
 import com.deloitte.elrr.repository.PersonalCredentialRepository;
 
 @Service
-public class PersonalCredentialSvc implements CommonSvc<PersonalCredential, UUID> {
+public class PersonalCredentialSvc implements
+    CommonSvc<PersonalCredential, UUID> {
     /**
      *
      */
@@ -19,8 +20,8 @@ public class PersonalCredentialSvc implements CommonSvc<PersonalCredential, UUID
      * @param argsCredentialRepository
      */
     public PersonalCredentialSvc(
-            final PersonalCredentialRepository argsRepository) {
-        this.personalCredentialRepository = argsRepository;
+            final PersonalCredentialRepository argsCredentialRepository) {
+        this.personalCredentialRepository = argsCredentialRepository;
     }
     /**
      *

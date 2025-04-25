@@ -8,7 +8,8 @@ import com.fasterxml.uuid.Generators;
 public class SemiSeqUUIdGenerator implements IdentifierGenerator {
 
     @Override
-    public Object generate(SharedSessionContractImplementor session, Object object) {
+    public Object generate(final SharedSessionContractImplementor session,
+                    final Object object) {
         return Generators.timeBasedEpochRandomGenerator().generate();
     }
 }

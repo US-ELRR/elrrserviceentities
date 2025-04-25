@@ -19,13 +19,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Organization extends Auditable<String> {
-    
+
     @Column(name = "name")
     private String name;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-    
+
     @Column(name = "profit_type")
     private String profitType;
 
@@ -40,7 +40,7 @@ public class Organization extends Auditable<String> {
 
     @Column(name = "vertical_specialization")
     private String verticalSpecialization;
-    
+
     @Column(name = "organization_identifier")
     private String organizationIdentifier;
 
@@ -67,7 +67,7 @@ public class Organization extends Auditable<String> {
 
     @Column(name = "institution_level")
     private String institutionLevel;
-    
+
     @Column(name = "institution_revocation_list")
     private String institutionRevocationList;
 
@@ -83,25 +83,26 @@ public class Organization extends Auditable<String> {
     @Column(name = "quality_assurance_type")
     private String qualityAssuranceType;
 
-    @OneToMany(mappedBy="organization")
+    @OneToMany(mappedBy = "organization")
     private Set<Association> associations;
 
     @Override
     public String toString() {
-        return "Organization [name=" + name + ", description=" + description + ", profitType=" + profitType + ", id="
-                + id + ", department=" + department + ", industryCode=" + industryCode + ", industryCategory="
-                + industryCategory + ", verticalSpecialization=" + verticalSpecialization + ", organizationIdentifier="
-                + organizationIdentifier + ", organizationDUNS=" + organizationDUNS + ", organizationFEIN="
-                + organizationFEIN + ", schoolOPEID=" + schoolOPEID + ", ipedsType=" + ipedsType + ", organizationISIC="
-                + organizationISIC + ", organizationImage=" + organizationImage + ", organizationWebsite="
-                + organizationWebsite + ", institutionLevel=" + institutionLevel + ", institutionRevocationList="
-                + institutionRevocationList + ", hasVerificationService=" + hasVerificationService
-                + ", institutionVerification=" + institutionVerification + ", organizationalResource="
-                + organizationalResource + ", qualityAssuranceType=" + qualityAssuranceType + "]";
+        return "Organization [name = " + name + ", description=" + description
+        + ", profitType=" + profitType + ", id=" + id + ", department="
+        + department + ", industryCode=" + industryCode + ", industryCategory="
+        + industryCategory + ", verticalSpecialization="
+        + verticalSpecialization + ", organizationIdentifier="
+        + organizationIdentifier + ", organizationDUNS=" + organizationDUNS
+        + ", organizationFEIN=" + organizationFEIN + ", schoolOPEID="
+        + schoolOPEID + ", ipedsType=" + ipedsType + ", organizationISIC="
+        + organizationISIC + ", organizationImage=" + organizationImage
+        + ", organizationWebsite=" + organizationWebsite + ", institutionLevel="
+        + institutionLevel + ", institutionRevocationList="
+        + institutionRevocationList + ", hasVerificationService="
+        + hasVerificationService + ", institutionVerification="
+        + institutionVerification + ", organizationalResource="
+        + organizationalResource + ", qualityAssuranceType="
+        + qualityAssuranceType + "]";
     }
-
-    //organization_accredits
-
-   
-
 }

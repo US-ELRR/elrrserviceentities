@@ -9,7 +9,8 @@ import com.deloitte.elrr.entity.PersonalCompetency;
 import com.deloitte.elrr.repository.PersonalCompetencyRepository;
 
 @Service
-public class PersonalCompetencySvc implements CommonSvc<PersonalCompetency, UUID> {
+public class PersonalCompetencySvc implements
+    CommonSvc<PersonalCompetency, UUID> {
     /**
      *
      */
@@ -19,8 +20,8 @@ public class PersonalCompetencySvc implements CommonSvc<PersonalCompetency, UUID
      * @param argsCompetencyRepository
      */
     public PersonalCompetencySvc(
-            final PersonalCompetencyRepository argsRepository) {
-        this.personalCompetencyRepository = argsRepository;
+            final PersonalCompetencyRepository argsCompetencyRepository) {
+        this.personalCompetencyRepository = argsCompetencyRepository;
     }
     /**
      *

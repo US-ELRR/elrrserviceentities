@@ -18,12 +18,20 @@ import lombok.Setter;
 public class PersonalCompetency extends PersonalQualification {
 
     @ManyToOne
-    @JoinColumn(name="qualification_id")
+    @JoinColumn(name = "qualification_id")
     private Competency competency;
 
-    public PersonalCompetency(Person p, Competency c, Boolean hasRecord){
-        this.setCompetency(c);
+    /**
+    * Constructor to create a new PersonalCompetency from properties.
+    *
+    * @param  person     Person for PersonalComptency
+    * @param  comp       Comptency for PersonalCompetency
+    * @param  hasRecord  Whether the assertion has a record
+    */
+    public PersonalCompetency(Person person, Competency comp,
+            Boolean hasRecord) {
+        this.setCompetency(comp);
         this.setHasRecord(hasRecord);
-        this.setPerson(p);
+        this.setPerson(person);
     }
 }

@@ -30,11 +30,11 @@ import lombok.Setter;
 public class LearningRecord extends Auditable<String> {
 
     @ManyToOne
-    @JoinColumn(name="learning_resource_id")
+    @JoinColumn(name = "learning_resource_id")
     private LearningResource learningResource;
-    
+
     @ManyToOne
-    @JoinColumn(name="person_id")
+    @JoinColumn(name = "person_id")
     private Person person;
 
     @Column(name = "enrollment_date")
@@ -53,9 +53,10 @@ public class LearningRecord extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "LearningRecord [id=" + id + ", learningResource=" + learningResource + ", person=" + person
-                + ", enrollmentDate=" + enrollmentDate + ", recordStatus=" + recordStatus + ", academicGrade="
-                + academicGrade + ", eventTime=" + eventTime + "]";
+        return "LearningRecord [id=" + id + ", learningResource="
+        + learningResource + ", person=" + person + ", enrollmentDate="
+        + enrollmentDate + ", recordStatus=" + recordStatus + ", academicGrade="
+        + academicGrade + ", eventTime=" + eventTime + "]";
     }
 
 }

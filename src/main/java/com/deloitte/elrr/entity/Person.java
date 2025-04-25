@@ -25,16 +25,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Person extends Auditable<String> {
-    
+
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "first_name")
     private String firstName;
-    
+
     @Column(name = "middle_name")
     private String middleName;
-    
+
     @Column(name = "last_name")
     private String lastName;
 
@@ -54,91 +54,95 @@ public class Person extends Auditable<String> {
     private String maidenName;
 
     @ManyToOne
-    @JoinColumn(name="mailing_address_id")
+    @JoinColumn(name = "mailing_address_id")
     private Location mailingAddress;
 
     @ManyToOne
-    @JoinColumn(name="physical_address_id")
+    @JoinColumn(name = "physical_address_id")
     private Location physicalAddress;
 
     @ManyToOne
-    @JoinColumn(name="shipping_address_id")
+    @JoinColumn(name = "shipping_address_id")
     private Location shippingAddress;
 
     @ManyToOne
-    @JoinColumn(name="billing_address_id")
+    @JoinColumn(name = "billing_address_id")
     private Location billingAddress;
 
     @ManyToOne
-    @JoinColumn(name="on_campus_address_id")
+    @JoinColumn(name = "on_campus_address_id")
     private Location onCampusAddress;
 
     @ManyToOne
-    @JoinColumn(name="off_campus_address_id")
+    @JoinColumn(name = "off_campus_address_id")
     private Location offCampusAddress;
 
     @ManyToOne
-    @JoinColumn(name="permanent_student_address_id")
+    @JoinColumn(name = "permanent_student_address_id")
     private Location permanentStudentAddress;
 
     @ManyToOne
-    @JoinColumn(name="employment_address_id")
+    @JoinColumn(name = "employment_address_id")
     private Location employmentAddress;
 
     @ManyToOne
-    @JoinColumn(name="time_of_admission_address_id")
+    @JoinColumn(name = "time_of_admission_address_id")
     private Location timeOfAdmissionAddress;
 
     @ManyToOne
-    @JoinColumn(name="father_address_id")
+    @JoinColumn(name = "father_address_id")
     private Location fatherAddress;
 
     @ManyToOne
-    @JoinColumn(name="mother_address_id")
+    @JoinColumn(name = "mother_address_id")
     private Location motherAddress;
 
     @ManyToOne
-    @JoinColumn(name="guardian_address_id")
+    @JoinColumn(name = "guardian_address_id")
     private Location guardianAddress;
 
     @ManyToOne
-    @JoinColumn(name="birthplace_id")
+    @JoinColumn(name = "birthplace_id")
     private Location birthplaceAddress;
 
     @Column(name = "birthdate")
     private LocalDate birthdate;
 
     @ManyToMany
-    @JoinTable(name="person_phone",
-        joinColumns=@JoinColumn(name="person_id", referencedColumnName="id"),
-        inverseJoinColumns=@JoinColumn(name="phone_id", referencedColumnName="id"))
+    @JoinTable(name = "person_phone",
+        joinColumns = @JoinColumn(name = "person_id",
+            referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "phone_id",
+            referencedColumnName = "id"))
     private Set<Phone> phoneNumbers;
 
     @ManyToMany
-    @JoinTable(name="person_email",
-        joinColumns=@JoinColumn(name="person_id", referencedColumnName="id"),
-        inverseJoinColumns=@JoinColumn(name="email_id", referencedColumnName="id"))
+    @JoinTable(name = "person_email",
+        joinColumns = @JoinColumn(name = "person_id",
+            referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "email_id",
+            referencedColumnName = "id"))
     private Set<Email> emailAddresses;
 
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy = "person")
     private Set<PersonalCompetency> competencies;
 
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy = "person")
     private Set<PersonalCredential> credentials;
 
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy = "person")
     private Set<LearningRecord> learningRecords;
 
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy = "person")
     private Set<Association> associations;
 
-    @OneToMany(mappedBy="employee")
+    @OneToMany(mappedBy = "employee")
     private Set<EmploymentRecord> employmentRecords;
 
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy = "person")
     private Set<MilitaryRecord> militaryRecords;
 
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy = "person")
     private Set<Identity> identities;
 
     @Column(name = "citizenship")
@@ -146,10 +150,10 @@ public class Person extends Auditable<String> {
 
     @Column(name = "height", precision = 5, scale = 2)
     private BigDecimal height;
-    
+
     @Column(name = "height_unit")
     private String heightUnit;
-    
+
     @Column(name = "weight", precision = 5, scale = 2)
     private BigDecimal weight;
 
@@ -176,26 +180,23 @@ public class Person extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "Person [id=" + id + ", name=" + name + ", firstName=" + firstName + ", middleName=" + middleName
-                + ", lastName=" + lastName + ", namePrefix=" + namePrefix + ", titleAffixCode=" + titleAffixCode
-                + ", nameSuffix=" + nameSuffix + ", qualificationAffixCode=" + qualificationAffixCode + ", maidenName="
-                + maidenName + ", mailingAddress=" + mailingAddress + ", physicalAddress=" + physicalAddress
-                + ", shippingAddress=" + shippingAddress + ", billingAddress=" + billingAddress + ", onCampusAddress="
-                + onCampusAddress + ", offCampusAddress=" + offCampusAddress + ", permanentStudentAddress="
-                + permanentStudentAddress + ", employmentAddress=" + employmentAddress + ", timeOfAdmissionAddress="
-                + timeOfAdmissionAddress + ", fatherAddress=" + fatherAddress + ", motherAddress=" + motherAddress
-                + ", guardianAddress=" + guardianAddress + ", birthplaceAddress=" + birthplaceAddress + ", birthdate="
-                + birthdate + ", phoneNumbers=" + phoneNumbers + ", emailAddresses=" + emailAddresses
-                + ", competencies=" + competencies + ", credentials=" + credentials + ", learningRecords="
-                + learningRecords + ", associations=" + associations + ", employmentRecords=" + employmentRecords
-                + ", militaryRecords=" + militaryRecords + ", identities=" + identities + ", citizenship=" + citizenship
-                + ", height=" + height + ", heightUnit=" + heightUnit + ", weight=" + weight + ", weightUnit="
-                + weightUnit + ", interpupillaryDistance=" + interpupillaryDistance + ", handedness=" + handedness
-                + ", primaryLanguage=" + primaryLanguage + ", currentSecurityClearance=" + currentSecurityClearance
-                + ", highestSecurityClearance=" + highestSecurityClearance + ", unionMembership=" + unionMembership
-                + "]";
+        return "Person [id=" + id + ", name = " + name + ", firstname = "
+        + firstName + ", middlename = " + middleName + ", lastname = "
+        + lastName + ", namePrefix=" + namePrefix + ", titleAffixCode="
+        + titleAffixCode + ", nameSuffix=" + nameSuffix
+        + ", qualificationAffixCode=" + qualificationAffixCode
+        + ", maidenname = " + maidenName + ", mailingAddress=" + mailingAddress
+        + ", phoneNumbers=" + phoneNumbers + ", emailAddresses="
+        + emailAddresses + ", competencies=" + competencies + ", credentials="
+        + credentials + ", learningRecords=" + learningRecords
+        + ", associations=" + associations + ", employmentRecords="
+        + employmentRecords + ", militaryRecords=" + militaryRecords
+        + ", identities=" + identities + ", citizenship=" + citizenship
+        + ", height=" + height + ", heightUnit=" + heightUnit + ", weight="
+        + weight + ", weightUnit=" + weightUnit + ", interpupillaryDistance="
+        + interpupillaryDistance + ", handedness=" + handedness
+        + ", primaryLanguage=" + primaryLanguage + ", currentSecurityClearance="
+        + currentSecurityClearance + ", highestSecurityClearance="
+        + highestSecurityClearance + "]";
     }
-
-    
-
 }

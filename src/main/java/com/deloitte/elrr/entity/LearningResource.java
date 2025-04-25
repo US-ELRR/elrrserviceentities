@@ -1,6 +1,5 @@
 package com.deloitte.elrr.entity;
 
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -18,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LearningResource extends Auditable<String> {
-    
+
     @Column(name = "iri")
     private String iri;
 
@@ -66,11 +65,15 @@ public class LearningResource extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "LearningResource [iri=" + iri + ", title=" + title + ", id=" + id + ", subjectMatter=" + subjectMatter
-                + ", subjectAbbreviation=" + subjectAbbreviation + ", level=" + level + ", number=" + number
-                + ", instructionMethod=" + instructionMethod + ", startDate=" + startDate + ", endDate=" + endDate
-                + ", providerName=" + providerName + ", departmentName=" + departmentName + ", gradeScaleCode="
-                + gradeScaleCode + ", metadataRepository=" + metadataRepository + ", lrsEndpoint=" + lrsEndpoint
-                + ", description=" + description + "]";
+        return "LearningResource [iri=" + iri + ", title=" + title + ", id="
+                + id + ", subjectMatter=" + subjectMatter
+                + ", subjectAbbreviation=" + subjectAbbreviation + ", level="
+                + level + ", number=" + number + ", instructionMethod="
+                + instructionMethod + ", startDate=" + startDate + ", endDate="
+                + endDate + ", providername = " + providerName
+                + ", departmentname = " + departmentName + ", gradeScaleCode="
+                + gradeScaleCode + ", metadataRepository=" + metadataRepository
+                + ", lrsEndpoint=" + lrsEndpoint + ", description="
+                + description + "]";
     }
 }

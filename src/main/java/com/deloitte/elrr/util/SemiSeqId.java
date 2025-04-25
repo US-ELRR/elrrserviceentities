@@ -9,7 +9,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import org.hibernate.annotations.IdGeneratorType;
 
 @IdGeneratorType(SemiSeqUUIdGenerator.class)
-@Retention( RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ FIELD, METHOD})
 public @interface SemiSeqId {
 

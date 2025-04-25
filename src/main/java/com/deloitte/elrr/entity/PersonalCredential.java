@@ -18,18 +18,20 @@ import lombok.Setter;
 public class PersonalCredential extends PersonalQualification {
 
     @ManyToOne
-    @JoinColumn(name="qualification_id")
+    @JoinColumn(name = "qualification_id")
     private Credential credential;
 
-    public PersonalCredential(Person p, Credential c, Boolean hasRecord){
-        this.setCredential(c);
+    /**
+    * Constructor to create a new PersonalCredential from properties.
+    *
+    * @param  person     Person for PersonalCredential
+    * @param  cred       Comptency for PersonalCredential
+    * @param  hasRecord  Whether the assertion has a record
+    */
+    public PersonalCredential(Person person, Credential cred,
+            Boolean hasRecord) {
+        this.setCredential(cred);
         this.setHasRecord(hasRecord);
-        this.setPerson(p);
+        this.setPerson(person);
     }
-
-    //@Override
-    //public AbstractQualification getQualification() {
-    //    return credential;
-    //}
-
 }

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Phone extends Auditable<String> {
-    
+
     @Column(name = "telephone_number")
     private String telephoneNumber;
 
@@ -24,8 +24,9 @@ public class Phone extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "Phone [telephoneNumber=" + telephoneNumber + ", telephoneNumberType=" + telephoneNumberType + ", id="
-                + id + "]";
+        return "Phone [telephoneNumber=" + telephoneNumber
+        + ", telephoneNumberType=" + telephoneNumberType + ", id="
+        + id + "]";
     }
 
 }
