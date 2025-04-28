@@ -21,8 +21,10 @@ public class PersonalQualification extends Auditable<String> {
 
     @ManyToOne
     @JoinColumn(name = "person_id")
+    @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Person person;
 
     @Column(name = "has_record")
+    @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Boolean hasRecord;
 }

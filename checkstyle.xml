@@ -192,9 +192,7 @@
                 default="checkstyle-xpath-suppressions.xml" />
       <property name="optional" value="true"/>
     </module>
-
+    <module name="SuppressWarningsHolder"/>
   </module>
-  <module name="SuppressionFilter">
-    <property name="file" value="checkstyle-suppressions.xml" />
-  </module>
+  <module name="SuppressWarningsFilter"/>
 </module>
