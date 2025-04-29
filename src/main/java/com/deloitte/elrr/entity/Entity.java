@@ -20,6 +20,7 @@ public abstract class Entity {
 
     @Id
     @SemiSeqId
+    @SuppressWarnings("checkstyle:visibilitymodifier")
     protected UUID id;
 
 }
