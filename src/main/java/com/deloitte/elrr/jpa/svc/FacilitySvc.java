@@ -37,9 +37,9 @@ public class FacilitySvc implements CommonSvc<Facility, UUID> {
 
     @Override
     public Facility save(final Facility facility) {
-        if (facility.getLocation() != null)
+        if (facility.getLocation() != null) {
             facility.setLocation(locationSvc.save(facility.getLocation()));
-
+        }
         return CommonSvc.super.save(facility);
     }
 

@@ -19,20 +19,21 @@ import lombok.Setter;
 public class Association extends Auditable<String> {
 
     @ManyToOne
-    @JoinColumn(name="organization_id")
+    @JoinColumn(name = "organization_id")
     private Organization organization;
-    
+
     @ManyToOne
-    @JoinColumn(name="person_id")
+    @JoinColumn(name = "person_id")
     private Person person;
 
     @Column(name = "association_type")
     private String associationType;
 
     @Override
-    public String toString() {
-        return "Association [id=" + id + ", organization=" + organization + ", person=" + person + ", associationType="
-                + associationType + "]";
+    public final String toString() {
+        return "Association [id=" + id + ", organization=" + organization
+            + ", person=" + person + ", associationType=" + associationType
+            + "]";
     }
 
 }

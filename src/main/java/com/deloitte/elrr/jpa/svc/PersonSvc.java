@@ -62,7 +62,6 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     public Person save(final Person person) {
         if (person.getMailingAddress() != null)
             person.setMailingAddress(locationSvc.save(person.getMailingAddress()));
-
         return CommonSvc.super.save(person);
     }
 

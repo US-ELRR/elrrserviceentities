@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Facility extends Auditable<String> {
-    
+
     @Column(name = "name")
     private String name;
 
@@ -26,20 +26,20 @@ public class Facility extends Auditable<String> {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="location_id")
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @Column(name = "operational_status")
-    private String operational_status;
+    private String operationalStatus;
 
     @Column(name = "facility_security_level")
-    private String facility_security_level;
+    private String facilitySecurityLevel;
 
     @Override
     public String toString() {
-        return "Facility [name=" + name + ", description=" + description + ", id=" + id + ", location=" + location
-                + ", operational_status=" + operational_status + ", facility_security_level=" + facility_security_level
-                + "]";
+        return "Facility [name = " + name + ", description=" + description
+        + ", id=" + id + ", location=" + location + ", operational_status="
+        + operationalStatus + ", facility_security_level="
+        + facilitySecurityLevel + "]";
     }
-
 }

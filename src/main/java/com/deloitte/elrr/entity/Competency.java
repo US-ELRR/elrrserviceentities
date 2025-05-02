@@ -9,4 +9,4 @@ import lombok.Setter;
 @DiscriminatorValue("COMPETENCY")
 @Getter
 @Setter
-public class Competency extends AbstractQualification {}
+public class Competency extends AbstractQualification { }
