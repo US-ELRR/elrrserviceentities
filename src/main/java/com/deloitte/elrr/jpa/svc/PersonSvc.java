@@ -22,9 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class PersonSvc implements CommonSvc<Person, UUID> {
-    /**
-     *
-     */
 
     private final PersonRepository personRepository;
 

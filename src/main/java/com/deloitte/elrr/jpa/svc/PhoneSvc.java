@@ -10,9 +10,7 @@ import com.deloitte.elrr.repository.PhoneRepository;
 
 @Service
 public class PhoneSvc implements CommonSvc<Phone, UUID> {
-    /**
-     *
-     */
+
     private final PhoneRepository phoneRepository;
 
     /**
@@ -23,25 +21,16 @@ public class PhoneSvc implements CommonSvc<Phone, UUID> {
         this.phoneRepository = argsPhoneRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public CrudRepository<Phone, UUID> getRepository() {
         return this.phoneRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public UUID getId(final Phone phone) {
         return phone.getId();
     }
 
-    /**
-     *
-     */
     @Override
     public Phone save(final Phone phone) {
         return CommonSvc.super.save(phone);

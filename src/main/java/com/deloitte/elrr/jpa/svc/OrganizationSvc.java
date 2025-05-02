@@ -18,9 +18,7 @@ import com.deloitte.elrr.repository.OrganizationRepository;
 
 @Service
 public class OrganizationSvc implements CommonSvc<Organization, UUID> {
-    /**
-     *
-     */
+
     private final OrganizationRepository organizationRepository;
 
     /**
@@ -31,25 +29,16 @@ public class OrganizationSvc implements CommonSvc<Organization, UUID> {
         this.organizationRepository = argsOrganizationRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public CrudRepository<Organization, UUID> getRepository() {
         return this.organizationRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public UUID getId(final Organization organization) {
         return organization.getId();
     }
 
-    /**
-     *
-     */
     @Override
     public Organization save(final Organization organization) {
         return CommonSvc.super.save(organization);

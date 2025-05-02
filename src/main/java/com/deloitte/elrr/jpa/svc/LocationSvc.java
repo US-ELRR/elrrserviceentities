@@ -10,9 +10,7 @@ import com.deloitte.elrr.repository.LocationRepository;
 
 @Service
 public class LocationSvc implements CommonSvc<Location, UUID> {
-    /**
-     *
-     */
+
     private final LocationRepository locationRepository;
 
     /**
@@ -23,25 +21,16 @@ public class LocationSvc implements CommonSvc<Location, UUID> {
         this.locationRepository = argsLocationRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public CrudRepository<Location, UUID> getRepository() {
         return this.locationRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public UUID getId(final Location location) {
         return location.getId();
     }
 
-    /**
-     *
-     */
     @Override
     public Location save(final Location location) {
         return CommonSvc.super.save(location);

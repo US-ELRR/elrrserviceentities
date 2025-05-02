@@ -10,9 +10,7 @@ import com.deloitte.elrr.repository.EmailRepository;
 
 @Service
 public class EmailSvc implements CommonSvc<Email, UUID> {
-    /**
-     *
-     */
+
     private final EmailRepository emailRepository;
 
     /**
@@ -23,25 +21,16 @@ public class EmailSvc implements CommonSvc<Email, UUID> {
         this.emailRepository = argsEmailRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public CrudRepository<Email, UUID> getRepository() {
         return this.emailRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public UUID getId(final Email email) {
         return email.getId();
     }
 
-    /**
-     *
-     */
     @Override
     public Email save(final Email email) {
         return CommonSvc.super.save(email);

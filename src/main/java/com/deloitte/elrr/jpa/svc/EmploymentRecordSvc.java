@@ -10,9 +10,7 @@ import com.deloitte.elrr.repository.EmploymentRecordRepository;
 
 @Service
 public class EmploymentRecordSvc implements CommonSvc<EmploymentRecord, UUID> {
-    /**
-     *
-     */
+
     private final EmploymentRecordRepository employmentRecordRepository;
 
     /**
@@ -23,25 +21,16 @@ public class EmploymentRecordSvc implements CommonSvc<EmploymentRecord, UUID> {
         this.employmentRecordRepository = argsEmploymentRecordRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public CrudRepository<EmploymentRecord, UUID> getRepository() {
         return this.employmentRecordRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public UUID getId(final EmploymentRecord employmentRecord) {
         return employmentRecord.getId();
     }
 
-    /**
-     *
-     */
     @Override
     public EmploymentRecord save(final EmploymentRecord employmentRecord) {
         return CommonSvc.super.save(employmentRecord);

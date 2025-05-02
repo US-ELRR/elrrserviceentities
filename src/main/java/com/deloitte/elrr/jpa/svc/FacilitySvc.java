@@ -25,25 +25,16 @@ public class FacilitySvc implements CommonSvc<Facility, UUID> {
         this.facilityRepository = argsFacilityRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public CrudRepository<Facility, UUID> getRepository() {
         return this.facilityRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public UUID getId(final Facility facility) {
         return facility.getId();
     }
 
-    /**
-     *
-     */
     @Override
     public Facility save(final Facility facility) {
         if (facility.getLocation() != null)

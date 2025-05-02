@@ -10,9 +10,7 @@ import com.deloitte.elrr.repository.IdentityRepository;
 
 @Service
 public class IdentitySvc implements CommonSvc<Identity, UUID> {
-    /**
-     *
-     */
+
     private final IdentityRepository identityRepository;
 
     /**
@@ -23,25 +21,16 @@ public class IdentitySvc implements CommonSvc<Identity, UUID> {
         this.identityRepository = argsIdentityRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public CrudRepository<Identity, UUID> getRepository() {
         return this.identityRepository;
     }
 
-    /**
-     *
-     */
     @Override
     public UUID getId(final Identity identity) {
         return identity.getId();
     }
 
-    /**
-     *
-     */
     @Override
     public Identity save(final Identity identity) {
         return CommonSvc.super.save(identity);

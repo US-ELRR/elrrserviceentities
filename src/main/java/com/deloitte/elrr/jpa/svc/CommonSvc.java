@@ -56,7 +56,6 @@ public interface CommonSvc<T, I extends Serializable> {
         }
     }
 
-    /** */
     default void deleteAll() {
         getRepository().deleteAll();
     }
