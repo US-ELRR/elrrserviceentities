@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.Email;
 
 @Repository
-public interface EmailRepository
-        extends JpaRepository<Email, UUID> {
+public interface EmailRepository extends JpaRepository<Email, UUID> {
 
 }

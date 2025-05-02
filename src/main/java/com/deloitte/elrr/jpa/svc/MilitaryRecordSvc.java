@@ -14,14 +14,15 @@ public class MilitaryRecordSvc implements CommonSvc<MilitaryRecord, UUID> {
      *
      */
     private final MilitaryRecordRepository militaryRecordRepository;
+
     /**
      *
      * @param argsMilitaryRecordRepository
      */
-    public MilitaryRecordSvc(
-            final MilitaryRecordRepository argsMilitaryRecordRepository) {
+    public MilitaryRecordSvc(final MilitaryRecordRepository argsMilitaryRecordRepository) {
         this.militaryRecordRepository = argsMilitaryRecordRepository;
     }
+
     /**
      *
      */
@@ -29,6 +30,7 @@ public class MilitaryRecordSvc implements CommonSvc<MilitaryRecord, UUID> {
     public CrudRepository<MilitaryRecord, UUID> getRepository() {
         return this.militaryRecordRepository;
     }
+
     /**
      *
      */
@@ -36,6 +38,7 @@ public class MilitaryRecordSvc implements CommonSvc<MilitaryRecord, UUID> {
     public UUID getId(final MilitaryRecord militaryRecord) {
         return militaryRecord.getId();
     }
+
     /**
      *
      */

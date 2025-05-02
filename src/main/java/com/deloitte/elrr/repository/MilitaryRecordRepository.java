@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.MilitaryRecord;
 
 @Repository
-public interface MilitaryRecordRepository
-        extends JpaRepository<MilitaryRecord, UUID> {
+public interface MilitaryRecordRepository extends JpaRepository<MilitaryRecord, UUID> {
 
 }

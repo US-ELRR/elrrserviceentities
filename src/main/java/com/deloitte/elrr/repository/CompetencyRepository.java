@@ -10,5 +10,5 @@ import com.deloitte.elrr.entity.Competency;
 @Repository
 public interface CompetencyRepository extends JpaRepository<Competency, UUID> {
 
-  Competency findByIdentifier(String identifier);
+    Competency findByIdentifier(String identifier);
 }

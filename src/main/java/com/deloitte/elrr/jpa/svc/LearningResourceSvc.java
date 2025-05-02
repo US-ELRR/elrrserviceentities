@@ -11,32 +11,32 @@ import com.deloitte.elrr.repository.LearningResourceRepository;
 @Service
 public class LearningResourceSvc implements CommonSvc<LearningResource, UUID> {
 
-  private final LearningResourceRepository learningResourceRepository;
+    private final LearningResourceRepository learningResourceRepository;
 
-  /**
-   * @param argsLearningResourceRepository
-   */
-  public LearningResourceSvc(final LearningResourceRepository argsLearningResourceRepository) {
-    this.learningResourceRepository = argsLearningResourceRepository;
-  }
+    /**
+     * @param argsLearningResourceRepository
+     */
+    public LearningResourceSvc(final LearningResourceRepository argsLearningResourceRepository) {
+        this.learningResourceRepository = argsLearningResourceRepository;
+    }
 
-  @Override
-  public CrudRepository<LearningResource, UUID> getRepository() {
-    return this.learningResourceRepository;
-  }
+    @Override
+    public CrudRepository<LearningResource, UUID> getRepository() {
+        return this.learningResourceRepository;
+    }
 
-  @Override
-  public UUID getId(final LearningResource learningResource) {
-    return learningResource.getId();
-  }
+    @Override
+    public UUID getId(final LearningResource learningResource) {
+        return learningResource.getId();
+    }
 
-  @Override
-  public LearningResource save(final LearningResource learningResource) {
-    return CommonSvc.super.save(learningResource);
-  }
+    @Override
+    public LearningResource save(final LearningResource learningResource) {
+        return CommonSvc.super.save(learningResource);
+    }
 
-  public LearningResource findByIri(String iri) {
-    LearningResource learningResource = learningResourceRepository.findByIri(iri);
-    return learningResource;
-  }
+    public LearningResource findByIri(String iri) {
+        LearningResource learningResource = learningResourceRepository.findByIri(iri);
+        return learningResource;
+    }
 }

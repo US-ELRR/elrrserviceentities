@@ -10,5 +10,5 @@ import com.deloitte.elrr.entity.LearningRecord;
 @Repository
 public interface LearningRecordRepository extends JpaRepository<LearningRecord, UUID> {
 
-  LearningRecord findByPersonIdAndLearningResourceId(UUID personId, UUID learningResourceId);
+    LearningRecord findByPersonIdAndLearningResourceId(UUID personId, UUID learningResourceId);
 }

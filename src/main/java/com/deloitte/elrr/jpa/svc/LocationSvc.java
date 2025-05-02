@@ -14,14 +14,15 @@ public class LocationSvc implements CommonSvc<Location, UUID> {
      *
      */
     private final LocationRepository locationRepository;
+
     /**
      *
      * @param argsLocationRepository
      */
-    public LocationSvc(
-            final LocationRepository argsLocationRepository) {
+    public LocationSvc(final LocationRepository argsLocationRepository) {
         this.locationRepository = argsLocationRepository;
     }
+
     /**
      *
      */
@@ -29,6 +30,7 @@ public class LocationSvc implements CommonSvc<Location, UUID> {
     public CrudRepository<Location, UUID> getRepository() {
         return this.locationRepository;
     }
+
     /**
      *
      */
@@ -36,6 +38,7 @@ public class LocationSvc implements CommonSvc<Location, UUID> {
     public UUID getId(final Location location) {
         return location.getId();
     }
+
     /**
      *
      */

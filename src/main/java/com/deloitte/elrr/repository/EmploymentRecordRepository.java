@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.EmploymentRecord;
 
 @Repository
-public interface EmploymentRecordRepository
-        extends JpaRepository<EmploymentRecord, UUID> {
+public interface EmploymentRecordRepository extends JpaRepository<EmploymentRecord, UUID> {
 
 }

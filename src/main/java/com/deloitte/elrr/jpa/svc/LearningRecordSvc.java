@@ -11,34 +11,33 @@ import com.deloitte.elrr.repository.LearningRecordRepository;
 @Service
 public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
 
-  private final LearningRecordRepository learningRecordRepository;
+    private final LearningRecordRepository learningRecordRepository;
 
-  /**
-   * @param argsLearningRecordRepository
-   */
-  public LearningRecordSvc(final LearningRecordRepository argsLearningRecordRepository) {
-    this.learningRecordRepository = argsLearningRecordRepository;
-  }
+    /**
+     * @param argsLearningRecordRepository
+     */
+    public LearningRecordSvc(final LearningRecordRepository argsLearningRecordRepository) {
+        this.learningRecordRepository = argsLearningRecordRepository;
+    }
 
-  @Override
-  public CrudRepository<LearningRecord, UUID> getRepository() {
-    return this.learningRecordRepository;
-  }
+    @Override
+    public CrudRepository<LearningRecord, UUID> getRepository() {
+        return this.learningRecordRepository;
+    }
 
-  @Override
-  public UUID getId(final LearningRecord learningRecord) {
-    return learningRecord.getId();
-  }
+    @Override
+    public UUID getId(final LearningRecord learningRecord) {
+        return learningRecord.getId();
+    }
 
-  @Override
-  public LearningRecord save(final LearningRecord learningRecord) {
-    return CommonSvc.super.save(learningRecord);
-  }
+    @Override
+    public LearningRecord save(final LearningRecord learningRecord) {
+        return CommonSvc.super.save(learningRecord);
+    }
 
-  public LearningRecord findByPersonIdAndLearningResourceId(
-      UUID personId, UUID learningResourceId) {
-    LearningRecord learningRecord =
-        learningRecordRepository.findByPersonIdAndLearningResourceId(personId, learningResourceId);
-    return learningRecord;
-  }
+    public LearningRecord findByPersonIdAndLearningResourceId(UUID personId, UUID learningResourceId) {
+        LearningRecord learningRecord = learningRecordRepository.findByPersonIdAndLearningResourceId(personId,
+                learningResourceId);
+        return learningRecord;
+    }
 }

@@ -11,33 +11,33 @@ import com.deloitte.elrr.repository.PersonalCompetencyRepository;
 @Service
 public class PersonalCompetencySvc implements CommonSvc<PersonalCompetency, UUID> {
 
-  private final PersonalCompetencyRepository personalCompetencyRepository;
+    private final PersonalCompetencyRepository personalCompetencyRepository;
 
-  /**
-   * @param argsCompetencyRepository
-   */
-  public PersonalCompetencySvc(final PersonalCompetencyRepository argsRepository) {
-    this.personalCompetencyRepository = argsRepository;
-  }
+    /**
+     * @param argsCompetencyRepository
+     */
+    public PersonalCompetencySvc(final PersonalCompetencyRepository argsRepository) {
+        this.personalCompetencyRepository = argsRepository;
+    }
 
-  @Override
-  public CrudRepository<PersonalCompetency, UUID> getRepository() {
-    return this.personalCompetencyRepository;
-  }
+    @Override
+    public CrudRepository<PersonalCompetency, UUID> getRepository() {
+        return this.personalCompetencyRepository;
+    }
 
-  @Override
-  public UUID getId(final PersonalCompetency pq) {
-    return pq.getId();
-  }
+    @Override
+    public UUID getId(final PersonalCompetency pq) {
+        return pq.getId();
+    }
 
-  @Override
-  public PersonalCompetency save(final PersonalCompetency pq) {
-    return CommonSvc.super.save(pq);
-  }
+    @Override
+    public PersonalCompetency save(final PersonalCompetency pq) {
+        return CommonSvc.super.save(pq);
+    }
 
-  public PersonalCompetency findByPersonIdAndCompetencyId(UUID personId, UUID competencyId) {
-    PersonalCompetency personalCompetency =
-        personalCompetencyRepository.findByPersonIdAndCompetencyId(personId, competencyId);
-    return personalCompetency;
-  }
+    public PersonalCompetency findByPersonIdAndCompetencyId(UUID personId, UUID competencyId) {
+        PersonalCompetency personalCompetency = personalCompetencyRepository.findByPersonIdAndCompetencyId(personId,
+                competencyId);
+        return personalCompetency;
+    }
 }

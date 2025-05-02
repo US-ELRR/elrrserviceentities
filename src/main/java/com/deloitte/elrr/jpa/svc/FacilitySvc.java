@@ -11,7 +11,7 @@ import com.deloitte.elrr.repository.FacilityRepository;
 
 @Service
 public class FacilitySvc implements CommonSvc<Facility, UUID> {
-    
+
     private final FacilityRepository facilityRepository;
 
     @Autowired
@@ -21,10 +21,10 @@ public class FacilitySvc implements CommonSvc<Facility, UUID> {
      *
      * @param argsFacilityRepository
      */
-    public FacilitySvc(
-            final FacilityRepository argsFacilityRepository) {
+    public FacilitySvc(final FacilityRepository argsFacilityRepository) {
         this.facilityRepository = argsFacilityRepository;
     }
+
     /**
      *
      */
@@ -32,6 +32,7 @@ public class FacilitySvc implements CommonSvc<Facility, UUID> {
     public CrudRepository<Facility, UUID> getRepository() {
         return this.facilityRepository;
     }
+
     /**
      *
      */
@@ -39,6 +40,7 @@ public class FacilitySvc implements CommonSvc<Facility, UUID> {
     public UUID getId(final Facility facility) {
         return facility.getId();
     }
+
     /**
      *
      */
@@ -46,7 +48,7 @@ public class FacilitySvc implements CommonSvc<Facility, UUID> {
     public Facility save(final Facility facility) {
         if (facility.getLocation() != null)
             facility.setLocation(locationSvc.save(facility.getLocation()));
-            
+
         return CommonSvc.super.save(facility);
     }
 

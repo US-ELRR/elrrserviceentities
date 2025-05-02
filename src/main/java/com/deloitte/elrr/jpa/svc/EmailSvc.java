@@ -14,14 +14,15 @@ public class EmailSvc implements CommonSvc<Email, UUID> {
      *
      */
     private final EmailRepository emailRepository;
+
     /**
      *
      * @param argsEmailRepository
      */
-    public EmailSvc(
-            final EmailRepository argsEmailRepository) {
+    public EmailSvc(final EmailRepository argsEmailRepository) {
         this.emailRepository = argsEmailRepository;
     }
+
     /**
      *
      */
@@ -29,6 +30,7 @@ public class EmailSvc implements CommonSvc<Email, UUID> {
     public CrudRepository<Email, UUID> getRepository() {
         return this.emailRepository;
     }
+
     /**
      *
      */
@@ -36,6 +38,7 @@ public class EmailSvc implements CommonSvc<Email, UUID> {
     public UUID getId(final Email email) {
         return email.getId();
     }
+
     /**
      *
      */

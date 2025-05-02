@@ -10,5 +10,5 @@ import com.deloitte.elrr.entity.PersonalCredential;
 @Repository
 public interface PersonalCredentialRepository extends JpaRepository<PersonalCredential, UUID> {
 
-  PersonalCredential findByPersonIdAndCredentialId(UUID personId, UUID credentialId);
+    PersonalCredential findByPersonIdAndCredentialId(UUID personId, UUID credentialId);
 }

@@ -14,14 +14,15 @@ public class EmploymentRecordSvc implements CommonSvc<EmploymentRecord, UUID> {
      *
      */
     private final EmploymentRecordRepository employmentRecordRepository;
+
     /**
      *
      * @param argsEmploymentRecordRepository
      */
-    public EmploymentRecordSvc(
-            final EmploymentRecordRepository argsEmploymentRecordRepository) {
+    public EmploymentRecordSvc(final EmploymentRecordRepository argsEmploymentRecordRepository) {
         this.employmentRecordRepository = argsEmploymentRecordRepository;
     }
+
     /**
      *
      */
@@ -29,6 +30,7 @@ public class EmploymentRecordSvc implements CommonSvc<EmploymentRecord, UUID> {
     public CrudRepository<EmploymentRecord, UUID> getRepository() {
         return this.employmentRecordRepository;
     }
+
     /**
      *
      */
@@ -36,6 +38,7 @@ public class EmploymentRecordSvc implements CommonSvc<EmploymentRecord, UUID> {
     public UUID getId(final EmploymentRecord employmentRecord) {
         return employmentRecord.getId();
     }
+
     /**
      *
      */

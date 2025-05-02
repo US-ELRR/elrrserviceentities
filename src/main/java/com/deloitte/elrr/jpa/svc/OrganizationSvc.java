@@ -22,14 +22,15 @@ public class OrganizationSvc implements CommonSvc<Organization, UUID> {
      *
      */
     private final OrganizationRepository organizationRepository;
+
     /**
      *
      * @param argsOrganizationRepository
      */
-    public OrganizationSvc(
-            final OrganizationRepository argsOrganizationRepository) {
+    public OrganizationSvc(final OrganizationRepository argsOrganizationRepository) {
         this.organizationRepository = argsOrganizationRepository;
     }
+
     /**
      *
      */
@@ -37,6 +38,7 @@ public class OrganizationSvc implements CommonSvc<Organization, UUID> {
     public CrudRepository<Organization, UUID> getRepository() {
         return this.organizationRepository;
     }
+
     /**
      *
      */
@@ -44,6 +46,7 @@ public class OrganizationSvc implements CommonSvc<Organization, UUID> {
     public UUID getId(final Organization organization) {
         return organization.getId();
     }
+
     /**
      *
      */

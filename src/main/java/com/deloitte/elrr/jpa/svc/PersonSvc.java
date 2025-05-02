@@ -25,11 +25,12 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     /**
      *
      */
-    
+
     private final PersonRepository personRepository;
-    
+
     @Autowired
     private LocationSvc locationSvc;
+
     /**
      *
      * @param argsPersonRepository
@@ -37,6 +38,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     public PersonSvc(final PersonRepository argsPersonRepository) {
         this.personRepository = argsPersonRepository;
     }
+
     /**
      *
      * @return CrudRepository<Person, Long>
@@ -45,6 +47,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     public CrudRepository<Person, UUID> getRepository() {
         return this.personRepository;
     }
+
     /**
      *
      * @return Long
@@ -53,6 +56,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     public UUID getId(final Person person) {
         return person.getId();
     }
+
     /**
      *
      * @return Person
@@ -61,7 +65,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     public Person save(final Person person) {
         if (person.getMailingAddress() != null)
             person.setMailingAddress(locationSvc.save(person.getMailingAddress()));
-            
+
         return CommonSvc.super.save(person);
     }
 

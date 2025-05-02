@@ -14,14 +14,15 @@ public class PhoneSvc implements CommonSvc<Phone, UUID> {
      *
      */
     private final PhoneRepository phoneRepository;
+
     /**
      *
      * @param argsPhoneRepository
      */
-    public PhoneSvc(
-            final PhoneRepository argsPhoneRepository) {
+    public PhoneSvc(final PhoneRepository argsPhoneRepository) {
         this.phoneRepository = argsPhoneRepository;
     }
+
     /**
      *
      */
@@ -29,6 +30,7 @@ public class PhoneSvc implements CommonSvc<Phone, UUID> {
     public CrudRepository<Phone, UUID> getRepository() {
         return this.phoneRepository;
     }
+
     /**
      *
      */
@@ -36,6 +38,7 @@ public class PhoneSvc implements CommonSvc<Phone, UUID> {
     public UUID getId(final Phone phone) {
         return phone.getId();
     }
+
     /**
      *
      */

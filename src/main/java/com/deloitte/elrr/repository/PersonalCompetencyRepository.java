@@ -10,5 +10,5 @@ import com.deloitte.elrr.entity.PersonalCompetency;
 @Repository
 public interface PersonalCompetencyRepository extends JpaRepository<PersonalCompetency, UUID> {
 
-  PersonalCompetency findByPersonIdAndCompetencyId(UUID personId, UUID competencyId);
+    PersonalCompetency findByPersonIdAndCompetencyId(UUID personId, UUID competencyId);
 }

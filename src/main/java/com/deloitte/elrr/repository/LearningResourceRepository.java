@@ -10,5 +10,5 @@ import com.deloitte.elrr.entity.LearningResource;
 @Repository
 public interface LearningResourceRepository extends JpaRepository<LearningResource, UUID> {
 
-  LearningResource findByIri(String iri);
+    LearningResource findByIri(String iri);
 }
