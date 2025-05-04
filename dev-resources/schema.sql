@@ -3,10 +3,29 @@ SET search_path TO elrr;
 -- Service Database Schema for P2997 Alignment
 
 
+DROP TABLE IF EXISTS organization CASCADE;
+DROP TABLE IF EXISTS location CASCADE;
+DROP TABLE IF EXISTS person CASCADE;
+DROP TABLE IF EXISTS identity CASCADE;
+DROP TABLE IF EXISTS association CASCADE;
+DROP TABLE IF EXISTS qualification CASCADE;
+DROP TABLE IF EXISTS person_qualification CASCADE;
+DROP TABLE IF EXISTS learning_resource CASCADE;
+DROP TABLE IF EXISTS learning_record CASCADE;
+DROP TABLE IF EXISTS phone CASCADE;
+DROP TABLE IF EXISTS person_phone CASCADE;
+DROP TABLE IF EXISTS email CASCADE;
+DROP TABLE IF EXISTS person_email CASCADE;
+DROP TABLE IF EXISTS facility CASCADE;
+DROP TABLE IF EXISTS organization_facility CASCADE;  
+DROP TABLE IF EXISTS employment_record CASCADE;
+DROP TABLE IF EXISTS employment_qualification CASCADE;
+DROP TABLE IF EXISTS military_record CASCADE;
+
 -- yes, we need this status
 DO $$ BEGIN
     CREATE TYPE learning_status AS ENUM (
-        'ATTEMPTED', 'COMPLETED', 'PASSED', 'FAILED');
+        'ATTEMPTED', 'COMPLETED', 'PASSED', 'FAILED', 'REGISTERED');
 EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
@@ -175,6 +194,7 @@ CREATE TABLE IF NOT EXISTS person_qualification (
     qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE,
     type                        qualification_type NOT NULL,
     has_record                  BOOLEAN,
+    expires						DATE NULL,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE
