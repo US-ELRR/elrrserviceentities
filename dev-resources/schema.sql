@@ -2,6 +2,7 @@ SET search_path TO elrr;
 
 -- Service Database Schema for P2997 Alignment
 
+DROP TYPE learning_status;
 
 DROP TABLE IF EXISTS organization CASCADE;
 DROP TABLE IF EXISTS location CASCADE;
@@ -24,8 +25,7 @@ DROP TABLE IF EXISTS military_record CASCADE;
 
 -- yes, we need this status
 DO $$ BEGIN
-    CREATE TYPE learning_status AS ENUM (
-        'ATTEMPTED', 'COMPLETED', 'PASSED', 'FAILED', 'REGISTERED');
+    CREATE TYPE learning_status AS ENUM ('ATTEMPTED', 'COMPLETED', 'PASSED', 'FAILED', 'REGISTERED');
 EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
