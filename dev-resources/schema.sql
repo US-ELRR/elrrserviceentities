@@ -2,7 +2,7 @@ SET search_path TO elrr;
 
 -- Service Database Schema for P2997 Alignment
 
-DROP TYPE learning_status;
+DROP TYPE IF EXISTS learning_status CASCADE;
 
 DROP TABLE IF EXISTS organization CASCADE;
 DROP TABLE IF EXISTS location CASCADE;
