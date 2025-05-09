@@ -1,6 +1,5 @@
 package com.deloitte.elrr.entity;
 
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -83,19 +82,14 @@ public class AbstractQualification extends Auditable<String> {
 
     @Override
     public String toString() {
-        return "AbstractQualification [id=" + id + ", identifier=" + identifier
-            + ", identifierUrl=" + identifierUrl + ", code=" + code
-            + ", taxonomyId=" + taxonomyId + ", validStartDate="
-            + validStartDate + ", validEndDate=" + validEndDate + ", parentId="
-            + parentId + ", parentUrl=" + parentUrl + ", parentCode="
-            + parentCode + ", typeUrl=" + typeUrl + ", statement=" + statement
-            + ", frameworkTitle=" + frameworkTitle + ", frameworkVersion="
-            + frameworkVersion + ", frameworkIdentifier=" + frameworkIdentifier
-            + ", frameworkDescription=" + frameworkDescription
-            + ", frameworkSubject=" + frameworkSubject
-            + ", frameworkValidStartDate=" + frameworkValidStartDate
-            + ", frameworkValidEndDate=" + frameworkValidEndDate
-            + ", recordStatus=" + recordStatus + "]";
+        return "AbstractQualification [id=" + id + ", identifier=" + identifier + ", identifierUrl=" + identifierUrl
+                + ", code=" + code + ", taxonomyId=" + taxonomyId + ", validStartDate=" + validStartDate
+                + ", validEndDate=" + validEndDate + ", parentId=" + parentId + ", parentUrl=" + parentUrl
+                + ", parentCode=" + parentCode + ", typeUrl=" + typeUrl + ", statement=" + statement
+                + ", frameworkTitle=" + frameworkTitle + ", frameworkVersion=" + frameworkVersion
+                + ", frameworkIdentifier=" + frameworkIdentifier + ", frameworkDescription=" + frameworkDescription
+                + ", frameworkSubject=" + frameworkSubject + ", frameworkValidStartDate=" + frameworkValidStartDate
+                + ", frameworkValidEndDate=" + frameworkValidEndDate + ", recordStatus=" + recordStatus + "]";
     }
 
 }
