@@ -1,6 +1,5 @@
 package com.deloitte.elrr.entity;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -58,5 +57,4 @@ public class LearningRecord extends Auditable<String> {
         + enrollmentDate + ", recordStatus=" + recordStatus + ", academicGrade="
         + academicGrade + ", eventTime=" + eventTime + "]";
     }
-
 }
