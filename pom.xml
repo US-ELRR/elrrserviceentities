@@ -23,6 +23,7 @@
     <sonar.dynamicAnalysis>resuseReports</sonar.dynamicAnalysis>
     <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
     <sona.lauguage>java</sona.lauguage>
+    <lombok.version>1.18.36</lombok.version>
   </properties>
 
   <dependencies>
@@ -34,8 +35,7 @@
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>1.18.36</version>
-        <scope>provided</scope>
+        <version>${lombok.version}</version>
     </dependency>
     <dependency>
         <groupId>org.hibernate.orm</groupId>
@@ -96,6 +96,15 @@
     <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
+        <configuration>
+            <annotationProcessorPaths>
+                <path>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                    <version>${lombok.version}</version>
+                </path>
+            </annotationProcessorPaths>
+        </configuration>
     </plugin>
     <plugin>
         <artifactId>maven-jar-plugin</artifactId>
