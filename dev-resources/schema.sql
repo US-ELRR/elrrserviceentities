@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS elrr AUTHORIZATION service_user;
+
 SET search_path TO elrr;
 
 -- Service Database Schema for P2997 Alignment
