@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.Person;
 
 @Repository
-public interface PersonRepository  extends JpaRepository<Person, UUID> {
+public interface PersonRepository extends JpaRepository<Person, UUID> {
 
 }
