@@ -1,4 +1,6 @@
-SET search_path TO elrr;
+CREATE SCHEMA IF NOT EXISTS services_schema AUTHORIZATION service_user;
+
+SET search_path TO services_schema;
 
 -- Service Database Schema for P2997 Alignment
 DROP TABLE IF EXISTS organization CASCADE;
