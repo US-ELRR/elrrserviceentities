@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.Phone;
 
 @Repository
-public interface PhoneRepository
-        extends JpaRepository<Phone, UUID> {
+public interface PhoneRepository extends JpaRepository<Phone, UUID> {
 
 }

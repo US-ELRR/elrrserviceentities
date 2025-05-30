@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.Organization;
 
 @Repository
-public interface OrganizationRepository
-        extends JpaRepository<Organization, UUID> {
+public interface OrganizationRepository extends JpaRepository<Organization,
+        UUID> {
 
 }
