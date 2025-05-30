@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS person_qualification (
     qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE,
     type                        qualification_type NOT NULL,
     has_record                  BOOLEAN,
-    expires						TIMESTAMP WITH TIME ZONE NULL,
+    expires                     TIMESTAMP WITH TIME ZONE NULL,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE

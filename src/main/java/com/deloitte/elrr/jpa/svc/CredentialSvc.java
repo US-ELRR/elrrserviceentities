@@ -14,6 +14,7 @@ public class CredentialSvc implements CommonSvc<Credential, UUID> {
     private final CredentialRepository credentialRepository;
 
     /**
+     * 
      * @param argsCredentialRepository
      */
     public CredentialSvc(final CredentialRepository argsCredentialRepository) {

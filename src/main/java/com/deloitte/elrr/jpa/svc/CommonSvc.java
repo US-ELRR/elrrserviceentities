@@ -1,4 +1,3 @@
-/** */
 package com.deloitte.elrr.jpa.svc;
 
 import java.io.Serializable;
@@ -15,6 +14,7 @@ import com.deloitte.elrr.exception.RuntimeServiceException;
  */
 public interface CommonSvc<T, I extends Serializable> {
     /**
+     * 
      * @return Iterable<T>
      */
     default Iterable<T> findAll() {
@@ -22,6 +22,7 @@ public interface CommonSvc<T, I extends Serializable> {
     }
 
     /**
+     * 
      * @param i
      * @return Optional<T>
      */
@@ -30,6 +31,7 @@ public interface CommonSvc<T, I extends Serializable> {
     }
 
     /**
+     * 
      * @param entity
      * @return T
      */
@@ -46,6 +48,7 @@ public interface CommonSvc<T, I extends Serializable> {
     }
 
     /**
+     * 
      * @param i
      */
     @SuppressWarnings("checkstyle:linelength")
@@ -59,6 +62,7 @@ public interface CommonSvc<T, I extends Serializable> {
     }
 
     /**
+     * 
      * @author phleven
      */
     default void deleteAll() {
@@ -85,6 +89,7 @@ public interface CommonSvc<T, I extends Serializable> {
     }
 
     /**
+     * 
      * @param entity
      * @return Id
      */

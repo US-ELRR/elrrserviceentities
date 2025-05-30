@@ -53,8 +53,10 @@ public class LearningRecord extends Auditable<String> {
     @Override
     public String toString() {
         return "LearningRecord [id=" + id + ", learningResource="
-        + learningResource + ", person=" + person + ", enrollmentDate="
-        + enrollmentDate + ", recordStatus=" + recordStatus + ", academicGrade="
-        + academicGrade + ", eventTime=" + eventTime + "]";
+                + learningResource + ", person=" + person + ", enrollmentDate="
+                + enrollmentDate + ", recordStatus=" + recordStatus
+                + ", academicGrade=" + academicGrade + ", eventTime="
+                + eventTime + "]";
     }
+
 }
