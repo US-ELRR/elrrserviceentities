@@ -9,14 +9,16 @@ import com.deloitte.elrr.entity.PersonalCredential;
 import com.deloitte.elrr.repository.PersonalCredentialRepository;
 
 @Service
-public class PersonalCredentialSvc implements CommonSvc<PersonalCredential, UUID> {
+public class PersonalCredentialSvc implements CommonSvc<PersonalCredential,
+        UUID> {
 
     private final PersonalCredentialRepository personalCredentialRepository;
 
     /**
-     * @param argsCredentialRepository
+     * @param argsRepository
      */
-    public PersonalCredentialSvc(final PersonalCredentialRepository argsRepository) {
+    public PersonalCredentialSvc(
+            final PersonalCredentialRepository argsRepository) {
         this.personalCredentialRepository = argsRepository;
     }
 
@@ -35,9 +37,15 @@ public class PersonalCredentialSvc implements CommonSvc<PersonalCredential, UUID
         return CommonSvc.super.save(pq);
     }
 
-    public PersonalCredential findByPersonIdAndCredentialId(UUID personId, UUID credentialId) {
-        PersonalCredential personalCredential = personalCredentialRepository.findByPersonIdAndCredentialId(personId,
-                credentialId);
+    /**
+     * @param personId
+     * @param credentialId
+     * @return PersonalCredential
+     */
+    public PersonalCredential findByPersonIdAndCredentialId(UUID personId,
+            UUID credentialId) {
+        PersonalCredential personalCredential = personalCredentialRepository
+                .findByPersonIdAndCredentialId(personId, credentialId);
         return personalCredential;
     }
 }

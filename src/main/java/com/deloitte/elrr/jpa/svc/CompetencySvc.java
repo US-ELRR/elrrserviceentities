@@ -35,8 +35,13 @@ public class CompetencySvc implements CommonSvc<Competency, UUID> {
         return CommonSvc.super.save(competency);
     }
 
+    /**
+     * @param identifier
+     * @return competency
+     */
     public Competency findByIdentifier(String identifier) {
-        Competency competency = competencyRepository.findByIdentifier(identifier);
+        Competency competency = competencyRepository.findByIdentifier(
+                identifier);
         return competency;
     }
 }

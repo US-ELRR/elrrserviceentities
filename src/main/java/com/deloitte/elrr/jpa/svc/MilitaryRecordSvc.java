@@ -17,7 +17,8 @@ public class MilitaryRecordSvc implements CommonSvc<MilitaryRecord, UUID> {
      *
      * @param argsMilitaryRecordRepository
      */
-    public MilitaryRecordSvc(final MilitaryRecordRepository argsMilitaryRecordRepository) {
+    public MilitaryRecordSvc(
+            final MilitaryRecordRepository argsMilitaryRecordRepository) {
         this.militaryRecordRepository = argsMilitaryRecordRepository;
     }
 

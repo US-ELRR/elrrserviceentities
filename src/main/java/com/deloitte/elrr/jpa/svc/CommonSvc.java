@@ -48,14 +48,19 @@ public interface CommonSvc<T, I extends Serializable> {
     /**
      * @param i
      */
+    @SuppressWarnings("checkstyle:linelength")
     default void delete(I i) {
         if (getRepository().existsById(i)) {
             getRepository().deleteById(i);
         } else {
-            throw new RuntimeServiceException(" Id not found for delete : " + i);
+            throw new RuntimeServiceException(" Id not found for delete : "
+                    + i);
         }
     }
 
+    /**
+     * @author phleven
+     */
     default void deleteAll() {
         getRepository().deleteAll();
     }
@@ -69,11 +74,13 @@ public interface CommonSvc<T, I extends Serializable> {
             if (getRepository().existsById(getId(entity))) {
                 getRepository().save(entity);
             } else {
-                throw new RuntimeServiceException("Record to update not found: " + entity);
+                throw new RuntimeServiceException("Record to update not found: "
+                        + entity);
             }
 
         } catch (IllegalArgumentException e) {
-            throw new RuntimeServiceException("Record to update not found: " + entity);
+            throw new RuntimeServiceException("Record to update not found: "
+                    + entity);
         }
     }
 

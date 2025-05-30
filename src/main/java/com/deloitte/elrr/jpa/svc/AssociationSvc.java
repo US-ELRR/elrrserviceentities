@@ -16,7 +16,8 @@ public class AssociationSvc implements CommonSvc<Association, UUID> {
      *
      * @param argsAssociationRepository
      */
-    public AssociationSvc(final AssociationRepository argsAssociationRepository) {
+    public AssociationSvc(
+            final AssociationRepository argsAssociationRepository) {
         this.associationRepository = argsAssociationRepository;
     }
 

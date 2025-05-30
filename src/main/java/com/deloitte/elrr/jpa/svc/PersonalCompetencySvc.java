@@ -9,14 +9,16 @@ import com.deloitte.elrr.entity.PersonalCompetency;
 import com.deloitte.elrr.repository.PersonalCompetencyRepository;
 
 @Service
-public class PersonalCompetencySvc implements CommonSvc<PersonalCompetency, UUID> {
+public class PersonalCompetencySvc implements CommonSvc<PersonalCompetency,
+        UUID> {
 
     private final PersonalCompetencyRepository personalCompetencyRepository;
 
     /**
-     * @param argsCompetencyRepository
+     * @param argsRepository
      */
-    public PersonalCompetencySvc(final PersonalCompetencyRepository argsRepository) {
+    public PersonalCompetencySvc(
+            final PersonalCompetencyRepository argsRepository) {
         this.personalCompetencyRepository = argsRepository;
     }
 
@@ -35,9 +37,15 @@ public class PersonalCompetencySvc implements CommonSvc<PersonalCompetency, UUID
         return CommonSvc.super.save(pq);
     }
 
-    public PersonalCompetency findByPersonIdAndCompetencyId(UUID personId, UUID competencyId) {
-        PersonalCompetency personalCompetency = personalCompetencyRepository.findByPersonIdAndCompetencyId(personId,
-                competencyId);
+    /**
+     * @param personId
+     * @param competencyId
+     * @return personalCompetency
+     */
+    public PersonalCompetency findByPersonIdAndCompetencyId(UUID personId,
+            UUID competencyId) {
+        PersonalCompetency personalCompetency = personalCompetencyRepository
+                .findByPersonIdAndCompetencyId(personId, competencyId);
         return personalCompetency;
     }
 }

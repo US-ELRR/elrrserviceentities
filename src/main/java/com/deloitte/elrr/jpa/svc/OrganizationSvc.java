@@ -25,7 +25,8 @@ public class OrganizationSvc implements CommonSvc<Organization, UUID> {
      *
      * @param argsOrganizationRepository
      */
-    public OrganizationSvc(final OrganizationRepository argsOrganizationRepository) {
+    public OrganizationSvc(
+            final OrganizationRepository argsOrganizationRepository) {
         this.organizationRepository = argsOrganizationRepository;
     }
 

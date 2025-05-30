@@ -16,7 +16,8 @@ public class LearningResourceSvc implements CommonSvc<LearningResource, UUID> {
     /**
      * @param argsLearningResourceRepository
      */
-    public LearningResourceSvc(final LearningResourceRepository argsLearningResourceRepository) {
+    public LearningResourceSvc(
+            final LearningResourceRepository argsLearningResourceRepository) {
         this.learningResourceRepository = argsLearningResourceRepository;
     }
 
@@ -35,8 +36,13 @@ public class LearningResourceSvc implements CommonSvc<LearningResource, UUID> {
         return CommonSvc.super.save(learningResource);
     }
 
+    /**
+     * @param iri
+     * @return learningResource
+     */
     public LearningResource findByIri(String iri) {
-        LearningResource learningResource = learningResourceRepository.findByIri(iri);
+        LearningResource learningResource = learningResourceRepository
+                .findByIri(iri);
         return learningResource;
     }
 }

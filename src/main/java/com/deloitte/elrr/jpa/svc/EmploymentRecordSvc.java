@@ -17,7 +17,8 @@ public class EmploymentRecordSvc implements CommonSvc<EmploymentRecord, UUID> {
      *
      * @param argsEmploymentRecordRepository
      */
-    public EmploymentRecordSvc(final EmploymentRecordRepository argsEmploymentRecordRepository) {
+    public EmploymentRecordSvc(
+            final EmploymentRecordRepository argsEmploymentRecordRepository) {
         this.employmentRecordRepository = argsEmploymentRecordRepository;
     }
 

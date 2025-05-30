@@ -16,7 +16,8 @@ public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
     /**
      * @param argsLearningRecordRepository
      */
-    public LearningRecordSvc(final LearningRecordRepository argsLearningRecordRepository) {
+    public LearningRecordSvc(
+            final LearningRecordRepository argsLearningRecordRepository) {
         this.learningRecordRepository = argsLearningRecordRepository;
     }
 
@@ -35,9 +36,17 @@ public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
         return CommonSvc.super.save(learningRecord);
     }
 
-    public LearningRecord findByPersonIdAndLearningResourceId(UUID personId, UUID learningResourceId) {
-        LearningRecord learningRecord = learningRecordRepository.findByPersonIdAndLearningResourceId(personId,
-                learningResourceId);
+    /**
+     * @param personId
+     * @param learningResourceId
+     * @return learningRecord
+     */
+    @SuppressWarnings("checkstyle:linelength")
+    public LearningRecord findByPersonIdAndLearningResourceId(UUID personId,
+            UUID learningResourceId) {
+        LearningRecord learningRecord = learningRecordRepository
+                .findByPersonIdAndLearningResourceId(personId,
+                        learningResourceId);
         return learningRecord;
     }
 }

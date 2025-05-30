@@ -35,8 +35,13 @@ public class CredentialSvc implements CommonSvc<Credential, UUID> {
         return CommonSvc.super.save(credential);
     }
 
+    /**
+     * @param identifier
+     * @return credential
+     */
     public Credential findByIdentifier(String identifier) {
-        Credential credential = credentialRepository.findByIdentifier(identifier);
+        Credential credential = credentialRepository.findByIdentifier(
+                identifier);
         return credential;
     }
 }
