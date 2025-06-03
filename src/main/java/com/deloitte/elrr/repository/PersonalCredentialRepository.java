@@ -8,7 +8,14 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.PersonalCredential;
 
 @Repository
-public interface PersonalCredentialRepository
-        extends JpaRepository<PersonalCredential, UUID> {
+public interface PersonalCredentialRepository extends JpaRepository<
+        PersonalCredential, UUID> {
 
+    /**
+     * @param personId
+     * @param credentialId
+     * @return PersonalCredential
+     */
+    PersonalCredential findByPersonIdAndCredentialId(UUID personId,
+            UUID credentialId);
 }

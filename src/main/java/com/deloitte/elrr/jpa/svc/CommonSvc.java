@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.deloitte.elrr.jpa.svc;
 
 import java.io.Serializable;
@@ -23,6 +20,7 @@ public interface CommonSvc<T, I extends Serializable> {
     default Iterable<T> findAll() {
         return getRepository().findAll();
     }
+
     /**
      *
      * @param i
@@ -31,6 +29,7 @@ public interface CommonSvc<T, I extends Serializable> {
     default Optional<T> get(I i) {
         return getRepository().findById(i);
     }
+
     /**
      *
      * @param entity
@@ -39,54 +38,64 @@ public interface CommonSvc<T, I extends Serializable> {
     default T save(T entity) {
         return getRepository().save(entity);
     }
+
     /**
-     *
      * @param entities
      * @return Iterable<T>
      */
     default Iterable<T> saveAll(Iterable<T> entities) {
         return getRepository().saveAll(entities);
     }
+
     /**
      *
      * @param i
      */
+    @SuppressWarnings("checkstyle:linelength")
     default void delete(I i) {
         if (getRepository().existsById(i)) {
             getRepository().deleteById(i);
         } else {
-            throw new RuntimeServiceException(
-                    " Id not found for delete : " + i);
+            throw new RuntimeServiceException(" Id not found for delete : "
+                    + i);
         }
     }
+
     /**
      *
+     * @author phleven
      */
     default void deleteAll() {
         getRepository().deleteAll();
-
     }
+
     /**
-     *
      * @param entity
      */
     default void update(T entity) {
-        if (getRepository().existsById(getId(entity))) {
-            getRepository().save(entity);
-        } else {
+        try {
 
-            throw new RuntimeServiceException(
-                    "Not found record in DB to update: " + entity);
+            if (getRepository().existsById(getId(entity))) {
+                getRepository().save(entity);
+            } else {
+                throw new RuntimeServiceException("Record to update not found: "
+                        + entity);
+            }
+
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeServiceException("Record to update not found: "
+                    + entity);
         }
     }
+
     /**
      *
      * @param entity
      * @return Id
      */
     I getId(T entity);
+
     /**
-     *
      * @return CrudRepository<T, ID>
      */
     CrudRepository<T, I> getRepository();

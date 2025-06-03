@@ -52,11 +52,13 @@ class IdentityTest {
         assertEquals(identity.getIfi(), "mbox_sha1sum::32qf23f23f2332f");
         identity.setMboxSha1Sum(null);
         identity.setOpenid("https://verifyopenid.org.net/whaioehnfioeiohhf");
-        assertEquals(identity.getIfi(), "openid::https://verifyopenid.org.net/whaioehnfioeiohhf");
+        assertEquals(identity.getIfi(),
+                "openid::https://verifyopenid.org.net/whaioehnfioeiohhf");
         identity.setOpenid(null);
         identity.setHomePage("http://accounts.domain.org/accounts");
         identity.setName("12345");
-        assertEquals(identity.getIfi(), "account::12345@http://accounts.domain.org/accounts");
+        assertEquals(identity.getIfi(),
+                "account::12345@http://accounts.domain.org/accounts");
     }
 
     /**
