@@ -14,7 +14,7 @@ public class LearningResourceSvc implements CommonSvc<LearningResource, UUID> {
     private final LearningResourceRepository learningResourceRepository;
 
     /**
-     * 
+     *
      * @param argsLearningResourceRepository
      */
     public LearningResourceSvc(

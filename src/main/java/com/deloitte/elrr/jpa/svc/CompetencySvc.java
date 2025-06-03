@@ -14,7 +14,7 @@ public class CompetencySvc implements CommonSvc<Competency, UUID> {
     private final CompetencyRepository competencyRepository;
 
     /**
-     * 
+     *
      * @param argsCompetencyRepository
      */
     public CompetencySvc(final CompetencyRepository argsCompetencyRepository) {
