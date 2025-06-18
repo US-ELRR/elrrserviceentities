@@ -17,7 +17,8 @@ public class ClientTokenSvc implements CommonSvc<ClientToken, UUID> {
      *
      * @param argsClientTokenRepository
      */
-    public ClientTokenSvc(final ClientTokenRepository argsClientTokenRepository) {
+    public ClientTokenSvc(
+            final ClientTokenRepository argsClientTokenRepository) {
         this.clientTokenRepository = argsClientTokenRepository;
     }
 

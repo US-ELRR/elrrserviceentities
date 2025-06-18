@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.ClientToken;
 
 @Repository
-public interface ClientTokenRepository extends JpaRepository<ClientToken, UUID> {
+public interface ClientTokenRepository
+        extends JpaRepository<ClientToken, UUID> {
 }
