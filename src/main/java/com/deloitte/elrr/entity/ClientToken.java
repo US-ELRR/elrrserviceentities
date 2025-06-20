@@ -49,6 +49,9 @@ public class ClientToken {
     @UpdateTimestamp
     private LocalDateTime lastModified;
 
+    @Column(name = "label", length = 100)
+    private String label;
+
     @Override
     public String toString() {
         return "ClientToken [id=" + id + "]";
