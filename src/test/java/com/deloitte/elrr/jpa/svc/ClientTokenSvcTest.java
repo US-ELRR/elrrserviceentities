@@ -84,6 +84,13 @@ public class ClientTokenSvcTest {
         assertEquals(clientTokenSvc.getRepository(), clientTokenRepository);
     }
 
+    @Test
+    void existsByIdTest() {
+        Mockito.doReturn(true).when(clientTokenRepository)
+                .existsById(clientTokenId);
+        assertEquals(clientTokenSvc.existsById(clientTokenId), true);
+    }
+
     private ClientToken getTestClientToken() {
         ClientToken clientToken = new ClientToken();
         clientToken.setId(clientTokenId);
