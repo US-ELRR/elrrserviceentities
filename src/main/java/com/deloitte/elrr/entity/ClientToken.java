@@ -24,7 +24,7 @@ import java.util.Map;
 public class ClientToken extends Auditable<String> {
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "jwtPayload", columnDefinition = "JSONB")
+    @Column(name = "jwt_payload", columnDefinition = "JSONB")
     private Map<String, Object> jwtPayload;
 
     @Column(name = "label", length = 100)
