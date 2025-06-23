@@ -2,6 +2,7 @@ package com.deloitte.elrr.entity;
 
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -34,6 +35,18 @@ import lombok.Setter;
     private Person person;
 
     /**
+     * The name of the Goal.
+     */
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    /**
+     * The description of the Goal.
+     */
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    /**
      * The Competencies associated with the Goal.
      */
     @OneToMany(mappedBy = "goal")
@@ -50,7 +63,6 @@ import lombok.Setter;
      */
     @OneToMany(mappedBy = "goal")
     private Set<LearningResource> learningResources;
-
 
     @Override
     public String toString() {
