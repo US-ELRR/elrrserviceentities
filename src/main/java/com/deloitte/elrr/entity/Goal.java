@@ -27,26 +27,26 @@ import lombok.Setter;
  public class Goal extends Auditable<String> {
 
     /**
-     * The person who owns the goal.
+     * The Person who owns the Goal.
      */
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
 
     /**
-     * The Competencies associated with the goal.
+     * The Competencies associated with the Goal.
      */
     @OneToMany(mappedBy = "goal")
     private Set<Competency> competencies;
 
     /**
-     * The Credentials associated with the goal.
+     * The Credentials associated with the Goal.
      */
     @OneToMany(mappedBy = "goal")
     private Set<Credential> credentials;
 
     /**
-     * The Learning Resources associated with the goal.
+     * The Learning Resources associated with the Goal.
      */
     @OneToMany(mappedBy = "goal")
     private Set<LearningResource> learningResources;
