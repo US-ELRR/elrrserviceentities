@@ -90,7 +90,7 @@ import com.deloitte.elrr.entity.types.GoalType;
     @JoinTable(
         name = "goal_competency",
         joinColumns = @JoinColumn(name = "goal_id"),
-        inverseJoinColumns = @JoinColumn(name = "competency_id")
+        inverseJoinColumns = @JoinColumn(name = "qualification_id")
     )
     private Set<Competency> competencies;
 
@@ -101,7 +101,7 @@ import com.deloitte.elrr.entity.types.GoalType;
     @JoinTable(
         name = "goal_credential",
         joinColumns = @JoinColumn(name = "goal_id"),
-        inverseJoinColumns = @JoinColumn(name = "credential_id")
+        inverseJoinColumns = @JoinColumn(name = "qualification_id")
     )
     private Set<Credential> credentials;
 

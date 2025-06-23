@@ -335,3 +335,40 @@ CREATE TABLE IF NOT EXISTS military_record (
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE
 );
+
+DO $$ BEGIN
+    CREATE TYPE goal_type AS ENUM (
+        'SELF', 'ASSIGNED'
+    );
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
+
+CREATE TABLE IF NOT EXISTS goal (
+    id                          UUID PRIMARY KEY,
+    person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
+    type                        goal_type NOT NULL,
+    name                        VARCHAR(255) NOT NULL,
+    description                 TEXT,
+    start_date                  DATE,
+    achieved_by_date            DATE,
+    expiration_date             DATE,
+    updated_by                  VARCHAR(20),
+    inserted_date               TIMESTAMP WITH TIME ZONE,
+    last_modified               TIMESTAMP WITH TIME ZONE
+);
+
+CREATE TABLE IF NOT EXISTS goal_competency (
+    goal_id                     UUID NOT NULL REFERENCES goal (id) ON DELETE CASCADE,
+    qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS goal_credential (
+    goal_id                     UUID NOT NULL REFERENCES goal (id) ON DELETE CASCADE,
+    qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS goal_learning_resource (
+    goal_id                     UUID NOT NULL REFERENCES goal (id) ON DELETE CASCADE,
+    learning_resource_id        UUID NOT NULL REFERENCES learning_resource (id) ON DELETE CASCADE
+);
