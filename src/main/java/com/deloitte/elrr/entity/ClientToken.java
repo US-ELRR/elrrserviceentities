@@ -4,15 +4,23 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.UUID;
 
 @Entity
 @Table(name = "client_token")
@@ -21,7 +29,11 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ClientToken extends Auditable<String> {
+public class ClientToken {
+
+    @Id
+    @Column(name = "id")
+    private UUID id;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "jwt_payload", columnDefinition = "JSONB")
@@ -29,6 +41,18 @@ public class ClientToken extends Auditable<String> {
 
     @Column(name = "label", length = 100)
     private String label;
+
+    @Column(name = "inserted_date", updatable = false)
+    @CreationTimestamp
+    private LocalDateTime insertedDate;
+
+    @Column(name = "updated_by", length = 20)
+    @LastModifiedBy
+    private String updatedBy;
+
+    @Column(name = "last_modified")
+    @UpdateTimestamp
+    private LocalDateTime lastModified;
 
     @Override
     public String toString() {
