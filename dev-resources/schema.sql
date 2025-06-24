@@ -344,6 +344,15 @@ EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
 
+CREATE TABLE IF NOT EXISTS client_token (
+    id                          UUID PRIMARY KEY,
+    jwt_payload                 JSONB NOT NULL,
+    label                       VARCHAR(255),
+    updated_by                  VARCHAR(20),
+    inserted_date               TIMESTAMP WITH TIME ZONE,
+    last_modified               TIMESTAMP WITH TIME ZONE
+);
+
 CREATE TABLE IF NOT EXISTS goal (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
