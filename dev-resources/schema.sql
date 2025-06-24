@@ -335,3 +335,12 @@ CREATE TABLE IF NOT EXISTS military_record (
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE
 );
+
+CREATE TABLE IF NOT EXISTS client_token (
+    id                          UUID PRIMARY KEY,
+    jwt_payload                 JSONB NOT NULL,
+    label                       VARCHAR(255),
+    updated_by                  VARCHAR(20),
+    inserted_date               TIMESTAMP WITH TIME ZONE,
+    last_modified               TIMESTAMP WITH TIME ZONE
+);
