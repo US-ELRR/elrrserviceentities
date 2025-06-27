@@ -1,4 +1,4 @@
-SET search_path TO elrr;
+SET search_path TO services_schema;
 
 TRUNCATE TABLE organization CASCADE;
 TRUNCATE TABLE location CASCADE;
