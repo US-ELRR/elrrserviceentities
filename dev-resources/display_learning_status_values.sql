@@ -1,4 +1,4 @@
-SET search_path TO elrr;
+SET search_path TO services_schema;
 
 SELECT enumlabel
 FROM pg_enum

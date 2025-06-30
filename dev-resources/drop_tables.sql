@@ -1,4 +1,4 @@
-SET search_path TO elrr;
+SET search_path TO services_schema;
 
 DROP TABLE IF EXISTS organization CASCADE;
 DROP TABLE IF EXISTS location CASCADE;
