@@ -17,4 +17,12 @@ public interface ClientTokenRepository
          * @return true if the client token exists, false otherwise
          */
         Boolean existsByJwtId(UUID jwtId);
+
+        /**
+         * Find a client token by its JWT ID.
+         *
+         * @param jwtId the UUID of the JWT
+         * @return the ClientToken if found, otherwise null
+         */
+        ClientToken findByJwtId(UUID jwtId);
 }

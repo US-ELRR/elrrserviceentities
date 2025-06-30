@@ -57,4 +57,14 @@ public class ClientTokenSvc implements CommonSvc<ClientToken, UUID> {
         return this.clientTokenRepository.existsByJwtId(jwtId);
     }
 
+    /**
+     * Find a client token by its JWT ID.
+     *
+     * @param jwtId the UUID of the JWT
+     * @return the ClientToken if found, otherwise null
+     */
+    public ClientToken findByJwtId(final UUID jwtId) {
+        return this.clientTokenRepository.findByJwtId(jwtId);
+    }
+
 }
