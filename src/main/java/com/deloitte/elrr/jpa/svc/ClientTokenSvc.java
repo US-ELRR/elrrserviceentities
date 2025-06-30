@@ -46,4 +46,15 @@ public class ClientTokenSvc implements CommonSvc<ClientToken, UUID> {
     public boolean existsById(final UUID id) {
         return this.clientTokenRepository.existsById(id);
     }
+
+    /**
+     * check if a client token exists by its JWT ID.
+     *
+     * @param jwtId the UUID of the JWT
+     * @return true if the client token exists, false otherwise
+     */
+    public boolean existsByJwtId(final UUID jwtId) {
+        return this.clientTokenRepository.existsByJwtId(jwtId);
+    }
+
 }

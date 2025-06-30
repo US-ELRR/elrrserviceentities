@@ -9,5 +9,12 @@ import com.deloitte.elrr.entity.ClientToken;
 
 @Repository
 public interface ClientTokenRepository
-        extends JpaRepository<ClientToken, UUID> {
+                extends JpaRepository<ClientToken, UUID> {
+        /**
+         * Check if a client token exists by its JWT ID.
+         *
+         * @param jwtId the UUID of the JWT
+         * @return true if the client token exists, false otherwise
+         */
+        Boolean existsByJwtId(UUID jwtId);
 }

@@ -91,6 +91,14 @@ public class ClientTokenSvcTest {
         assertEquals(clientTokenSvc.existsById(clientTokenId), true);
     }
 
+    @Test
+    void existsByJwtIdTest() {
+        UUID jwtId = UUID.randomUUID();
+        Mockito.doReturn(true).when(clientTokenRepository)
+                .existsByJwtId(jwtId);
+        assertEquals(clientTokenSvc.existsByJwtId(jwtId), true);
+    }
+
     private ClientToken getTestClientToken() {
         ClientToken clientToken = new ClientToken();
         clientToken.setId(clientTokenId);

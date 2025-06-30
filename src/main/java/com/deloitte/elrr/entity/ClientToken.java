@@ -13,6 +13,7 @@ import org.hibernate.type.SqlTypes;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Entity
 @Table(name = "client_token")
@@ -23,8 +24,11 @@ import java.util.Map;
 @Setter
 public class ClientToken extends Auditable<String> {
 
+    @Column(name = "jwt_id")
+    private UUID jwtId;
+
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "jwtPayload", columnDefinition = "JSONB")
+    @Column(name = "jwt_payload", columnDefinition = "JSONB")
     private Map<String, Object> jwtPayload;
 
     @Column(name = "label", length = 100)
