@@ -5,6 +5,8 @@ import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.util.Set;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -122,4 +124,46 @@ import com.deloitte.elrr.entity.types.GoalType;
         + "]";
     }
 
- }
+    /**
+     * Get the IDs of any competencies associated with this Goal.
+     *
+     * @return a Set of UUIDs representing the IDs of the competencies
+     */
+    public Set<UUID> getCompetencyIds() {
+        Set<UUID> competencyIds = new HashSet<>();
+        if (competencies != null) {
+            competencies.forEach(competency -> {
+                competencyIds.add(competency.getId());
+            });
+        }
+        return competencyIds;
+    }
+    /**
+     * Get the IDs of any credentials associated with this Goal.
+     *
+     * @return a Set of UUIDs representing the IDs of the credentials
+     */
+    public Set<UUID> getCredentialIds() {
+        Set<UUID> credentialIds = new HashSet<>();
+        if (credentials != null) {
+            credentials.forEach(credential -> {
+                credentialIds.add(credential.getId());
+            });
+        }
+        return credentialIds;
+    }
+    /**
+     * Get the IDs of any learning resources associated with this Goal.
+     *
+     * @return a Set of UUIDs representing the IDs of the learning resources
+     */
+    public Set<UUID> getLearningResourceIds() {
+        Set<UUID> learningResourceIds = new HashSet<>();
+        if (learningResources != null) {
+            learningResources.forEach(learningResource -> {
+                learningResourceIds.add(learningResource.getId());
+            });
+        }
+        return learningResourceIds;
+    }
+}

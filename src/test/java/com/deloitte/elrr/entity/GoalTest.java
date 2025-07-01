@@ -1,5 +1,8 @@
 package com.deloitte.elrr.entity;
 
+import java.util.Set;
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterAll;
@@ -54,5 +57,48 @@ class GoalTest {
     @Test
     void testToString() {
         assertNotNull(new Goal().toString());
+    }
+
+    /**
+     *
+     */
+    @Test
+    void testGetCompetencyIds() {
+        UUID competencyId = UUID.randomUUID();
+        Competency competency = new Competency();
+        competency.setId(competencyId);
+        Set<Competency> competencies = Set.of(competency);
+        Goal goal = new Goal();
+        goal.setCompetencies(competencies);
+        Set<UUID> competencyIds = goal.getCompetencyIds();
+        assertNotNull(competencyIds.iterator().next().equals(competencyId));
+    }
+    /**
+     *
+     */
+    @Test
+    void testGetCredentialIds() {
+        UUID credentialId = UUID.randomUUID();
+        Credential credential = new Credential();
+        credential.setId(credentialId);
+        Set<Credential> credentials = Set.of(credential);
+        Goal goal = new Goal();
+        goal.setCredentials(credentials);
+        Set<UUID> credentialIds = goal.getCredentialIds();
+        assertNotNull(credentialIds.iterator().next().equals(credentialId));
+    }
+    /**
+     *
+     */
+    @Test
+    void testGetLearningResourceIds() {
+        UUID learningResourceId = UUID.randomUUID();
+        LearningResource learningResource = new LearningResource();
+        learningResource.setId(learningResourceId);
+        Set<LearningResource> learningResources = Set.of(learningResource);
+        Goal goal = new Goal();
+        goal.setLearningResources(learningResources);
+        Set<UUID> learningResourceIds = goal.getLearningResourceIds();
+        assertNotNull(learningResourceIds.iterator().next().equals(learningResourceId));
     }
 }
