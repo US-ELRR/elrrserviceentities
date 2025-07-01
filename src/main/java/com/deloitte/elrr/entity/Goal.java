@@ -4,6 +4,7 @@ import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.util.Set;
+import java.beans.Transient;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.UUID;
@@ -129,6 +130,7 @@ import com.deloitte.elrr.entity.types.GoalType;
      *
      * @return a Set of UUIDs representing the IDs of the competencies
      */
+    @Transient
     public Set<UUID> getCompetencyIds() {
         Set<UUID> competencyIds = new HashSet<>();
         if (competencies != null) {
@@ -143,6 +145,7 @@ import com.deloitte.elrr.entity.types.GoalType;
      *
      * @return a Set of UUIDs representing the IDs of the credentials
      */
+    @Transient
     public Set<UUID> getCredentialIds() {
         Set<UUID> credentialIds = new HashSet<>();
         if (credentials != null) {
@@ -157,6 +160,7 @@ import com.deloitte.elrr.entity.types.GoalType;
      *
      * @return a Set of UUIDs representing the IDs of the learning resources
      */
+    @Transient
     public Set<UUID> getLearningResourceIds() {
         Set<UUID> learningResourceIds = new HashSet<>();
         if (learningResources != null) {
