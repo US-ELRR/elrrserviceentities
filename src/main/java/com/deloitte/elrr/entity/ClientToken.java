@@ -35,6 +35,9 @@ public class ClientToken {
     @Column(name = "id")
     private UUID id;
 
+    @Column(name = "jwt_id")
+    private UUID jwtId;
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "jwt_payload", columnDefinition = "JSONB")
     private Map<String, Object> jwtPayload;
