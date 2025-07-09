@@ -128,7 +128,8 @@ CREATE TABLE IF NOT EXISTS person (
     union_membership            BOOLEAN,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS identity (
