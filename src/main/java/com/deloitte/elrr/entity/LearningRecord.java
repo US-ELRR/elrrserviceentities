@@ -1,6 +1,5 @@
 package com.deloitte.elrr.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.JdbcType;
@@ -37,7 +36,7 @@ public class LearningRecord extends Auditable<String> {
     private Person person;
 
     @Column(name = "enrollment_date")
-    private LocalDate enrollmentDate;
+    private LocalDateTime enrollmentDate;
 
     @Column(name = "record_status", columnDefinition = "elrr.learning_status")
     @Enumerated(EnumType.STRING)

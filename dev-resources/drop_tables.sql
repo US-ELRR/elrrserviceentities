@@ -18,3 +18,8 @@ DROP TABLE IF EXISTS organization_facility CASCADE;
 DROP TABLE IF EXISTS employment_record CASCADE;
 DROP TABLE IF EXISTS employment_qualification CASCADE;
 DROP TABLE IF EXISTS military_record CASCADE;
+DROP TABLE IF EXISTS client_token CASCADE;
+DROP TABLE IF EXISTS goal CASCADE;
+DROP TABLE IF EXISTS goal_credential CASCADE;
+DROP TABLE IF EXISTS goal_competency CASCADE;
+DROP TABLE IF EXISTS goal_learning_resource CASCADE
