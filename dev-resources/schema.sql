@@ -21,9 +21,15 @@ DROP TABLE IF EXISTS organization_facility CASCADE;
 DROP TABLE IF EXISTS employment_record CASCADE;
 DROP TABLE IF EXISTS employment_qualification CASCADE;
 DROP TABLE IF EXISTS military_record CASCADE;
+DROP TABLE IF EXISTS client_token CASCADE;
+DROP TABLE IF EXISTS goal CASCADE;
+DROP TABLE IF EXISTS goal_credential CASCADE;
+DROP TABLE IF EXISTS goal_competency CASCADE;
+DROP TABLE IF EXISTS goal_learning_resource CASCADE;
 
 DROP TYPE IF EXISTS learning_status CASCADE;
 DROP TYPE IF EXISTS qualification_type CASCADE;
+DROP TYPE IF EXISTS goal_type CASCADE;
 
 -- yes, we need this status
 DO $$ BEGIN
@@ -182,8 +188,8 @@ CREATE TABLE IF NOT EXISTS qualification (
     framework_identifier        VARCHAR(100),
     framework_description       TEXT,
     framework_subject           VARCHAR(100),
-    framework_valid_start_date  DATE,
-    framework_valid_end_date    DATE,
+    framework_valid_start_date  TIMESTAMP WITH TIME ZONE NULL,
+    framework_valid_end_date    TIMESTAMP WITH TIME ZONE NULL,
     record_status               VARCHAR(10),
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
@@ -228,7 +234,7 @@ CREATE TABLE IF NOT EXISTS learning_record (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
     learning_resource_id        UUID NOT NULL REFERENCES learning_resource (id) ON DELETE CASCADE,
-    enrollment_date             DATE,
+    enrollment_date             TIMESTAMP WITH TIME ZONE,
     record_status               learning_status NOT NULL,
     academic_grade              VARCHAR(50),
     event_time                  TIMESTAMP WITH TIME ZONE,

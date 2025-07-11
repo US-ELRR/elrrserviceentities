@@ -18,3 +18,8 @@ TRUNCATE TABLE organization_facility CASCADE;
 TRUNCATE TABLE employment_record CASCADE;
 TRUNCATE TABLE employment_qualification CASCADE;
 TRUNCATE TABLE military_record CASCADE;
+TRUNCATE TABLE client_token CASCADE;
+TRUNCATE TABLE goal CASCADE;
+TRUNCATE TABLE goal_credential CASCADE;
+TRUNCATE TABLE goal_competency CASCADE;
+TRUNCATE TABLE goal_learning_resource CASCADE
