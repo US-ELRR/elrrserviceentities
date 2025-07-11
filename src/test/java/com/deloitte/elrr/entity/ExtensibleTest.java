@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,13 +85,13 @@ class ExtensibleTest {
      */
     @Test
     void testExtensionsSetterGetter() {
-        Map<String, Object> extensions = new HashMap<>();
-        extensions.put("https://example.org/schema#customField", "test value");
+        Map<URI, Object> extensions = new HashMap<>();
+        extensions.put(URI.create("https://example.org/schema#customField"), "test value");
 
         testExtensible.setExtensions(extensions);
 
         assertNotNull(testExtensible.getExtensions());
-        assertEquals("test value", testExtensible.getExtensions().get("https://example.org/schema#customField"));
+        assertEquals("test value", testExtensible.getExtensions().get(URI.create("https://example.org/schema#customField")));
     }
 
     /**
@@ -111,13 +112,13 @@ class ExtensibleTest {
      */
     @Test
     void testConstructorWithExtensions() {
-        Map<String, Object> extensions = new HashMap<>();
-        extensions.put("https://example.org/schema#key", "value");
-        
+        Map<URI, Object> extensions = new HashMap<>();
+        extensions.put(URI.create("https://example.org/schema#key"), "value");
+
         TestExtensible extensible = new TestExtensible();
         extensible.setExtensions(extensions);
         
         assertNotNull(extensible.getExtensions());
-        assertEquals("value", extensible.getExtensions().get("https://example.org/schema#key"));
+        assertEquals("value", extensible.getExtensions().get(URI.create("https://example.org/schema#key")));
     }
 }

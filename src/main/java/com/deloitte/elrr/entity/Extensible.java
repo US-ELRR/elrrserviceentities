@@ -1,6 +1,7 @@
 package com.deloitte.elrr.entity;
 
 import java.util.Map;
+import java.net.URI;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -21,6 +22,6 @@ public abstract class Extensible<U> extends Auditable<U> {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "extensions", columnDefinition = "JSONB")
-    private Map<String, Object> extensions;
+    private Map<URI, Object> extensions;
 
 }
