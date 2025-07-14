@@ -21,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AbstractQualification extends Auditable<String> {
+public class AbstractQualification extends Extensible<String> {
 
     @Column(name = "identifier", length = 100)
     private String identifier;

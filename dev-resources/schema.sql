@@ -70,7 +70,8 @@ CREATE TABLE IF NOT EXISTS organization (
     -- identification_system open question
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS location (
@@ -86,7 +87,8 @@ CREATE TABLE IF NOT EXISTS location (
     longitude                   VARCHAR(255),
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS person (
@@ -188,7 +190,8 @@ CREATE TABLE IF NOT EXISTS qualification (
     record_status               VARCHAR(10),
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS person_qualification (
@@ -222,7 +225,8 @@ CREATE TABLE IF NOT EXISTS learning_resource (
     description                 TEXT,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS learning_record (
@@ -235,7 +239,8 @@ CREATE TABLE IF NOT EXISTS learning_record (
     event_time                  TIMESTAMP WITH TIME ZONE,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS phone (
@@ -275,7 +280,8 @@ CREATE TABLE IF NOT EXISTS facility (
     facility_security_level     VARCHAR(255), --enum?
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS organization_facility (
@@ -303,7 +309,8 @@ CREATE TABLE IF NOT EXISTS employment_record (
     employment_facility         UUID REFERENCES facility (id),
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS employment_qualification (
@@ -334,7 +341,8 @@ CREATE TABLE IF NOT EXISTS military_record (
     -- expertise
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS client_token (
@@ -366,7 +374,8 @@ CREATE TABLE IF NOT EXISTS goal (
     expiration_date             DATE,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS goal_competency (

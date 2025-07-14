@@ -22,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class EmploymentRecord extends Auditable<String> {
+public class EmploymentRecord extends Extensible<String> {
 
     @ManyToOne
     @JoinColumn(name = "employer_organization")

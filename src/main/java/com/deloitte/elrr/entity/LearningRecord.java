@@ -26,7 +26,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LearningRecord extends Auditable<String> {
+public class LearningRecord extends Extensible<String> {
 
     @ManyToOne
     @JoinColumn(name = "learning_resource_id")

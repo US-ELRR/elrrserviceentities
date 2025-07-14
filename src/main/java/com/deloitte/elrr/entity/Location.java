@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Location extends Auditable<String> {
+public class Location extends Extensible<String> {
 
     @Column(name = "street_number_and_name")
     private String streetNumberAndName;
