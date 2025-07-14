@@ -20,7 +20,6 @@ DROP TABLE IF EXISTS facility CASCADE;
 DROP TABLE IF EXISTS organization_facility CASCADE;  
 DROP TABLE IF EXISTS employment_record CASCADE;
 DROP TABLE IF EXISTS employment_qualification CASCADE;
-DROP TABLE IF EXISTS military_record CASCADE;
 
 DROP TYPE IF EXISTS learning_status CASCADE;
 DROP TYPE IF EXISTS qualification_type CASCADE;
@@ -316,33 +315,6 @@ CREATE TABLE IF NOT EXISTS employment_record (
 CREATE TABLE IF NOT EXISTS employment_qualification (
     employment_record_id        UUID NOT NULL REFERENCES employment_record (id) ON DELETE CASCADE,
     qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS military_record (
-    id                          UUID PRIMARY KEY,
-    person_id                   UUID NOT NULL REFERENCES person (id)  ON DELETE CASCADE,
-    branch                      VARCHAR(255) NOT NULL, -- ENUM? CONTROLLED?
-    country                     VARCHAR(255) NOT NULL, -- VALIDATED?
-    induction_date              DATE,
-    induction_rank              VARCHAR(255),
-    release_date                DATE,
-    current_rank                VARCHAR(255),
-    current_status              VARCHAR(255),
-    discharge_date              DATE,
-    discharge_category          VARCHAR(255),
-    discharge_rank              VARCHAR(255),
-    highest_rank                VARCHAR(255),
-    military_id                 VARCHAR(255),
-    -- jobs: needs clarification
-    -- duties: needs clarification
-    -- honors: needs clarification
-    -- disciplinaryAction: needs clarification
-    -- skill                       
-    -- expertise
-    updated_by                  VARCHAR(20),
-    inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE,
-    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS client_token (
