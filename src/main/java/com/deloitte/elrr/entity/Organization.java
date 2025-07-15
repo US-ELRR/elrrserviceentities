@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Organization extends Auditable<String> {
+public class Organization extends Extensible<String> {
 
     @Column(name = "name")
     private String name;

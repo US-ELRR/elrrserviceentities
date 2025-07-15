@@ -24,7 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Person extends Auditable<String> {
+public class Person extends Extensible<String> {
 
     @Column(name = "name")
     private String name;
@@ -140,9 +140,6 @@ public class Person extends Auditable<String> {
     private Set<EmploymentRecord> employmentRecords;
 
     @OneToMany(mappedBy = "person")
-    private Set<MilitaryRecord> militaryRecords;
-
-    @OneToMany(mappedBy = "person")
     private Set<Identity> identities;
 
     @Column(name = "citizenship")
@@ -190,13 +187,12 @@ public class Person extends Auditable<String> {
         + emailAddresses + ", competencies=" + competencies + ", credentials="
         + credentials + ", learningRecords=" + learningRecords
         + ", associations=" + associations + ", employmentRecords="
-        + employmentRecords + ", militaryRecords=" + militaryRecords
-        + ", identities=" + identities + ", citizenship=" + citizenship
-        + ", height=" + height + ", heightUnit=" + heightUnit + ", weight="
-        + weight + ", weightUnit=" + weightUnit + ", interpupillaryDistance="
-        + interpupillaryDistance + ", handedness=" + handedness
-        + ", primaryLanguage=" + primaryLanguage + ", currentSecurityClearance="
-        + currentSecurityClearance + ", highestSecurityClearance="
-        + highestSecurityClearance + "]";
+        + employmentRecords + ", identities=" + identities + ", citizenship="
+        + citizenship + ", height=" + height + ", heightUnit=" + heightUnit
+        + ", weight=" + weight + ", weightUnit=" + weightUnit
+        + ", interpupillaryDistance=" + interpupillaryDistance + ", handedness="
+        + handedness + ", primaryLanguage=" + primaryLanguage
+        + ", currentSecurityClearance=" + currentSecurityClearance
+        + ", highestSecurityClearance=" + highestSecurityClearance + "]";
     }
 }

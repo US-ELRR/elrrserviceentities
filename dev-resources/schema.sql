@@ -20,7 +20,6 @@ DROP TABLE IF EXISTS facility CASCADE;
 DROP TABLE IF EXISTS organization_facility CASCADE;  
 DROP TABLE IF EXISTS employment_record CASCADE;
 DROP TABLE IF EXISTS employment_qualification CASCADE;
-DROP TABLE IF EXISTS military_record CASCADE;
 DROP TABLE IF EXISTS client_token CASCADE;
 DROP TABLE IF EXISTS goal CASCADE;
 DROP TABLE IF EXISTS goal_credential CASCADE;
@@ -41,6 +40,14 @@ END $$;
 DO $$ BEGIN
     CREATE TYPE qualification_type AS ENUM (
         'COMPETENCY', 'CREDENTIAL');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+    CREATE TYPE goal_type AS ENUM (
+        'SELF', 'ASSIGNED'
+    );
 EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
@@ -76,7 +83,8 @@ CREATE TABLE IF NOT EXISTS organization (
     -- identification_system open question
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS location (
@@ -92,7 +100,8 @@ CREATE TABLE IF NOT EXISTS location (
     longitude                   VARCHAR(255),
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS person (
@@ -134,7 +143,8 @@ CREATE TABLE IF NOT EXISTS person (
     union_membership            BOOLEAN,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS identity (
@@ -193,7 +203,8 @@ CREATE TABLE IF NOT EXISTS qualification (
     record_status               VARCHAR(10),
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS person_qualification (
@@ -227,7 +238,8 @@ CREATE TABLE IF NOT EXISTS learning_resource (
     description                 TEXT,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS learning_record (
@@ -240,7 +252,8 @@ CREATE TABLE IF NOT EXISTS learning_record (
     event_time                  TIMESTAMP WITH TIME ZONE,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS phone (
@@ -280,7 +293,8 @@ CREATE TABLE IF NOT EXISTS facility (
     facility_security_level     VARCHAR(255), --enum?
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS organization_facility (
@@ -308,38 +322,13 @@ CREATE TABLE IF NOT EXISTS employment_record (
     employment_facility         UUID REFERENCES facility (id),
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS employment_qualification (
     employment_record_id        UUID NOT NULL REFERENCES employment_record (id) ON DELETE CASCADE,
     qualification_id            UUID NOT NULL REFERENCES qualification (id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS military_record (
-    id                          UUID PRIMARY KEY,
-    person_id                   UUID NOT NULL REFERENCES person (id)  ON DELETE CASCADE,
-    branch                      VARCHAR(255) NOT NULL, -- ENUM? CONTROLLED?
-    country                     VARCHAR(255) NOT NULL, -- VALIDATED?
-    induction_date              DATE,
-    induction_rank              VARCHAR(255),
-    release_date                DATE,
-    current_rank                VARCHAR(255),
-    current_status              VARCHAR(255),
-    discharge_date              DATE,
-    discharge_category          VARCHAR(255),
-    discharge_rank              VARCHAR(255),
-    highest_rank                VARCHAR(255),
-    military_id                 VARCHAR(255),
-    -- jobs: needs clarification
-    -- duties: needs clarification
-    -- honors: needs clarification
-    -- disciplinaryAction: needs clarification
-    -- skill                       
-    -- expertise
-    updated_by                  VARCHAR(20),
-    inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
 );
 
 CREATE TABLE IF NOT EXISTS client_token (
@@ -352,14 +341,6 @@ CREATE TABLE IF NOT EXISTS client_token (
     last_modified               TIMESTAMP WITH TIME ZONE
 );
 
-DO $$ BEGIN
-    CREATE TYPE goal_type AS ENUM (
-        'SELF', 'ASSIGNED'
-    );
-EXCEPTION
-    WHEN duplicate_object THEN null;
-END $$;
-
 CREATE TABLE IF NOT EXISTS goal (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
@@ -371,7 +352,8 @@ CREATE TABLE IF NOT EXISTS goal (
     expiration_date             DATE,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
-    last_modified               TIMESTAMP WITH TIME ZONE
+    last_modified               TIMESTAMP WITH TIME ZONE,
+    extensions                  JSONB
 );
 
 CREATE TABLE IF NOT EXISTS goal_competency (
