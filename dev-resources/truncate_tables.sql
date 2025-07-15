@@ -17,7 +17,6 @@ TRUNCATE TABLE facility CASCADE;
 TRUNCATE TABLE organization_facility CASCADE;  
 TRUNCATE TABLE employment_record CASCADE;
 TRUNCATE TABLE employment_qualification CASCADE;
-TRUNCATE TABLE military_record CASCADE;
 TRUNCATE TABLE client_token CASCADE;
 TRUNCATE TABLE goal CASCADE;
 TRUNCATE TABLE goal_credential CASCADE;
