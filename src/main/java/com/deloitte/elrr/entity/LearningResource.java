@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LearningResource extends Auditable<String> {
+public class LearningResource extends Extensible<String> {
 
     @Column(name = "iri")
     private String iri;

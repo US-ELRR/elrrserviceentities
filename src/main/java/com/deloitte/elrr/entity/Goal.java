@@ -38,7 +38,7 @@ import com.deloitte.elrr.entity.types.GoalType;
  @AllArgsConstructor
  @Getter
  @Setter
- public class Goal extends Auditable<String> {
+ public class Goal extends Extensible<String> {
 
     /**
      * The Person who owns the Goal.
