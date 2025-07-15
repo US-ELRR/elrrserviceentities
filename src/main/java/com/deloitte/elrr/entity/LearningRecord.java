@@ -38,7 +38,7 @@ public class LearningRecord extends Auditable<String> {
     @Column(name = "enrollment_date")
     private LocalDateTime enrollmentDate;
 
-    @Column(name = "record_status", columnDefinition = "elrr.learning_status")
+    @Column(name = "record_status", columnDefinition = "learning_status")
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     private LearningStatus recordStatus;
