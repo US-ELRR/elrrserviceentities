@@ -3,14 +3,17 @@
  */
 package com.deloitte.elrr.jpa.svc;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.deloitte.elrr.entity.Person;
 import com.deloitte.elrr.repository.PersonRepository;
+import com.deloitte.elrr.specification.PersonSpecification;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,6 +68,27 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
                     .getMailingAddress()));
         }
         return CommonSvc.super.save(person);
+    }
+
+    /**
+     * Find persons using dynamic criteria.
+     *
+     * @param personId the person ID to filter by (optional)
+     * @param ifi the inverse functional identifier to filter by (optional)
+     * @return List of Person entities matching the criteria
+     */
+    public List<Person> findPersons(UUID personId, String ifi) {
+        Specification<Person> spec = Specification.where(null);
+
+        if (personId != null) {
+            spec = spec.and(PersonSpecification.hasId(personId));
+        }
+
+        if (ifi != null && !ifi.trim().isEmpty()) {
+            spec = spec.and(PersonSpecification.hasIfi(ifi));
+        }
+
+        return personRepository.findAll(spec);
     }
 
 }
