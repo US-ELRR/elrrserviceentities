@@ -3,6 +3,7 @@
  */
 package com.deloitte.elrr.jpa.svc;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,15 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
         return CommonSvc.super.save(person);
     }
 
+    /**
+     * Find persons with optional id and ifi filters.
+     *
+     * @param id Optional person ID filter
+     * @param ifi Optional IFI (Inverse Functional Identifier) filter
+     * @return List of persons matching the criteria
+     */
+    public List<Person> findPersonsWithFilters(final UUID id,
+                                               final String ifi) {
+        return personRepository.findPersonsWithFilters(id, ifi);
+    }
 }
