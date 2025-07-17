@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.hibernate.annotations.processing.CheckHQL;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -18,8 +21,28 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import com.deloitte.elrr.query.FindPersonsWithFiltersQuery;
+
 @Entity
 @Table(name = "person")
+@CheckHQL
+@NamedQuery(
+    name = "Person.findPersonsWithFilters",
+    query = """
+            SELECT DISTINCT p FROM Person p
+            LEFT JOIN p.identities i
+            LEFT JOIN p.associations a
+            LEFT JOIN p.employmentRecords er
+            WHERE (:id IS NULL OR p.id = :id)
+            AND (:ifi IS NULL OR i.ifi = :ifi)
+            AND (:organizationId IS NULL OR
+                ((:organizationRelType IS NULL OR
+                  :organizationRelType = 'Association')
+                 AND a.organization.id = :organizationId)
+                OR (:organizationRelType = 'Employment'
+                    AND er.employerOrganization.id = :organizationId))
+            """
+)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -4,12 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.deloitte.elrr.entity.Person;
-import com.deloitte.elrr.query.FindPersonsWithFiltersQuery;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, UUID> {
@@ -23,7 +21,6 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
      * @param organizationRelType Optional organization relationship type filter
      * @return List of persons matching the criteria
      */
-    @Query(FindPersonsWithFiltersQuery.QUERY)
     List<Person> findPersonsWithFilters(
             @Param("id") UUID id,
             @Param("ifi") String ifi,
