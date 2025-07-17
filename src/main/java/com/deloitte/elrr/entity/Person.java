@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
-import org.hibernate.annotations.processing.CheckHQL;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -23,7 +21,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "person")
-@CheckHQL
 @NamedQuery(
     name = "Person.findPersonsWithFilters",
     query = """
