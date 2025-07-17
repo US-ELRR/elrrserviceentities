@@ -20,8 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 
-@Service
-@Slf4j
+@Service @Slf4j
 public class PersonSvc implements CommonSvc<Person, UUID> {
 
     private final PersonRepository personRepository;
@@ -62,8 +61,8 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     @Override
     public Person save(final Person person) {
         if (person.getMailingAddress() != null) {
-            person.setMailingAddress(locationSvc.save(person
-                    .getMailingAddress()));
+            person.setMailingAddress(
+                    locationSvc.save(person.getMailingAddress()));
         }
         return CommonSvc.super.save(person);
     }
@@ -73,10 +72,13 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      *
      * @param id Optional person ID filter
      * @param ifi Optional IFI (Inverse Functional Identifier) filter
+     * @param organizationId Optional organization ID filter
+     * @param organizationRelType Optional organization relationship type filter
      * @return List of persons matching the criteria
      */
-    public List<Person> findPersonsWithFilters(final UUID id,
-                                               final String ifi) {
-        return personRepository.findPersonsWithFilters(id, ifi);
+    public List<Person> findPersonsWithFilters(final UUID id, final String ifi,
+            final UUID organizationId, final String organizationRelType) {
+        return personRepository.findPersonsWithFilters(id, ifi, organizationId,
+                organizationRelType);
     }
 }
