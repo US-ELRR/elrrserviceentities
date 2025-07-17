@@ -21,8 +21,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import com.deloitte.elrr.query.FindPersonsWithFiltersQuery;
-
 @Entity
 @Table(name = "person")
 @CheckHQL
