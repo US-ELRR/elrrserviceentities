@@ -84,6 +84,14 @@ public class PersonSvcTest {
         assertEquals(personSvc.getRepository(), personRepository);
     }
 
+    @Test
+    void findPersonsWithFiltersTest() {
+        Mockito.doReturn(getTestPeople()).when(personRepository)
+                .findPersonsWithFilters(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
+        Iterable<Person> people = personSvc.findPersonsWithFilters(null, null, null, null);
+        assertEquals(Iterables.size(people), 1);
+    }
+
     private Person getTestPerson() {
         Person person = new Person();
         person.setId(personId);
