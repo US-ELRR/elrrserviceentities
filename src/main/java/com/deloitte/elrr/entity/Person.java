@@ -10,9 +10,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.NamedNativeQuery;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,23 +21,28 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "person")
-@NamedQuery(
+@NamedNativeQuery(
     name = "Person.findPersonsWithFilters",
     query =
     """
-    SELECT DISTINCT p FROM Person p
-    LEFT JOIN p.identities i
-    LEFT JOIN p.associations a
-    LEFT JOIN p.employmentRecords er
-    WHERE (:id IS NULL OR p.id = :id)
-    AND (:ifi IS NULL OR i.ifi = :ifi)
-    AND (:organizationId IS NULL OR
-        ((:organizationRelType IS NULL OR
-          :organizationRelType = 'Association')
-         AND a.organization.id = :organizationId)
+    SELECT DISTINCT p.* FROM {h-schema}person p
+    LEFT JOIN {h-schema}identity i ON p.id = i.person_id
+    LEFT JOIN {h-schema}association a ON p.id = a.person_id
+    LEFT JOIN {h-schema}employment_record er ON p.id = er.employee
+    LEFT JOIN {h-schema}organization org_assoc
+        ON a.organization_id = org_assoc.id
+    LEFT JOIN {h-schema}organization org_emp
+        ON er.employer_organization = org_emp.id
+    WHERE (CAST(:id AS uuid) IS NULL OR p.id = :id)
+    AND (CAST(:ifi AS text) IS NULL OR i.ifi = :ifi)
+    AND (CAST(:organizationId AS uuid) IS NULL OR
+        ((CAST(:organizationRelType AS text) IS NULL
+            OR :organizationRelType = 'Association')
+         AND org_assoc.id = :organizationId)
         OR (:organizationRelType = 'Employment'
-            AND er.employerOrganization.id = :organizationId))
-    """
+            AND org_emp.id = :organizationId))
+    """,
+    resultClass = Person.class
 )
 @RequiredArgsConstructor
 @AllArgsConstructor
