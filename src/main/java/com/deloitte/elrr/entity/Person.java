@@ -41,6 +41,8 @@ import lombok.Setter;
          AND org_assoc.id = :organizationId)
         OR (:organizationRelType = 'Employment'
             AND org_emp.id = :organizationId))
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        p.extensions \\?\\?& CAST(:hasExtension AS text[]))
     """,
     resultClass = Person.class
 )
