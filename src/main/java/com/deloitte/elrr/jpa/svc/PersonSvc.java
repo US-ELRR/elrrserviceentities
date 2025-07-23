@@ -79,13 +79,9 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      */
     public List<Person> findPersonsWithFilters(final UUID id, final String ifi,
             final UUID organizationId, final String organizationRelType,
-            final List<String> hasExtension) {
+            final String[] hasExtension) {
 
-        // Convert hasExtension to Stringp[] for the query
-        String[] hasExtensionArray = hasExtension != null
-                ? hasExtension.toArray(new String[0])
-                : null;
         return personRepository.findPersonsWithFilters(id, ifi, organizationId,
-                organizationRelType, hasExtensionArray);
+                organizationRelType, hasExtension);
     }
 }
