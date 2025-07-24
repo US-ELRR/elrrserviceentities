@@ -36,7 +36,7 @@ import lombok.Setter;
     -- by ID, TODO: make multiple IDs work
     WHERE (CAST(:id AS uuid[]) IS NULL OR p.id = ANY(:id))
     -- by IFI, TODO: make multiple IFIs work
-    AND (CAST(:ifi AS text) IS NULL OR i.ifi = :ifi)
+    AND (CAST(:ifi AS text[]) IS NULL OR i.ifi = ANY(:ifi))
     -- by organization, via association or employment
     AND (CAST(:organizationId AS uuid) IS NULL OR
         ((CAST(:organizationRelType AS text) IS NULL
