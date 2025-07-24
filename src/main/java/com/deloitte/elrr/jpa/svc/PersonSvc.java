@@ -76,13 +76,18 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      * @param organizationId Optional organization ID filter
      * @param organizationRelType Optional organization relationship type filter
      * @param hasExtension Optional filter for extension keys
+     * @param extensionPath Optional filter for JSONPath expressions
+     * @param extensionPathMatch Optional filter for JSONPath predicates
      * @return List of persons matching the criteria
      */
     public List<Person> findPersonsWithFilters(final UUID id, final String ifi,
             final UUID organizationId, final String organizationRelType,
-            final String[] hasExtension) {
+            final String[] hasExtension,
+            final String[] extensionPath,
+            final String[] extensionPathMatch) {
 
         return personRepository.findPersonsWithFilters(id, ifi, organizationId,
-                organizationRelType, hasExtension);
+                organizationRelType, hasExtension,
+                extensionPath, extensionPathMatch);
     }
 }
