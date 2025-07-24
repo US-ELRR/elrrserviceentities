@@ -25,7 +25,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
      * @return List of persons matching the criteria
      */
     List<Person> findPersonsWithFilters(
-            @Param("id") UUID id,
+            @Param("id") UUID[] id,
             @Param("ifi") String ifi,
             @Param("organizationId") UUID organizationId,
             @Param("organizationRelType") String organizationRelType,

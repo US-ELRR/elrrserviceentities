@@ -80,11 +80,14 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      * @param extensionPathMatch Optional filter for JSONPath predicates
      * @return List of persons matching the criteria
      */
-    public List<Person> findPersonsWithFilters(final UUID id, final String ifi,
-            final UUID organizationId, final String organizationRelType,
-            final String[] hasExtension,
-            final String[] extensionPath,
-            final String[] extensionPathMatch) {
+    public List<Person> findPersonsWithFilters(
+        final UUID[] id,
+        final String ifi,
+        final UUID organizationId,
+        final String organizationRelType,
+        final String[] hasExtension,
+        final String[] extensionPath,
+        final String[] extensionPathMatch) {
 
         return personRepository.findPersonsWithFilters(id, ifi, organizationId,
                 organizationRelType, hasExtension,

@@ -34,7 +34,7 @@ import lombok.Setter;
     LEFT JOIN {h-schema}organization org_emp
         ON er.employer_organization = org_emp.id
     -- by ID, TODO: make multiple IDs work
-    WHERE (CAST(:id AS uuid) IS NULL OR p.id = :id)
+    WHERE (CAST(:id AS uuid[]) IS NULL OR p.id = ANY(:id))
     -- by IFI, TODO: make multiple IFIs work
     AND (CAST(:ifi AS text) IS NULL OR i.ifi = :ifi)
     -- by organization, via association or employment
