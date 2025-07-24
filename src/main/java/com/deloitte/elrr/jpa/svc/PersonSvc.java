@@ -75,11 +75,14 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      * @param ifi Optional IFI (Inverse Functional Identifier) filter
      * @param organizationId Optional organization ID filter
      * @param organizationRelType Optional organization relationship type filter
+     * @param hasExtension Optional filter for extension keys
      * @return List of persons matching the criteria
      */
     public List<Person> findPersonsWithFilters(final UUID id, final String ifi,
-            final UUID organizationId, final String organizationRelType) {
+            final UUID organizationId, final String organizationRelType,
+            final String[] hasExtension) {
+
         return personRepository.findPersonsWithFilters(id, ifi, organizationId,
-                organizationRelType);
+                organizationRelType, hasExtension);
     }
 }
