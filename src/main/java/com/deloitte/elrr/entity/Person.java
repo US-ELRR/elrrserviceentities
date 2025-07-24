@@ -47,6 +47,10 @@ import lombok.Setter;
     -- by presence of (all) extension keys
     AND (CAST(:hasExtension AS text[]) IS NULL OR
         p.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(p.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
     """,
     resultClass = Person.class
 )

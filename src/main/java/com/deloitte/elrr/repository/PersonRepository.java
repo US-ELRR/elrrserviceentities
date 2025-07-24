@@ -20,6 +20,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
      * @param organizationId Optional organization ID filter
      * @param organizationRelType Optional organization relationship type filter
      * @param hasExtension Optional filter for extension keys
+     * @param extensionPath Optional filter for JSONPath expressions
      * @return List of persons matching the criteria
      */
     List<Person> findPersonsWithFilters(
@@ -27,6 +28,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
             @Param("ifi") String ifi,
             @Param("organizationId") UUID organizationId,
             @Param("organizationRelType") String organizationRelType,
-            @Param("hasExtension") String[] hasExtension);
+            @Param("hasExtension") String[] hasExtension,
+            @Param("extensionPath") String[] extensionPath);
 
 }
