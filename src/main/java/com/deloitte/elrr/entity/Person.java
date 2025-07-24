@@ -38,12 +38,12 @@ import lombok.Setter;
     -- by IFI, TODO: make multiple IFIs work
     AND (CAST(:ifi AS text[]) IS NULL OR i.ifi = ANY(:ifi))
     -- by organization, via association or employment
-    AND (CAST(:organizationId AS uuid) IS NULL OR
+    AND (CAST(:organizationId AS uuid[]) IS NULL OR
         ((CAST(:organizationRelType AS text) IS NULL
             OR :organizationRelType = 'Association')
-         AND org_assoc.id = :organizationId)
+         AND org_assoc.id = ANY(:organizationId))
         OR (:organizationRelType = 'Employment'
-            AND org_emp.id = :organizationId))
+            AND org_emp.id = ANY(:organizationId)))
     -- by presence of (all) extension keys
     AND (CAST(:hasExtension AS text[]) IS NULL OR
         p.extensions \\?\\?& CAST(:hasExtension AS text[]))

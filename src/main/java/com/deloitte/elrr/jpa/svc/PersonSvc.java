@@ -83,7 +83,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     public List<Person> findPersonsWithFilters(
         final UUID[] id,
         final String[] ifi,
-        final UUID organizationId,
+        final UUID[] organizationId,
         final String organizationRelType,
         final String[] hasExtension,
         final String[] extensionPath,
