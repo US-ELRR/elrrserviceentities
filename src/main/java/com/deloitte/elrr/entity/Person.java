@@ -51,6 +51,10 @@ import lombok.Setter;
     AND (CAST(:extensionPath AS text[]) IS NULL OR
         (SELECT bool_and(p.extensions @\\?\\? path::jsonpath)
          FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(p.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
     """,
     resultClass = Person.class
 )
