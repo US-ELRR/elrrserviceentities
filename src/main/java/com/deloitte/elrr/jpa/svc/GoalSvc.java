@@ -1,8 +1,8 @@
 package com.deloitte.elrr.jpa.svc;
 
-import java.util.UUID;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.deloitte.elrr.entity.Competency;
 import com.deloitte.elrr.entity.Credential;
+import com.deloitte.elrr.entity.Goal;
 import com.deloitte.elrr.entity.LearningResource;
 import com.deloitte.elrr.exception.RuntimeServiceException;
-import com.deloitte.elrr.entity.Goal;
 import com.deloitte.elrr.repository.GoalRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +57,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Sets the competencies for the goal from an array of competency IDs.
      *
-     * @param goal The goal to set competencies for.
+     * @param goal          The goal to set competencies for.
      * @param competencyIds The array of competency IDs.
      * @return The updated goal with competencies set.
      */
@@ -79,7 +79,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Sets the credentials for the goal from an array of credential IDs.
      *
-     * @param goal The goal to set credentials for.
+     * @param goal          The goal to set credentials for.
      * @param credentialIds The array of credential IDs.
      * @return The updated goal with credentials set.
      */
@@ -102,20 +102,20 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
      * Sets the learning resources for the goal from an array of learning
      * resource IDs.
      *
-     * @param goal The goal to set learning resources for.
+     * @param goal                The goal to set learning resources for.
      * @param learningResourceIds The array of learning resource IDs.
      * @return The updated goal with learning resources set.
      */
-    public Goal setLearningResourcesFromIds(Goal goal,
-            Set<UUID> learningResourceIds) {
+    public Goal setLearningResourcesFromIds(Goal goal, Set<
+            UUID> learningResourceIds) {
         if (learningResourceIds != null) {
             Set<LearningResource> learningResources = new HashSet<>();
             for (UUID learningResourceId : learningResourceIds) {
-                LearningResource learningResource = learningResourceSvc
-                        .get(learningResourceId)
-                        .orElseThrow(() -> new RuntimeServiceException(
-                                "Learning Resource not found for id: "
-                                        + learningResourceId));
+                LearningResource learningResource = learningResourceSvc.get(
+                        learningResourceId).orElseThrow(
+                                () -> new RuntimeServiceException(
+                                        "Learning Resource not found for id: "
+                                                + learningResourceId));
                 learningResources.add(learningResource);
             }
             goal.setLearningResources(learningResources);
@@ -123,4 +123,12 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
         return goal;
     }
 
+    /**
+     * @param identifier
+     * @return goal
+     */
+    public Goal findByIdentifier(String identifier) {
+        Goal goal = goalRepository.findByIdentifier(identifier);
+        return goal;
+    }
 }
