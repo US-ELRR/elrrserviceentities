@@ -18,8 +18,8 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
      *
      * @param id Optional person ID filter
      * @param ifi Optional IFI (Inverse Functional Identifier) filter
-     * @param organizationId Optional organization ID filter
-     * @param organizationRelType Optional organization relationship type filter
+     * @param associatedOrgId Optional associated organization ID filter
+     * @param employerOrgId Optional employer organization ID filter
      * @param hasExtension Optional filter for extension keys
      * @param extensionPath Optional filter for JSONPath expressions
      * @param extensionPathMatch Optional filter for JSONPath predicates
@@ -29,8 +29,8 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
     List<Person> findPersonsWithFilters(
             @Param("id") UUID[] id,
             @Param("ifi") String[] ifi,
-            @Param("organizationId") UUID[] organizationId,
-            @Param("organizationRelType") String organizationRelType,
+            @Param("associatedOrgId") UUID[] associatedOrgId,
+            @Param("employerOrgId") UUID[] employerOrgId,
             @Param("hasExtension") String[] hasExtension,
             @Param("extensionPath") String[] extensionPath,
             @Param("extensionPathMatch") String[] extensionPathMatch,

@@ -33,17 +33,16 @@ import lombok.Setter;
         ON a.organization_id = org_assoc.id
     LEFT JOIN {h-schema}organization org_emp
         ON er.employer_organization = org_emp.id
-    -- by ID, TODO: make multiple IDs work
+    -- by ID
     WHERE (CAST(:id AS uuid[]) IS NULL OR p.id = ANY(:id))
-    -- by IFI, TODO: make multiple IFIs work
+    -- by IFI
     AND (CAST(:ifi AS text[]) IS NULL OR i.ifi = ANY(:ifi))
-    -- by organization, via association or employment
-    AND (CAST(:organizationId AS uuid[]) IS NULL OR
-        ((CAST(:organizationRelType AS text) IS NULL
-            OR :organizationRelType = 'Association')
-         AND org_assoc.id = ANY(:organizationId))
-        OR (:organizationRelType = 'Employment'
-            AND org_emp.id = ANY(:organizationId)))
+    -- by associated organization
+    AND (CAST(:associatedOrgId AS uuid[]) IS NULL OR
+        org_assoc.id = ANY(:associatedOrgId))
+    -- by employer organization
+    AND (CAST(:employerOrgId AS uuid[]) IS NULL OR
+        org_emp.id = ANY(:employerOrgId))
     -- by presence of (all) extension keys
     AND (CAST(:hasExtension AS text[]) IS NULL OR
         p.extensions \\?\\?& CAST(:hasExtension AS text[]))
