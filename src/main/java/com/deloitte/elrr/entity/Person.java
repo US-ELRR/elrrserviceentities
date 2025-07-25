@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.NamedNativeQuery;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,48 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "person")
+@NamedNativeQuery(
+    name = "Person.findPersonsWithFilters",
+    query =
+    """
+    SELECT DISTINCT p.* FROM {h-schema}person p
+    LEFT JOIN {h-schema}identity i ON p.id = i.person_id
+    LEFT JOIN {h-schema}association a ON p.id = a.person_id
+    LEFT JOIN {h-schema}employment_record er ON p.id = er.employee
+    LEFT JOIN {h-schema}organization org_assoc
+        ON a.organization_id = org_assoc.id
+    LEFT JOIN {h-schema}organization org_emp
+        ON er.employer_organization = org_emp.id
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR p.id = ANY(:id))
+    -- by IFI
+    AND (CAST(:ifi AS text[]) IS NULL OR i.ifi = ANY(:ifi))
+    -- by associated organization
+    AND (CAST(:associatedOrgId AS uuid[]) IS NULL OR
+        org_assoc.id = ANY(:associatedOrgId))
+    -- by employer organization
+    AND (CAST(:employerOrgId AS uuid[]) IS NULL OR
+        org_emp.id = ANY(:employerOrgId))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        p.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(p.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(p.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- fuzzy search filter by name
+    AND (CAST(:name AS text[]) IS NULL OR
+        (p.name ILIKE ANY(CAST(:name AS text[]))
+         OR p.first_name ILIKE ANY(CAST(:name AS text[]))
+         OR p.middle_name ILIKE ANY(CAST(:name AS text[]))
+         OR p.last_name ILIKE ANY(CAST(:name AS text[]))))
+    """,
+    resultClass = Person.class
+)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
