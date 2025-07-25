@@ -55,6 +55,12 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(p.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- fuzzy search filter by name
+    AND (CAST(:name AS text[]) IS NULL OR
+        (p.name ILIKE ANY(CAST(:name AS text[]))
+         OR p.first_name ILIKE ANY(CAST(:name AS text[]))
+         OR p.middle_name ILIKE ANY(CAST(:name AS text[]))
+         OR p.last_name ILIKE ANY(CAST(:name AS text[]))))
     """,
     resultClass = Person.class
 )

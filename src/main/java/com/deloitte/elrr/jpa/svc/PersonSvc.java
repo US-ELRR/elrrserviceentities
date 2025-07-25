@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@SuppressWarnings("checkstyle:ParameterNumber")
 public class PersonSvc implements CommonSvc<Person, UUID> {
 
     private final PersonRepository personRepository;
@@ -78,6 +79,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      * @param hasExtension Optional filter for extension keys
      * @param extensionPath Optional filter for JSONPath expressions
      * @param extensionPathMatch Optional filter for JSONPath predicates
+     * @param name Optional name search filter
      * @return List of persons matching the criteria
      */
     public List<Person> findPersonsWithFilters(
@@ -87,10 +89,11 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
         final String organizationRelType,
         final String[] hasExtension,
         final String[] extensionPath,
-        final String[] extensionPathMatch) {
+        final String[] extensionPathMatch,
+        final String[] name) {
 
         return personRepository.findPersonsWithFilters(id, ifi, organizationId,
                 organizationRelType, hasExtension,
-                extensionPath, extensionPathMatch);
+                extensionPath, extensionPathMatch, name);
     }
 }

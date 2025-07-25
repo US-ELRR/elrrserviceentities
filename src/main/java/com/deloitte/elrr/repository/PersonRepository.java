@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.Person;
 
 @Repository
+@SuppressWarnings("checkstyle:ParameterNumber")
 public interface PersonRepository extends JpaRepository<Person, UUID> {
 
     /**
@@ -22,6 +23,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
      * @param hasExtension Optional filter for extension keys
      * @param extensionPath Optional filter for JSONPath expressions
      * @param extensionPathMatch Optional filter for JSONPath predicates
+     * @param name Optional name search filter
      * @return List of persons matching the criteria
      */
     List<Person> findPersonsWithFilters(
@@ -31,5 +33,6 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
             @Param("organizationRelType") String organizationRelType,
             @Param("hasExtension") String[] hasExtension,
             @Param("extensionPath") String[] extensionPath,
-            @Param("extensionPathMatch") String[] extensionPathMatch);
+            @Param("extensionPathMatch") String[] extensionPathMatch,
+            @Param("name") String[] name);
 }
