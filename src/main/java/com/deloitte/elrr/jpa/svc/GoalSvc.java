@@ -123,12 +123,4 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
         return goal;
     }
 
-    /**
-     * @param identifier
-     * @return goal
-     */
-    public Goal findByIdentifier(String identifier) {
-        Goal goal = goalRepository.findByIdentifier(identifier);
-        return goal;
-    }
 }
