@@ -41,7 +41,6 @@ public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
      * @param learningResourceId
      * @return learningRecord
      */
-    @SuppressWarnings("checkstyle:linelength")
     public LearningRecord findByPersonIdAndLearningResourceId(UUID personId,
             UUID learningResourceId) {
         LearningRecord learningRecord = learningRecordRepository
