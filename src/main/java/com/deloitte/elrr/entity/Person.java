@@ -35,6 +35,8 @@ import lombok.Setter;
         ON er.employer_organization = org_emp.id
     LEFT JOIN {h-schema}person_email pe ON p.id = pe.person_id
     LEFT JOIN {h-schema}email e ON pe.email_id = e.id
+    LEFT JOIN {h-schema}person_phone pp ON p.id = pp.person_id
+    LEFT JOIN {h-schema}phone ph ON pp.phone_id = ph.id
     -- by ID
     WHERE (CAST(:id AS uuid[]) IS NULL OR p.id = ANY(:id))
     -- by IFI
@@ -81,6 +83,12 @@ import lombok.Setter;
     -- by email address
     AND (CAST(:emailAddress AS text[]) IS NULL OR
         e.email_address ILIKE ANY(CAST(:emailAddress AS text[])))
+    -- by phone number (normalized - removes formatting characters)
+    AND (CAST(:phoneNumber AS text[]) IS NULL OR
+        (SELECT bool_or(
+            REGEXP_REPLACE(ph.telephone_number, '[^0-9]', '', 'g') =
+            REGEXP_REPLACE(phone_filter, '[^0-9]', '', 'g')
+        ) FROM unnest(CAST(:phoneNumber AS text[])) AS phone_filter))
     """,
     resultClass = Person.class
 )
