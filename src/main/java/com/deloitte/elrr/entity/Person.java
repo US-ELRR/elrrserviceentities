@@ -33,6 +33,8 @@ import lombok.Setter;
         ON a.organization_id = org_assoc.id
     LEFT JOIN {h-schema}organization org_emp
         ON er.employer_organization = org_emp.id
+    LEFT JOIN {h-schema}person_email pe ON p.id = pe.person_id
+    LEFT JOIN {h-schema}email e ON pe.email_id = e.id
     -- by ID
     WHERE (CAST(:id AS uuid[]) IS NULL OR p.id = ANY(:id))
     -- by IFI
@@ -76,6 +78,9 @@ import lombok.Setter;
          OR p.mother_address_id = ANY(:locationId)
          OR p.guardian_address_id = ANY(:locationId)
          OR p.birthplace_id = ANY(:locationId)))
+    -- by email address
+    AND (CAST(:emailAddress AS text[]) IS NULL OR
+        e.email_address ILIKE ANY(CAST(:emailAddress AS text[])))
     """,
     resultClass = Person.class
 )

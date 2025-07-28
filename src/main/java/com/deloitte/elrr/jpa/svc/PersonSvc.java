@@ -148,6 +148,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      * @param extensionPathMatch Optional filter for JSONPath predicates
      * @param name Optional name search filter
      * @param locationId Optional location ID filter for any location field
+     * @param emailAddress Optional email address filter
      * @return List of persons matching the criteria
      */
     public List<Person> findPersonsWithFilters(
@@ -159,10 +160,12 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
         final String[] extensionPath,
         final String[] extensionPathMatch,
         final String[] name,
-        final UUID[] locationId) {
+        final UUID[] locationId,
+        final String[] emailAddress) {
 
         return personRepository.findPersonsWithFilters(id, ifi, associatedOrgId,
                 employerOrgId, hasExtension,
-                extensionPath, extensionPathMatch, name, locationId);
+                extensionPath, extensionPathMatch, name, locationId,
+                emailAddress);
     }
 }

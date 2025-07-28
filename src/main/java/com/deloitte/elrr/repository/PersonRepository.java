@@ -25,6 +25,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
      * @param extensionPathMatch Optional filter for JSONPath predicates
      * @param name Optional name search filter
      * @param locationId Optional location ID filter for any location field
+     * @param emailAddress Optional email address filter
      * @return List of persons matching the criteria
      */
     List<Person> findPersonsWithFilters(
@@ -36,5 +37,6 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
             @Param("extensionPath") String[] extensionPath,
             @Param("extensionPathMatch") String[] extensionPathMatch,
             @Param("name") String[] name,
-            @Param("locationId") UUID[] locationId);
+            @Param("locationId") UUID[] locationId,
+            @Param("emailAddress") String[] emailAddress);
 }
