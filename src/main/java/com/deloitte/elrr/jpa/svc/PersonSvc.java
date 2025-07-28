@@ -33,6 +33,9 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     @Autowired
     private EmailSvc emailSvc;
 
+    @Autowired
+    private PhoneSvc phoneSvc;
+
     /**
      *
      * @param argsPersonRepository
@@ -125,6 +128,10 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
         // Save email addresses if present
         if (person.getEmailAddresses() != null) {
             emailSvc.saveAll(person.getEmailAddresses());
+        }
+        // Save phone numbers if present
+        if (person.getPhoneNumbers() != null) {
+            phoneSvc.saveAll(person.getPhoneNumbers());
         }
         return CommonSvc.super.save(person);
     }
