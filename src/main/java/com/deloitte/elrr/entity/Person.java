@@ -121,6 +121,10 @@ public class Person extends Extensible<String> {
     private Location offCampusAddress;
 
     @ManyToOne
+    @JoinColumn(name = "temporary_address_id")
+    private Location temporaryAddress;
+
+    @ManyToOne
     @JoinColumn(name = "permanent_student_address_id")
     private Location permanentStudentAddress;
 

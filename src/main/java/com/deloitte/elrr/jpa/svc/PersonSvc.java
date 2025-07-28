@@ -66,6 +66,58 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
             person.setMailingAddress(
                     locationSvc.save(person.getMailingAddress()));
         }
+        if (person.getPhysicalAddress() != null) {
+            person.setPhysicalAddress(
+                    locationSvc.save(person.getPhysicalAddress()));
+        }
+        if (person.getShippingAddress() != null) {
+            person.setShippingAddress(
+                    locationSvc.save(person.getShippingAddress()));
+        }
+        if (person.getBillingAddress() != null) {
+            person.setBillingAddress(
+                    locationSvc.save(person.getBillingAddress()));
+        }
+        if (person.getOnCampusAddress() != null) {
+            person.setOnCampusAddress(
+                    locationSvc.save(person.getOnCampusAddress()));
+        }
+        if (person.getOffCampusAddress() != null) {
+            person.setOffCampusAddress(
+                    locationSvc.save(person.getOffCampusAddress()));
+        }
+        if (person.getTemporaryAddress() != null) {
+            person.setTemporaryAddress(
+                    locationSvc.save(person.getTemporaryAddress()));
+        }
+        if (person.getPermanentStudentAddress() != null) {
+            person.setPermanentStudentAddress(
+                    locationSvc.save(person.getPermanentStudentAddress()));
+        }
+        if (person.getEmploymentAddress() != null) {
+            person.setEmploymentAddress(
+                    locationSvc.save(person.getEmploymentAddress()));
+        }
+        if (person.getTimeOfAdmissionAddress() != null) {
+            person.setTimeOfAdmissionAddress(
+                    locationSvc.save(person.getTimeOfAdmissionAddress()));
+        }
+        if (person.getFatherAddress() != null) {
+            person.setFatherAddress(
+                    locationSvc.save(person.getFatherAddress()));
+        }
+        if (person.getMotherAddress() != null) {
+            person.setMotherAddress(
+                    locationSvc.save(person.getMotherAddress()));
+        }
+        if (person.getGuardianAddress() != null) {
+            person.setGuardianAddress(
+                    locationSvc.save(person.getGuardianAddress()));
+        }
+        if (person.getBirthplaceAddress() != null) {
+            person.setBirthplaceAddress(
+                    locationSvc.save(person.getBirthplaceAddress()));
+        }
         return CommonSvc.super.save(person);
     }
 
