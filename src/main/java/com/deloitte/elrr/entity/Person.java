@@ -60,6 +60,22 @@ import lombok.Setter;
          OR p.first_name ILIKE ANY(CAST(:name AS text[]))
          OR p.middle_name ILIKE ANY(CAST(:name AS text[]))
          OR p.last_name ILIKE ANY(CAST(:name AS text[]))))
+    -- by location ID in any location field
+    AND (CAST(:locationId AS uuid[]) IS NULL OR
+        (p.mailing_address_id = ANY(:locationId)
+         OR p.physical_address_id = ANY(:locationId)
+         OR p.shipping_address_id = ANY(:locationId)
+         OR p.billing_address_id = ANY(:locationId)
+         OR p.on_campus_address_id = ANY(:locationId)
+         OR p.off_campus_address_id = ANY(:locationId)
+         OR p.temporary_address_id = ANY(:locationId)
+         OR p.permanent_student_address_id = ANY(:locationId)
+         OR p.employment_address_id = ANY(:locationId)
+         OR p.time_of_admission_address_id = ANY(:locationId)
+         OR p.father_address_id = ANY(:locationId)
+         OR p.mother_address_id = ANY(:locationId)
+         OR p.guardian_address_id = ANY(:locationId)
+         OR p.birthplace_id = ANY(:locationId)))
     """,
     resultClass = Person.class
 )
