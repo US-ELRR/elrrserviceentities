@@ -30,6 +30,9 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     @Autowired
     private LocationSvc locationSvc;
 
+    @Autowired
+    private EmailSvc emailSvc;
+
     /**
      *
      * @param argsPersonRepository
@@ -62,6 +65,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      */
     @Override
     public Person save(final Person person) {
+        // Save locations
         if (person.getMailingAddress() != null) {
             person.setMailingAddress(
                     locationSvc.save(person.getMailingAddress()));
@@ -117,6 +121,10 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
         if (person.getBirthplaceAddress() != null) {
             person.setBirthplaceAddress(
                     locationSvc.save(person.getBirthplaceAddress()));
+        }
+        // Save email addresses if present
+        if (person.getEmailAddresses() != null) {
+            emailSvc.saveAll(person.getEmailAddresses());
         }
         return CommonSvc.super.save(person);
     }
