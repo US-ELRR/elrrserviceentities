@@ -17,8 +17,7 @@ import com.deloitte.elrr.repository.GoalRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Service
-@Slf4j
+@Service @Slf4j
 public class GoalSvc implements CommonSvc<Goal, UUID> {
 
     private final GoalRepository goalRepository;
@@ -57,7 +56,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Sets the competencies for the goal from an array of competency IDs.
      *
-     * @param goal          The goal to set competencies for.
+     * @param goal The goal to set competencies for.
      * @param competencyIds The array of competency IDs.
      * @return The updated goal with competencies set.
      */
@@ -79,7 +78,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Sets the credentials for the goal from an array of credential IDs.
      *
-     * @param goal          The goal to set credentials for.
+     * @param goal The goal to set credentials for.
      * @param credentialIds The array of credential IDs.
      * @return The updated goal with credentials set.
      */
@@ -102,7 +101,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
      * Sets the learning resources for the goal from an array of learning
      * resource IDs.
      *
-     * @param goal                The goal to set learning resources for.
+     * @param goal The goal to set learning resources for.
      * @param learningResourceIds The array of learning resource IDs.
      * @return The updated goal with learning resources set.
      */
