@@ -79,7 +79,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Sets the credentials for the goal from an array of credential IDs.
      *
-     * @param goal The goal to set credentials for.
+     * @param goal          The goal to set credentials for.
      * @param credentialIds The array of credential IDs.
      * @return The updated goal with credentials set.
      */
@@ -102,7 +102,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
      * Sets the learning resources for the goal from an array of learning
      * resource IDs.
      *
-     * @param goal The goal to set learning resources for.
+     * @param goal                The goal to set learning resources for.
      * @param learningResourceIds The array of learning resource IDs.
      * @return The updated goal with learning resources set.
      */
@@ -125,11 +125,11 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
 
     /**
      * @param personId
-     * @param name
+     * @param goalId
      * @return goal
      */
-    public Goal findByPersonIdAndName(UUID personId, String name) {
-        Goal goal = goalRepository.findByPersonIdAndName(personId, name);
+    public Goal findByPersonIdAndGoalId(UUID personId, String goalId) {
+        Goal goal = goalRepository.findByPersonIdAndGoalId(personId, goalId);
         return goal;
     }
 }

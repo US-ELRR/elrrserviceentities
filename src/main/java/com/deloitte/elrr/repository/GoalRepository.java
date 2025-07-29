@@ -12,9 +12,9 @@ public interface GoalRepository extends JpaRepository<Goal, UUID> {
 
     /**
      * @param personId
-     * @param name
+     * @param goalId
      * @return Goal
      */
-    Goal findByPersonIdAndName(UUID personId, String name);
+    Goal findByPersonIdAndGoalId(UUID personId, String goalId);
 
 }

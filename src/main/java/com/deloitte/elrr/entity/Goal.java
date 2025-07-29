@@ -46,6 +46,13 @@ public class Goal extends Extensible<String> {
     private Person person;
 
     /**
+     * The id of the Goal.
+     */
+    @Column(name = "goal_id",
+            nullable = false)
+    private String goalId;
+
+    /**
      * The type of the Goal, enum of SELF or ASSIGNED.
      */
     @Column(name = "type",
