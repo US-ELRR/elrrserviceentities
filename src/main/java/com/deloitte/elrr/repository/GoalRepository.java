@@ -10,4 +10,11 @@ import com.deloitte.elrr.entity.Goal;
 @Repository
 public interface GoalRepository extends JpaRepository<Goal, UUID> {
 
+    /**
+     * @param personId
+     * @param goalId
+     * @return Goal
+     */
+    Goal findByPersonIdAndGoalId(UUID personId, String goalId);
+
 }
