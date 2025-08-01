@@ -89,6 +89,12 @@ import lombok.Setter;
             REGEXP_REPLACE(ph.telephone_number, '[^0-9]', '', 'g') =
             REGEXP_REPLACE(phone_filter, '[^0-9]', '', 'g')
         ) FROM unnest(CAST(:phoneNumber AS text[])) AS phone_filter))
+    -- by competency ID
+    AND (CAST(:competencyId AS uuid[]) IS NULL OR
+        EXISTS (SELECT 1 FROM {h-schema}person_qualification pq
+                WHERE pq.person_id = p.id
+                AND pq.type = 'COMPETENCY'
+                AND pq.qualification_id = ANY(:competencyId)))
     """,
     resultClass = Person.class
 )
