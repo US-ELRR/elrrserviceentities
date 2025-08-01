@@ -95,6 +95,12 @@ import lombok.Setter;
                 WHERE pq.person_id = p.id
                 AND pq.type = 'COMPETENCY'
                 AND pq.qualification_id = ANY(:competencyId)))
+    -- by credential ID
+    AND (CAST(:credentialId AS uuid[]) IS NULL OR
+        EXISTS (SELECT 1 FROM {h-schema}person_qualification pq
+                WHERE pq.person_id = p.id
+                AND pq.type = 'CREDENTIAL'
+                AND pq.qualification_id = ANY(:credentialId)))
     """,
     resultClass = Person.class
 )
