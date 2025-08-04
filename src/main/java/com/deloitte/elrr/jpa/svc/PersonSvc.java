@@ -152,6 +152,7 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      * @param phoneNumber Optional phone number filter (normalized search)
      * @param competencyId Optional competency ID filter
      * @param credentialId Optional credential ID filter
+     * @param learningResourceId Optional learning resource ID filter
      * @return List of persons matching the criteria
      */
     public List<Person> findPersonsWithFilters(
@@ -167,11 +168,13 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
         final String[] emailAddress,
         final String[] phoneNumber,
         final UUID[] competencyId,
-        final UUID[] credentialId) {
+        final UUID[] credentialId,
+        final String[] learningResourceId) {
 
         return personRepository.findPersonsWithFilters(id, ifi, associatedOrgId,
                 employerOrgId, hasExtension,
                 extensionPath, extensionPathMatch, name, locationId,
-                emailAddress, phoneNumber, competencyId, credentialId);
+                emailAddress, phoneNumber, competencyId, credentialId,
+                learningResourceId);
     }
 }

@@ -101,6 +101,11 @@ import lombok.Setter;
                 WHERE pq.person_id = p.id
                 AND pq.type = 'CREDENTIAL'
                 AND pq.qualification_id = ANY(:credentialId)))
+    -- by learning resource ID
+    AND (CAST(:learningResourceId AS text[]) IS NULL OR
+        EXISTS (SELECT 1 FROM {h-schema}learning_record lr
+                WHERE lr.person_id = p.id
+                AND lr.learning_resource_id::text = ANY(:learningResourceId)))
     """,
     resultClass = Person.class
 )

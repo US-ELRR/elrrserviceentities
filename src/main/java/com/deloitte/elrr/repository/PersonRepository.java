@@ -29,6 +29,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
      * @param phoneNumber Optional phone number filter (normalized search)
      * @param competencyId Optional competency ID filter
      * @param credentialId Optional credential ID filter
+     * @param learningResourceId Optional learning resource ID filter
      * @return List of persons matching the criteria
      */
     List<Person> findPersonsWithFilters(
@@ -44,5 +45,6 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
             @Param("emailAddress") String[] emailAddress,
             @Param("phoneNumber") String[] phoneNumber,
             @Param("competencyId") UUID[] competencyId,
-            @Param("credentialId") UUID[] credentialId);
+            @Param("credentialId") UUID[] credentialId,
+            @Param("learningResourceId") String[] learningResourceId);
 }
