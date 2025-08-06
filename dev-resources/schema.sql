@@ -46,8 +46,7 @@ END $$;
 
 DO $$ BEGIN
     CREATE TYPE goal_type AS ENUM (
-        'SELF', 'ASSIGNED'
-    );
+        'SELF', 'ASSIGNED', 'RECOMMENDED');
 EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
