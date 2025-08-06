@@ -47,4 +47,29 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
             @Param("competencyId") UUID[] competencyId,
             @Param("credentialId") UUID[] credentialId,
             @Param("learningResourceId") String[] learningResourceId);
+
+    /**
+     * Find persons using a filter object.
+     *
+     * @param filter Person.Filter containing all filter criteria
+     * @return List of persons matching the criteria
+     */
+    default List<Person> findPersonsWithFilters(Person.Filter filter) {
+        return findPersonsWithFilters(
+            filter.getId(),
+            filter.getIfi(),
+            filter.getAssociatedOrgId(),
+            filter.getEmployerOrgId(),
+            filter.getHasExtension(),
+            filter.getExtensionPath(),
+            filter.getExtensionPathMatch(),
+            filter.getName(),
+            filter.getLocationId(),
+            filter.getEmailAddress(),
+            filter.getPhoneNumber(),
+            filter.getCompetencyId(),
+            filter.getCredentialId(),
+            filter.getLearningResourceId()
+        );
+    }
 }

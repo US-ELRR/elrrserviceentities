@@ -15,9 +15,11 @@ import jakarta.persistence.Table;
 import jakarta.persistence.NamedNativeQuery;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.Data;
 
 @Entity
 @Table(name = "person")
@@ -287,5 +289,85 @@ public class Person extends Extensible<String> {
         + handedness + ", primaryLanguage=" + primaryLanguage
         + ", currentSecurityClearance=" + currentSecurityClearance
         + ", highestSecurityClearance=" + highestSecurityClearance + "]";
+    }
+
+    /**
+     * Filter criteria for searching persons.
+     * All fields are optional and correspond to query parameters.
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Filter {
+
+        /**
+         * Optional person ID filter.
+         */
+        private java.util.UUID[] id;
+
+        /**
+         * Optional IFI (Inverse Functional Identifier) filter.
+         */
+        private String[] ifi;
+
+        /**
+         * Optional associated organization ID filter.
+         */
+        private java.util.UUID[] associatedOrgId;
+
+        /**
+         * Optional employer organization ID filter.
+         */
+        private java.util.UUID[] employerOrgId;
+
+        /**
+         * Optional filter for extension keys.
+         */
+        private String[] hasExtension;
+
+        /**
+         * Optional filter for extension JSONPath expressions.
+         */
+        private String[] extensionPath;
+
+        /**
+         * Optional filter for extension JSONPath predicate expressions.
+         */
+        private String[] extensionPathMatch;
+
+        /**
+         * Optional filter for person names.
+         */
+        private String[] name;
+
+        /**
+         * Optional location ID filter for any location field.
+         */
+        private java.util.UUID[] locationId;
+
+        /**
+         * Optional filter for email addresses.
+         */
+        private String[] emailAddress;
+
+        /**
+         * Optional filter for phone numbers (normalized search).
+         */
+        private String[] phoneNumber;
+
+        /**
+         * Optional competency ID filter.
+         */
+        private java.util.UUID[] competencyId;
+
+        /**
+         * Optional credential ID filter.
+         */
+        private java.util.UUID[] credentialId;
+
+        /**
+         * Optional learning resource ID filter.
+         */
+        private String[] learningResourceId;
     }
 }
