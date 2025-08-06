@@ -18,9 +18,10 @@ public interface GoalRepository extends JpaRepository<Goal, UUID> {
   Goal findByPersonIdAndGoalId(UUID personId, String goalId);
 
   /**
+   * @param personId
    * @param goalId
    * @return long
    */
-  long deleteByGoalId(String goalId);
+  long deleteByPersonIdAndGoalId(UUID personId, String goalId);
 
 }
