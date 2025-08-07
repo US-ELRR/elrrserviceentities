@@ -1,5 +1,7 @@
 package com.deloitte.elrr.entity;
 
+import java.util.UUID;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
@@ -303,7 +305,7 @@ public class Person extends Extensible<String> {
         /**
          * Optional person ID filter.
          */
-        private java.util.UUID[] id;
+        private UUID[] id;
 
         /**
          * Optional IFI (Inverse Functional Identifier) filter.
@@ -313,12 +315,12 @@ public class Person extends Extensible<String> {
         /**
          * Optional associated organization ID filter.
          */
-        private java.util.UUID[] associatedOrgId;
+        private UUID[] associatedOrgId;
 
         /**
          * Optional employer organization ID filter.
          */
-        private java.util.UUID[] employerOrgId;
+        private UUID[] employerOrgId;
 
         /**
          * Optional filter for person names.
@@ -328,7 +330,7 @@ public class Person extends Extensible<String> {
         /**
          * Optional location ID filter for any location field.
          */
-        private java.util.UUID[] locationId;
+        private UUID[] locationId;
 
         /**
          * Optional filter for email addresses.
@@ -343,12 +345,12 @@ public class Person extends Extensible<String> {
         /**
          * Optional competency ID filter.
          */
-        private java.util.UUID[] competencyId;
+        private UUID[] competencyId;
 
         /**
          * Optional credential ID filter.
          */
-        private java.util.UUID[] credentialId;
+        private UUID[] credentialId;
 
         /**
          * Optional learning resource ID filter.
