@@ -343,7 +343,7 @@ CREATE TABLE IF NOT EXISTS client_token (
 CREATE TABLE IF NOT EXISTS goal (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
-    goal_id                     TEXT NOT NULL,
+    goal_id                     TEXT NOT NULL UNIQUE,
     type                        goal_type NOT NULL,
     name                        VARCHAR(255) NOT NULL,
     description                 TEXT,

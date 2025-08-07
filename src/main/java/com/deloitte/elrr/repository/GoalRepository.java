@@ -11,17 +11,15 @@ import com.deloitte.elrr.entity.Goal;
 public interface GoalRepository extends JpaRepository<Goal, UUID> {
 
   /**
-   * @param personId
    * @param goalId
    * @return Goal
    */
-  Goal findByPersonIdAndGoalId(UUID personId, String goalId);
+  Goal findByGoalId(String goalId);
 
   /**
-   * @param personId
    * @param goalId
    * @return long
    */
-  long deleteByPersonIdAndGoalId(UUID personId, String goalId);
+  long deleteByGoalId(String goalId);
 
 }

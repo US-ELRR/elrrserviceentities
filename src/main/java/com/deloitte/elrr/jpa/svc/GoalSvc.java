@@ -130,23 +130,20 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
   }
 
   /**
-   * @param personId
    * @param goalId
    * @return goal
    */
-  public Goal findByPersonIdAndGoalId(UUID personId, String goalId) {
-    Goal goal = goalRepository.findByPersonIdAndGoalId(personId, goalId);
+  public Goal findByGoalId(String goalId) {
+    Goal goal = goalRepository.findByGoalId(goalId);
     return goal;
   }
 
   /**
-   * @param personId
    * @param goalId
    * @return rowsDeleted
    */
-  public long deleteByPersonIdAndGoalId(UUID personId, String goalId) {
-    long rowsDeleted = goalRepository.deleteByPersonIdAndGoalId(personId,
-        goalId);
+  public long deleteByGoalId(String goalId) {
+    long rowsDeleted = goalRepository.deleteByGoalId(goalId);
     return rowsDeleted;
   }
 
