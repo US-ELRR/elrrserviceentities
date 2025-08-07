@@ -9,7 +9,6 @@ import org.hibernate.type.SqlTypes;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -31,9 +30,7 @@ public abstract class Extensible<U> extends Auditable<U> {
      */
     @Getter
     @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Filter {
+    public abstract static class Filter {
         /**
          * Optional filter for extension keys.
          */
