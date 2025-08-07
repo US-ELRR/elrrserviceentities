@@ -9,6 +9,7 @@ import org.hibernate.type.SqlTypes;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -24,4 +25,28 @@ public abstract class Extensible<U> extends Auditable<U> {
     @Column(name = "extensions", columnDefinition = "JSONB")
     private Map<URI, Object> extensions;
 
+    /**
+     * Filter criteria for extensions.
+     * All fields are optional and correspond to query parameters.
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Filter {
+        /**
+         * Optional filter for extension keys.
+         */
+        private String[] hasExtension;
+
+        /**
+         * Optional filter for extension JSONPath expressions.
+         */
+        private String[] extensionPath;
+
+        /**
+         * Optional filter for extension JSONPath predicate expressions.
+         */
+        private String[] extensionPathMatch;
+    }
 }

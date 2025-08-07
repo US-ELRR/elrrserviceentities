@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.Data;
 
 @Entity
 @Table(name = "person")
@@ -295,10 +294,11 @@ public class Person extends Extensible<String> {
      * Filter criteria for searching persons.
      * All fields are optional and correspond to query parameters.
      */
-    @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Filter {
+    public static class Filter extends Extensible.Filter {
 
         /**
          * Optional person ID filter.
@@ -319,21 +319,6 @@ public class Person extends Extensible<String> {
          * Optional employer organization ID filter.
          */
         private java.util.UUID[] employerOrgId;
-
-        /**
-         * Optional filter for extension keys.
-         */
-        private String[] hasExtension;
-
-        /**
-         * Optional filter for extension JSONPath expressions.
-         */
-        private String[] extensionPath;
-
-        /**
-         * Optional filter for extension JSONPath predicate expressions.
-         */
-        private String[] extensionPathMatch;
 
         /**
          * Optional filter for person names.
