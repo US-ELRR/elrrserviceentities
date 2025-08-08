@@ -3,6 +3,7 @@ package com.deloitte.elrr.entity;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +20,27 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "employment_record")
+@NamedNativeQuery(
+    name = "EmploymentRecord.findEmploymentRecordsWithFilters",
+    query =
+    """
+    SELECT DISTINCT er.* FROM {h-schema}employment_record er
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR er.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        er.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(er.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(er.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """,
+    resultClass = EmploymentRecord.class
+)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -101,6 +124,12 @@ public class EmploymentRecord extends Extensible<String> {
         + employmentLocation + ", employmentFacility=" + employmentFacility
         + ", credentials=" + credentials + ", competencies=" + competencies
         + "]";
+    }
+
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        private UUID[] id;
     }
 
 }
