@@ -46,8 +46,7 @@ END $$;
 
 DO $$ BEGIN
     CREATE TYPE goal_type AS ENUM (
-        'SELF', 'ASSIGNED'
-    );
+        'SELF', 'ASSIGNED', 'RECOMMENDED');
 EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
@@ -344,12 +343,13 @@ CREATE TABLE IF NOT EXISTS client_token (
 CREATE TABLE IF NOT EXISTS goal (
     id                          UUID PRIMARY KEY,
     person_id                   UUID NOT NULL REFERENCES person (id) ON DELETE CASCADE,
+    goal_id                     TEXT NOT NULL UNIQUE,
     type                        goal_type NOT NULL,
     name                        VARCHAR(255) NOT NULL,
     description                 TEXT,
-    start_date                  DATE,
-    achieved_by_date            DATE,
-    expiration_date             DATE,
+    start_date                  TIMESTAMP WITH TIME ZONE,
+    achieved_by_date            TIMESTAMP WITH TIME ZONE,
+    expiration_date             TIMESTAMP WITH TIME ZONE,
     updated_by                  VARCHAR(20),
     inserted_date               TIMESTAMP WITH TIME ZONE,
     last_modified               TIMESTAMP WITH TIME ZONE,
