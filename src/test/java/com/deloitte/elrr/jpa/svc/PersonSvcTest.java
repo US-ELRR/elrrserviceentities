@@ -87,8 +87,9 @@ public class PersonSvcTest {
     @Test
     void findPersonsWithFiltersTest() {
         Mockito.doReturn(getTestPeople()).when(personRepository)
-                .findPersonsWithFilters(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
-        Iterable<Person> people = personSvc.findPersonsWithFilters(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+                .findPersonsWithFilters(Mockito.any(Person.Filter.class));
+        Person.Filter filter = new Person.Filter();
+        Iterable<Person> people = personSvc.findPersonsWithFilters(filter);
         assertEquals(Iterables.size(people), 1);
     }
 

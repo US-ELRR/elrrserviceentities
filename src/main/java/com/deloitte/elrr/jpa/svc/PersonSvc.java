@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-@SuppressWarnings("checkstyle:ParameterNumber")
 public class PersonSvc implements CommonSvc<Person, UUID> {
 
     private final PersonRepository personRepository;
@@ -137,44 +136,12 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
     }
 
     /**
-     * Find persons with optional id and ifi filters.
+     * Find persons with optional filters using Person.Filter object.
      *
-     * @param id Optional person ID filter
-     * @param ifi Optional IFI (Inverse Functional Identifier) filter
-     * @param associatedOrgId Optional associated organization ID filter
-     * @param employerOrgId Optional employer organization ID filter
-     * @param hasExtension Optional filter for extension keys
-     * @param extensionPath Optional filter for JSONPath expressions
-     * @param extensionPathMatch Optional filter for JSONPath predicates
-     * @param name Optional name search filter
-     * @param locationId Optional location ID filter for any location field
-     * @param emailAddress Optional email address filter
-     * @param phoneNumber Optional phone number filter (normalized search)
-     * @param competencyId Optional competency ID filter
-     * @param credentialId Optional credential ID filter
-     * @param learningResourceId Optional learning resource ID filter
+     * @param filter Person.Filter containing all filter criteria
      * @return List of persons matching the criteria
      */
-    public List<Person> findPersonsWithFilters(
-        final UUID[] id,
-        final String[] ifi,
-        final UUID[] associatedOrgId,
-        final UUID[] employerOrgId,
-        final String[] hasExtension,
-        final String[] extensionPath,
-        final String[] extensionPathMatch,
-        final String[] name,
-        final UUID[] locationId,
-        final String[] emailAddress,
-        final String[] phoneNumber,
-        final UUID[] competencyId,
-        final UUID[] credentialId,
-        final String[] learningResourceId) {
-
-        return personRepository.findPersonsWithFilters(id, ifi, associatedOrgId,
-                employerOrgId, hasExtension,
-                extensionPath, extensionPathMatch, name, locationId,
-                emailAddress, phoneNumber, competencyId, credentialId,
-                learningResourceId);
+    public List<Person> findPersonsWithFilters(final Person.Filter filter) {
+        return personRepository.findPersonsWithFilters(filter);
     }
 }
