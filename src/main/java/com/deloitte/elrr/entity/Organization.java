@@ -5,6 +5,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,27 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "organization")
+@NamedNativeQuery(
+    name = "Organization.findOrganizationsWithFilters",
+    query =
+    """
+    SELECT DISTINCT o.* FROM {h-schema}organization o
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR o.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        o.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(o.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(o.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """,
+    resultClass = Organization.class
+)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -105,4 +127,11 @@ public class Organization extends Extensible<String> {
         + organizationalResource + ", qualityAssuranceType="
         + qualityAssuranceType + "]";
     }
+
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        private java.util.UUID[] id;
+    }
+
 }
