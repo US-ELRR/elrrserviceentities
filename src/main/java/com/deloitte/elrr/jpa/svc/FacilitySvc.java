@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.deloitte.elrr.entity.Facility;
+import com.deloitte.elrr.entity.Facility.Filter;
 import com.deloitte.elrr.repository.FacilityRepository;
 
 @Service
@@ -41,6 +42,16 @@ public class FacilitySvc implements CommonSvc<Facility, UUID> {
             facility.setLocation(locationSvc.save(facility.getLocation()));
         }
         return CommonSvc.super.save(facility);
+    }
+
+    /**
+     * Find Facilities with filters.
+     * @param filter filter
+     * @return list
+     */
+    public java.util.List<Facility> findFacilitiesWithFilters(
+            final Filter filter) {
+        return facilityRepository.findFacilitiesWithFilters(filter);
     }
 
 }
