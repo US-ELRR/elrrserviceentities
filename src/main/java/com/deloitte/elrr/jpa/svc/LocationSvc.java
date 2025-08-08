@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.deloitte.elrr.entity.Location;
+import com.deloitte.elrr.entity.Location.Filter;
 import com.deloitte.elrr.repository.LocationRepository;
 
 @Service
@@ -34,6 +35,16 @@ public class LocationSvc implements CommonSvc<Location, UUID> {
     @Override
     public Location save(final Location location) {
         return CommonSvc.super.save(location);
+    }
+
+    /**
+     * Find Locations with filters.
+     * @param filter filter
+     * @return list
+     */
+    public java.util.List<Location> findLocationsWithFilters(
+            final Filter filter) {
+        return locationRepository.findLocationsWithFilters(filter);
     }
 
 }

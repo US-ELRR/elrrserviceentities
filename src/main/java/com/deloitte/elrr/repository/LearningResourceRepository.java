@@ -1,8 +1,10 @@
 package com.deloitte.elrr.repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.deloitte.elrr.entity.LearningResource;
@@ -16,4 +18,32 @@ public interface LearningResourceRepository extends JpaRepository<
      * @return LearningResource
      */
     LearningResource findByIri(String iri);
+
+    /**
+     * Find learning resources by optional filters.
+     * @param id ids
+     * @param hasExtension extension keys
+     * @param extensionPath jsonpath queries
+     * @param extensionPathMatch jsonpath predicate queries
+     * @return learning resources
+     */
+    List<LearningResource> findLearningResourcesWithFilters(
+        @Param("id") UUID[] id,
+        @Param("hasExtension") String[] hasExtension,
+        @Param("extensionPath") String[] extensionPath,
+        @Param("extensionPathMatch") String[] extensionPathMatch);
+
+    /**
+     * Convenience overload using filter object.
+     * @param filter filter
+     * @return learning resources
+     */
+    default List<LearningResource> findLearningResourcesWithFilters(
+        final LearningResource.Filter filter) {
+    return findLearningResourcesWithFilters(
+        filter.getId(),
+        filter.getHasExtension(),
+        filter.getExtensionPath(),
+        filter.getExtensionPathMatch());
+    }
 }

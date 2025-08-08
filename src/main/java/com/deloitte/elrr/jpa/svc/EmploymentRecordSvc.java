@@ -1,5 +1,6 @@
 package com.deloitte.elrr.jpa.svc;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
@@ -35,6 +36,19 @@ public class EmploymentRecordSvc implements CommonSvc<EmploymentRecord, UUID> {
     @Override
     public EmploymentRecord save(final EmploymentRecord employmentRecord) {
         return CommonSvc.super.save(employmentRecord);
+    }
+
+    /**
+     * Find employment records with optional filters using an
+     * EmploymentRecord.Filter object.
+     *
+     * @param filter EmploymentRecord.Filter containing all filter criteria
+     * @return List of employment records matching the criteria
+     */
+    public List<EmploymentRecord> findEmploymentRecordsWithFilters(
+        EmploymentRecord.Filter filter) {
+        return employmentRecordRepository
+            .findEmploymentRecordsWithFilters(filter);
     }
 
 }

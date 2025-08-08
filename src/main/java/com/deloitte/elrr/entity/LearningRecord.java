@@ -1,6 +1,7 @@
 package com.deloitte.elrr.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
@@ -13,6 +14,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +23,27 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "learning_record")
+@NamedNativeQuery(
+    name = "LearningRecord.findLearningRecordsWithFilters",
+    query =
+    """
+    SELECT DISTINCT lr.* FROM {h-schema}learning_record lr
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR lr.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        lr.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(lr.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(lr.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """,
+    resultClass = LearningRecord.class
+)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -56,6 +79,15 @@ public class LearningRecord extends Extensible<String> {
                 + enrollmentDate + ", recordStatus=" + recordStatus
                 + ", academicGrade=" + academicGrade + ", eventTime="
                 + eventTime + "]";
+    }
+
+    /**
+     * Filter object for LearningRecord queries (id + extension filters).
+     */
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        private UUID[] id;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.deloitte.elrr.jpa.svc;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
@@ -45,4 +46,16 @@ public class CompetencySvc implements CommonSvc<Competency, UUID> {
                 identifier);
         return competency;
     }
+
+    /**
+     * Find competencies with optional filters using a Competency.Filter object.
+     *
+     * @param filter Competency.Filter containing all filter criteria
+     * @return List of competencies matching the criteria
+     */
+    public List<Competency> findCompetenciesWithFilters(
+        Competency.Filter filter) {
+        return competencyRepository.findCompetenciesWithFilters(filter);
+    }
+
 }

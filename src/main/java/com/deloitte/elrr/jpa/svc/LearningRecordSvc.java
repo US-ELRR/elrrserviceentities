@@ -1,5 +1,6 @@
 package com.deloitte.elrr.jpa.svc;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
@@ -48,5 +49,15 @@ public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
                 .findByPersonIdAndLearningResourceId(personId,
                         learningResourceId);
         return learningRecord;
+    }
+
+    /**
+     * Filter search.
+     * @param filter filter
+     * @return learning records
+     */
+    public List<LearningRecord> findLearningRecordsWithFilters(
+            final LearningRecord.Filter filter) {
+        return learningRecordRepository.findLearningRecordsWithFilters(filter);
     }
 }

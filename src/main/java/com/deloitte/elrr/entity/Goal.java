@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -34,6 +35,27 @@ import com.deloitte.elrr.entity.types.GoalType;
 
  @Entity
  @Table(name = "goal")
+ @NamedNativeQuery(
+    name = "Goal.findGoalsWithFilters",
+    query =
+    """
+    SELECT DISTINCT g.* FROM {h-schema}goal g
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR g.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        g.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(g.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(g.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """,
+    resultClass = Goal.class
+ )
  @RequiredArgsConstructor
  @AllArgsConstructor
  @Getter
@@ -169,5 +191,14 @@ import com.deloitte.elrr.entity.types.GoalType;
             });
         }
         return learningResourceIds;
+    }
+
+    /**
+     * Filter object for Goal queries (id + extension filters).
+     */
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        private UUID[] id;
     }
 }

@@ -46,4 +46,15 @@ public class LearningResourceSvc implements CommonSvc<LearningResource, UUID> {
                 .findByIri(iri);
         return learningResource;
     }
+
+    /**
+     * Filter search.
+     * @param filter filter
+     * @return learning resources
+     */
+    public java.util.List<LearningResource> findLearningResourcesWithFilters(
+            final LearningResource.Filter filter) {
+        return learningResourceRepository
+                .findLearningResourcesWithFilters(filter);
+    }
 }
