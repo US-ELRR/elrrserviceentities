@@ -124,14 +124,10 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
             person.setBirthplaceAddress(
                     locationSvc.save(person.getBirthplaceAddress()));
         }
-        // Save email addresses if present
-        if (person.getEmailAddresses() != null) {
-            emailSvc.saveAll(person.getEmailAddresses());
-        }
-        // Save phone numbers if present
-        if (person.getPhoneNumbers() != null) {
-            phoneSvc.saveAll(person.getPhoneNumbers());
-        }
+
+        // Save email addresses and phone numbers
+        saveAllInfo(person);
+
         return CommonSvc.super.save(person);
     }
 
@@ -143,5 +139,16 @@ public class PersonSvc implements CommonSvc<Person, UUID> {
      */
     public List<Person> findPersonsWithFilters(final Person.Filter filter) {
         return personRepository.findPersonsWithFilters(filter);
+    }
+
+    private void saveAllInfo(final Person person) {
+        // Save email addresses if present
+        if (person.getEmailAddresses() != null) {
+            emailSvc.saveAll(person.getEmailAddresses());
+        }
+        // Save phone numbers if present
+        if (person.getPhoneNumbers() != null) {
+            phoneSvc.saveAll(person.getPhoneNumbers());
+        }
     }
 }
