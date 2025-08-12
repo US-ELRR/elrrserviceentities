@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.deloitte.elrr.entity.Organization;
+import com.deloitte.elrr.entity.Organization.Filter;
 import com.deloitte.elrr.repository.OrganizationRepository;
 
 /**
@@ -43,6 +44,16 @@ public class OrganizationSvc implements CommonSvc<Organization, UUID> {
     @Override
     public Organization save(final Organization organization) {
         return CommonSvc.super.save(organization);
+    }
+
+    /**
+     * Find Organizations with filters.
+     * @param filter filter
+     * @return list
+     */
+    public java.util.List<Organization> findOrganizationsWithFilters(
+            final Filter filter) {
+        return organizationRepository.findOrganizationsWithFilters(filter);
     }
 
 }

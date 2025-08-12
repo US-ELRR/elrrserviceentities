@@ -13,6 +13,7 @@ import com.deloitte.elrr.entity.Credential;
 import com.deloitte.elrr.entity.LearningResource;
 import com.deloitte.elrr.exception.RuntimeServiceException;
 import com.deloitte.elrr.entity.Goal;
+import com.deloitte.elrr.entity.Goal.Filter;
 import com.deloitte.elrr.repository.GoalRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -121,6 +122,15 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
             goal.setLearningResources(learningResources);
         }
         return goal;
+    }
+
+    /**
+     * Find Goals with filters.
+     * @param filter filter
+     * @return list
+     */
+    public java.util.List<Goal> findGoalsWithFilters(final Filter filter) {
+        return goalRepository.findGoalsWithFilters(filter);
     }
 
 }

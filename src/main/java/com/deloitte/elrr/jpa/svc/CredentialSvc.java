@@ -1,5 +1,6 @@
 package com.deloitte.elrr.jpa.svc;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
@@ -44,5 +45,16 @@ public class CredentialSvc implements CommonSvc<Credential, UUID> {
         Credential credential = credentialRepository.findByIdentifier(
                 identifier);
         return credential;
+    }
+
+    /**
+     * Find credentials with optional filters using a Credential.Filter object.
+     *
+     * @param filter Credential.Filter containing all filter criteria
+     * @return List of credentials matching the criteria
+     */
+    public List<Credential> findCredentialsWithFilters(
+        Credential.Filter filter) {
+        return credentialRepository.findCredentialsWithFilters(filter);
     }
 }
