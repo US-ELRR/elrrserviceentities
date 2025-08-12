@@ -126,7 +126,7 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
 
     /**
      * Find Goals with filters.
-     * 
+     *
      * @param filter filter
      * @return list
      */

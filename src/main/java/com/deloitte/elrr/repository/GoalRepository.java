@@ -15,7 +15,7 @@ public interface GoalRepository extends JpaRepository<Goal, UUID> {
 
     /**
      * Find goals by filters.
-     * 
+     *
      * @param id                 ids
      * @param hasExtension       extension keys
      * @param extensionPath      jsonpath queries
@@ -30,7 +30,7 @@ public interface GoalRepository extends JpaRepository<Goal, UUID> {
 
     /**
      * Convenience overload.
-     * 
+     *
      * @param filter filter
      * @return goals
      */
