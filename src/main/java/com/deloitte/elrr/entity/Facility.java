@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,27 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "facility")
+@NamedNativeQuery(
+    name = "Facility.findFacilitiesWithFilters",
+    query =
+    """
+    SELECT DISTINCT f.* FROM {h-schema}facility f
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR f.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        f.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(f.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(f.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """,
+    resultClass = Facility.class
+)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -41,5 +63,11 @@ public class Facility extends Extensible<String> {
         + ", id=" + id + ", location=" + location + ", operational_status="
         + operationalStatus + ", facility_security_level="
         + facilitySecurityLevel + "]";
+    }
+
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        private java.util.UUID[] id;
     }
 }

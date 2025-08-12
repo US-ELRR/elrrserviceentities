@@ -1,14 +1,13 @@
 package com.deloitte.elrr.entity;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import com.deloitte.elrr.entity.types.GoalType;
+import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,12 +17,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
+import com.deloitte.elrr.entity.types.GoalType;
 
 /**
  * A Goal represents a relationship between a Person and a number of
@@ -32,6 +35,22 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "goal")
+@NamedNativeQuery(name = "Goal.findGoalsWithFilters", query = """
+    SELECT DISTINCT g.* FROM {h-schema}goal g
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR g.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        g.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(g.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(g.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """, resultClass = Goal.class)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -48,16 +67,13 @@ public class Goal extends Extensible<String> {
     /**
      * The id of the Goal.
      */
-    @Column(name = "goal_id",
-            nullable = false)
+    @Column(name = "goal_id", nullable = false)
     private String goalId;
 
     /**
      * The type of the Goal, enum of SELF or ASSIGNED.
      */
-    @Column(name = "type",
-            nullable = false,
-            columnDefinition = "elrr.goal_type")
+    @Column(name = "type", nullable = false, columnDefinition = "elrr.goal_type")
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     private GoalType type;
@@ -65,15 +81,13 @@ public class Goal extends Extensible<String> {
     /**
      * The name of the Goal.
      */
-    @Column(name = "name",
-            nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The description of the Goal.
      */
-    @Column(name = "description",
-            columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     /**
@@ -98,29 +112,34 @@ public class Goal extends Extensible<String> {
      * The Competencies associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_competency",
-            joinColumns = @JoinColumn(name = "goal_id"),
-            inverseJoinColumns = @JoinColumn(name = "qualification_id"))
+    @JoinTable(
+        name = "goal_competency",
+        joinColumns = @JoinColumn(name = "goal_id"),
+        inverseJoinColumns = @JoinColumn(name = "qualification_id")
+    )
     private Set<Competency> competencies;
 
     /**
      * The Credentials associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_credential",
-            joinColumns = @JoinColumn(name = "goal_id"),
-            inverseJoinColumns = @JoinColumn(name = "qualification_id"))
+    @JoinTable(
+        name = "goal_credential",
+        joinColumns = @JoinColumn(name = "goal_id"),
+        inverseJoinColumns = @JoinColumn(name = "qualification_id")
+    )
     private Set<Credential> credentials;
 
     /**
      * The Learning Resources associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_learning_resource",
-            joinColumns = @JoinColumn(name = "goal_id"),
-            inverseJoinColumns = @JoinColumn(name = "learning_resource_id"))
+    @JoinTable(
+        name = "goal_learning_resource",
+        joinColumns = @JoinColumn(name = "goal_id"),
+        inverseJoinColumns = @JoinColumn(name = "learning_resource_id")
+    )
     private Set<LearningResource> learningResources;
-
     @Override
     public String toString() {
         return "Goal [id=" + id + ", person=" + person + "]";
@@ -172,5 +191,14 @@ public class Goal extends Extensible<String> {
             });
         }
         return learningResourceIds;
+    }
+
+    /**
+     * Filter object for Goal queries (id + extension filters).
+     */
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        private UUID[] id;
     }
 }

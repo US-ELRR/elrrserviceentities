@@ -24,4 +24,26 @@ public abstract class Extensible<U> extends Auditable<U> {
     @Column(name = "extensions", columnDefinition = "JSONB")
     private Map<URI, Object> extensions;
 
+    /**
+     * Filter criteria for extensions.
+     * All fields are optional and correspond to query parameters.
+     */
+    @Getter
+    @Setter
+    public abstract static class Filter {
+        /**
+         * Optional filter for extension keys.
+         */
+        private String[] hasExtension;
+
+        /**
+         * Optional filter for extension JSONPath expressions.
+         */
+        private String[] extensionPath;
+
+        /**
+         * Optional filter for extension JSONPath predicate expressions.
+         */
+        private String[] extensionPathMatch;
+    }
 }

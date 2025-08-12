@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.NamedNativeQuery;
+
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +15,27 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "learning_resource")
+@NamedNativeQuery(
+    name = "LearningResource.findLearningResourcesWithFilters",
+    query =
+    """
+    SELECT DISTINCT lr.* FROM {h-schema}learning_resource lr
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR lr.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        lr.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(lr.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(lr.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """,
+    resultClass = LearningResource.class
+)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -62,6 +86,15 @@ public class LearningResource extends Extensible<String> {
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+
+    /**
+     * Filter object for LearningResource queries (id + extension filters).
+     */
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        private UUID[] id;
+    }
 
     @Override
     public String toString() {
