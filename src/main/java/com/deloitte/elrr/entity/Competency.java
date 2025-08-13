@@ -27,6 +27,8 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(q.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    AND (CAST(:identifier AS text[]) IS NULL OR
+        q.identifier ILIKE ANY(CAST(:identifier AS text[])))
     """,
     resultClass = Competency.class
 )

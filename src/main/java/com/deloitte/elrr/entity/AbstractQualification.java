@@ -100,6 +100,13 @@ public class AbstractQualification extends Extensible<String> {
                 + ", recordStatus=" + recordStatus + "]";
     }
 
-    public static class Filter extends Extensible.Filter { }
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        /**
+         * Optional Identifier search filter.
+         */
+        private String[] identifier;
+    }
 
 }
