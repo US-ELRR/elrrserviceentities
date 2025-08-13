@@ -33,6 +33,12 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(o.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by name
+    AND (CAST(:name AS text[]) IS NULL OR
+        o.name ILIKE ANY(:name))
+    -- by description
+    AND (CAST(:description AS text[]) IS NULL OR
+        o.description ILIKE ANY(:description))
     """,
     resultClass = Organization.class
 )
@@ -130,6 +136,15 @@ public class Organization extends Extensible<String> {
 
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter { }
+    public static class Filter extends Extensible.Filter {
+        /**
+         * Optional organization name filter.
+         */
+        private String[] name;
 
+        /**
+         * Optional organization description filter.
+         */
+        private String[] description;
+    }
 }

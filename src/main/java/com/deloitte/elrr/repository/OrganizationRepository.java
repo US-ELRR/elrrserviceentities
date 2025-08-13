@@ -21,6 +21,8 @@ public interface OrganizationRepository extends JpaRepository<Organization,
      * @param hasExtension       extension keys
      * @param extensionPath      jsonpath queries
      * @param extensionPathMatch jsonpath predicate queries
+     * @param name               organization name
+     * @param description        organization description
      * @return list of organizations
      */
     @Query(name = "Organization.findOrganizationsWithFilters",
@@ -28,7 +30,9 @@ public interface OrganizationRepository extends JpaRepository<Organization,
     List<Organization> findOrganizationsWithFilters(@Param("id") UUID[] id,
             @Param("hasExtension") String[] hasExtension,
             @Param("extensionPath") String[] extensionPath,
-            @Param("extensionPathMatch") String[] extensionPathMatch);
+            @Param("extensionPathMatch") String[] extensionPathMatch,
+            @Param("name") String[] name,
+            @Param("description") String[] description);
 
     /**
      * Convenience overload accepting Filter object.
@@ -38,9 +42,13 @@ public interface OrganizationRepository extends JpaRepository<Organization,
      */
     default List<Organization> findOrganizationsWithFilters(
             final Organization.Filter filter) {
-        return findOrganizationsWithFilters(filter.getId(),
-                filter.getHasExtension(), filter.getExtensionPath(),
-                filter.getExtensionPathMatch());
+        return findOrganizationsWithFilters(
+                filter.getId(),
+                filter.getHasExtension(),
+                filter.getExtensionPath(),
+                filter.getExtensionPathMatch(),
+                filter.getName(),
+                filter.getDescription());
     }
 
 }
