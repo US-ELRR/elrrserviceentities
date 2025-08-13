@@ -100,4 +100,6 @@ public class AbstractQualification extends Extensible<String> {
                 + ", recordStatus=" + recordStatus + "]";
     }
 
+    public static class Filter extends Extensible.Filter { }
+
 }

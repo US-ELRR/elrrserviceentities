@@ -35,5 +35,5 @@ import lombok.Setter;
 public class Credential extends AbstractQualification {
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter { }
+    public static class Filter extends AbstractQualification.Filter { }
 }
