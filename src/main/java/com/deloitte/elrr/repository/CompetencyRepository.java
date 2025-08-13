@@ -26,6 +26,7 @@ public interface CompetencyRepository extends JpaRepository<Competency, UUID> {
      * @param extensionPath Optional filter for JSONPath expressions
      * @param extensionPathMatch Optional filter for JSONPath predicates
      * @param identifier Optional filter for competency identifier
+     * @param identifierUrl Optional filter for competency identifier URL
      * @return List of competencies matching the criteria
      */
     List<Competency> findCompetenciesWithFilters(
@@ -33,7 +34,8 @@ public interface CompetencyRepository extends JpaRepository<Competency, UUID> {
         @Param("hasExtension") String[] hasExtension,
         @Param("extensionPath") String[] extensionPath,
         @Param("extensionPathMatch") String[] extensionPathMatch,
-        @Param("identifier") String[] identifier
+        @Param("identifier") String[] identifier,
+        @Param("identifierUrl") String[] identifierUrl
     );
 
     /**
@@ -49,7 +51,8 @@ public interface CompetencyRepository extends JpaRepository<Competency, UUID> {
             filter.getHasExtension(),
             filter.getExtensionPath(),
             filter.getExtensionPathMatch(),
-            filter.getIdentifier()
+            filter.getIdentifier(),
+            filter.getIdentifierUrl()
         );
     }
 }

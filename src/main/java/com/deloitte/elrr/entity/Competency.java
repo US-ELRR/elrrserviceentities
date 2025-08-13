@@ -29,6 +29,8 @@ import lombok.Setter;
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
     AND (CAST(:identifier AS text[]) IS NULL OR
         q.identifier ILIKE ANY(CAST(:identifier AS text[])))
+    AND (CAST(:identifierUrl AS text[]) IS NULL OR
+        q.identifier_url = ANY(CAST(:identifierUrl AS text[])))
     """,
     resultClass = Competency.class
 )
