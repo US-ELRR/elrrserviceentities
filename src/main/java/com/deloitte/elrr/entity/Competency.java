@@ -27,10 +27,13 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(q.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by identifier
     AND (CAST(:identifier AS text[]) IS NULL OR
         q.identifier ILIKE ANY(CAST(:identifier AS text[])))
+    -- by identifier URL
     AND (CAST(:identifierUrl AS text[]) IS NULL OR
         q.identifier_url = ANY(CAST(:identifierUrl AS text[])))
+    -- by code
     AND (CAST(:code AS text[]) IS NULL OR
         q.code = ANY(CAST(:code AS text[])))
     """,
