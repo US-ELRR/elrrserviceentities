@@ -1,5 +1,7 @@
 package com.deloitte.elrr.entity;
 
+import java.util.UUID;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.JdbcType;
@@ -40,6 +42,9 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(lr.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by learning resource id
+    AND (CAST(:learningResourceId AS uuid[]) IS NULL OR
+        lr.learning_resource_id = ANY(:learningResourceId))
     """,
     resultClass = LearningRecord.class
 )
@@ -85,6 +90,12 @@ public class LearningRecord extends Extensible<String> {
      */
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter { }
+    public static class Filter extends Extensible.Filter {
+        /**
+         * Optional filter for learning resource IDs.
+         */
+        private UUID[] learningResourceId;
+
+    }
 
 }
