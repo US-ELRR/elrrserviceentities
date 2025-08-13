@@ -20,13 +20,15 @@ public interface EmploymentRecordRepository extends JpaRepository<
      * @param hasExtension Optional filter for extension keys
      * @param extensionPath Optional filter for JSONPath expressions
      * @param extensionPathMatch Optional filter for JSONPath predicates
+     * @param employerOrgId Optional filter for employer organization ID
      * @return List of employment records matching the criteria
      */
     List<EmploymentRecord> findEmploymentRecordsWithFilters(
         @Param("id") UUID[] id,
         @Param("hasExtension") String[] hasExtension,
         @Param("extensionPath") String[] extensionPath,
-        @Param("extensionPathMatch") String[] extensionPathMatch
+        @Param("extensionPathMatch") String[] extensionPathMatch,
+        @Param("employerOrgId") UUID[] employerOrgId
     );
 
     /**
@@ -41,7 +43,8 @@ public interface EmploymentRecordRepository extends JpaRepository<
             filter.getId(),
             filter.getHasExtension(),
             filter.getExtensionPath(),
-            filter.getExtensionPathMatch()
+            filter.getExtensionPathMatch(),
+            filter.getEmployerOrgId()
         );
     }
 }

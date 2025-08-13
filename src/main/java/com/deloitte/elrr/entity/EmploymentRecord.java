@@ -3,6 +3,7 @@ package com.deloitte.elrr.entity;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +38,9 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(er.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by employer organization ID
+    AND (CAST(:employerOrgId AS uuid[]) IS NULL OR
+        er.employer_organization = ANY(:employerOrgId))
     """,
     resultClass = EmploymentRecord.class
 )
@@ -127,6 +131,11 @@ public class EmploymentRecord extends Extensible<String> {
 
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter { }
+    public static class Filter extends Extensible.Filter {
+        /**
+         * Optional Employer Organization filter.
+         */
+        private UUID[] employerOrgId;
+    }
 
 }
