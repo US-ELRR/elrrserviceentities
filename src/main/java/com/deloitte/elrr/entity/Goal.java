@@ -71,7 +71,8 @@ public class Goal extends Extensible<String> {
     /**
      * The type of the Goal, enum of SELF or ASSIGNED.
      */
-    @Column(name = "type", nullable = false, columnDefinition = "elrr.goal_type")
+    @Column(name = "type", nullable = false,
+            columnDefinition = "elrr.goal_type")
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     private GoalType type;
@@ -110,21 +111,27 @@ public class Goal extends Extensible<String> {
      * The Competencies associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_competency", joinColumns = @JoinColumn(name = "goal_id"), inverseJoinColumns = @JoinColumn(name = "qualification_id"))
+    @JoinTable(name = "goal_competency",
+    joinColumns = @JoinColumn(name = "goal_id"),
+    inverseJoinColumns = @JoinColumn(name = "qualification_id"))
     private Set<Competency> competencies;
 
     /**
      * The Credentials associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_credential", joinColumns = @JoinColumn(name = "goal_id"), inverseJoinColumns = @JoinColumn(name = "qualification_id"))
+    @JoinTable(name = "goal_credential",
+    joinColumns = @JoinColumn(name = "goal_id"),
+    inverseJoinColumns = @JoinColumn(name = "qualification_id"))
     private Set<Credential> credentials;
 
     /**
      * The Learning Resources associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_learning_resource", joinColumns = @JoinColumn(name = "goal_id"), inverseJoinColumns = @JoinColumn(name = "learning_resource_id"))
+    @JoinTable(name = "goal_learning_resource",
+    joinColumns = @JoinColumn(name = "goal_id"),
+    inverseJoinColumns = @JoinColumn(name = "learning_resource_id"))
     private Set<LearningResource> learningResources;
 
     @Override

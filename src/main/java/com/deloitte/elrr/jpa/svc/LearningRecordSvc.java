@@ -52,7 +52,7 @@ public class LearningRecordSvc implements CommonSvc<LearningRecord, UUID> {
 
     /**
      * Filter search.
-     * 
+     *
      * @param filter
      *            filter
      * @return learning records
