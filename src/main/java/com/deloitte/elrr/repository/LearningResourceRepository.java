@@ -25,14 +25,15 @@ public interface LearningResourceRepository extends JpaRepository<
      * @param hasExtension extension keys
      * @param extensionPath jsonpath queries
      * @param extensionPathMatch jsonpath predicate queries
+     * @param iri IRIs
      * @return learning resources
      */
     List<LearningResource> findLearningResourcesWithFilters(
         @Param("id") UUID[] id,
         @Param("hasExtension") String[] hasExtension,
         @Param("extensionPath") String[] extensionPath,
-        @Param("extensionPathMatch") String[] extensionPathMatch);
-
+        @Param("extensionPathMatch") String[] extensionPathMatch,
+        @Param("iri") String[] iri);
     /**
      * Convenience overload using filter object.
      * @param filter filter
@@ -44,6 +45,7 @@ public interface LearningResourceRepository extends JpaRepository<
         filter.getId(),
         filter.getHasExtension(),
         filter.getExtensionPath(),
-        filter.getExtensionPathMatch());
+        filter.getExtensionPathMatch(),
+        filter.getIri());
     }
 }

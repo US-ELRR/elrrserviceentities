@@ -32,6 +32,8 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(lr.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by iri
+    AND (CAST(:iri AS text[]) IS NULL OR lr.iri = ANY(:iri))
     """,
     resultClass = LearningResource.class
 )
@@ -86,13 +88,6 @@ public class LearningResource extends Extensible<String> {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    /**
-     * Filter object for LearningResource queries (id + extension filters).
-     */
-    @Getter
-    @Setter
-    public static class Filter extends Extensible.Filter { }
-
     @Override
     public String toString() {
         return "LearningResource [iri=" + iri + ", title=" + title + ", id="
@@ -105,5 +100,17 @@ public class LearningResource extends Extensible<String> {
                 + gradeScaleCode + ", metadataRepository=" + metadataRepository
                 + ", lrsEndpoint=" + lrsEndpoint + ", description="
                 + description + "]";
+    }
+
+    /**
+     * Filter object for LearningResource queries.
+     */
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        /**
+         * Filter by specific IRIs.
+         */
+        private String[] iri;
     }
 }
