@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.deloitte.elrr.entity.EmploymentRecord;
 
 @Repository
+@SuppressWarnings("checkstyle:ParameterNumber")
 public interface EmploymentRecordRepository extends JpaRepository<
         EmploymentRecord, UUID> {
 
@@ -21,6 +22,9 @@ public interface EmploymentRecordRepository extends JpaRepository<
      * @param extensionPath Optional filter for JSONPath expressions
      * @param extensionPathMatch Optional filter for JSONPath predicates
      * @param employerOrgId Optional filter for employer organization ID
+     * @param position Optional filter for position
+     * @param positionTitle Optional filter for position title
+     * @param positionDescription Optional filter for position description
      * @return List of employment records matching the criteria
      */
     List<EmploymentRecord> findEmploymentRecordsWithFilters(
@@ -28,7 +32,10 @@ public interface EmploymentRecordRepository extends JpaRepository<
         @Param("hasExtension") String[] hasExtension,
         @Param("extensionPath") String[] extensionPath,
         @Param("extensionPathMatch") String[] extensionPathMatch,
-        @Param("employerOrgId") UUID[] employerOrgId
+        @Param("employerOrgId") UUID[] employerOrgId,
+        @Param("position") String[] position,
+        @Param("positionTitle") String[] positionTitle,
+        @Param("positionDescription") String[] positionDescription
     );
 
     /**
@@ -44,7 +51,10 @@ public interface EmploymentRecordRepository extends JpaRepository<
             filter.getHasExtension(),
             filter.getExtensionPath(),
             filter.getExtensionPathMatch(),
-            filter.getEmployerOrgId()
+            filter.getEmployerOrgId(),
+            filter.getPosition(),
+            filter.getPositionTitle(),
+            filter.getPositionDescription()
         );
     }
 }
