@@ -34,6 +34,11 @@ import lombok.Setter;
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
     -- by iri
     AND (CAST(:iri AS text[]) IS NULL OR lr.iri = ANY(:iri))
+    -- by title
+    AND (CAST(:title AS text[]) IS NULL OR lr.title ILIKE ANY(:title))
+    -- by subject matter
+    AND (CAST(:subjectMatter AS text[]) IS NULL OR
+        lr.subject_matter ILIKE ANY(:subjectMatter))
     """,
     resultClass = LearningResource.class
 )
@@ -112,5 +117,15 @@ public class LearningResource extends Extensible<String> {
          * Filter by specific IRIs.
          */
         private String[] iri;
+
+        /**
+         * Search filter by title.
+         */
+        private String[] title;
+
+        /**
+         * Search filter by subject matter.
+         */
+        private String[] subjectMatter;
     }
 }
