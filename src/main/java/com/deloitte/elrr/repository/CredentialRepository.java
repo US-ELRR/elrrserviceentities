@@ -27,6 +27,7 @@ public interface CredentialRepository extends JpaRepository<Credential, UUID> {
      * @param extensionPathMatch Optional filter for JSONPath predicates
      * @param identifier Optional filter for credential identifier
      * @param identifierUrl Optional filter for credential identifier URL
+     * @param code Optional filter for credential code
      * @return List of credentials matching the criteria
      */
     List<Credential> findCredentialsWithFilters(
@@ -35,7 +36,8 @@ public interface CredentialRepository extends JpaRepository<Credential, UUID> {
         @Param("extensionPath") String[] extensionPath,
         @Param("extensionPathMatch") String[] extensionPathMatch,
         @Param("identifier") String[] identifier,
-        @Param("identifierUrl") String[] identifierUrl
+        @Param("identifierUrl") String[] identifierUrl,
+        @Param("code") String[] code
     );
 
     /**
@@ -52,7 +54,8 @@ public interface CredentialRepository extends JpaRepository<Credential, UUID> {
             filter.getExtensionPath(),
             filter.getExtensionPathMatch(),
             filter.getIdentifier(),
-            filter.getIdentifierUrl()
+            filter.getIdentifierUrl(),
+            filter.getCode()
         );
     }
 }

@@ -31,6 +31,8 @@ import lombok.Setter;
         q.identifier ILIKE ANY(CAST(:identifier AS text[])))
     AND (CAST(:identifierUrl AS text[]) IS NULL OR
         q.identifier_url = ANY(CAST(:identifierUrl AS text[])))
+    AND (CAST(:code AS text[]) IS NULL OR
+        q.code = ANY(CAST(:code AS text[])))
     """,
     resultClass = Credential.class
 )

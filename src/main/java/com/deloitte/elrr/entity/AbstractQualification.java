@@ -111,6 +111,10 @@ public class AbstractQualification extends Extensible<String> {
          * Optional identifierUrl filter.
          */
         private String[] identifierUrl;
+        /**
+         * Optional code filter.
+         */
+        private String[] code;
     }
 
 }
