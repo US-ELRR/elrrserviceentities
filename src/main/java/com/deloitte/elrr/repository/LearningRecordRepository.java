@@ -29,6 +29,7 @@ public interface LearningRecordRepository extends JpaRepository<LearningRecord,
      * @param extensionPath jsonpath queries
      * @param extensionPathMatch jsonpath predicate queries
      * @param learningResourceId learning resource IDs
+     * @param recordStatus record status
      * @return learning records
      */
     @Query(
@@ -39,7 +40,8 @@ public interface LearningRecordRepository extends JpaRepository<LearningRecord,
             @Param("hasExtension") String[] hasExtension,
             @Param("extensionPath") String[] extensionPath,
             @Param("extensionPathMatch") String[] extensionPathMatch,
-            @Param("learningResourceId") UUID[] learningResourceId);
+            @Param("learningResourceId") UUID[] learningResourceId,
+            @Param("recordStatus") String[] recordStatus);;
 
     /**
      * Convenience overload.
@@ -53,6 +55,7 @@ public interface LearningRecordRepository extends JpaRepository<LearningRecord,
                     filter.getHasExtension(),
                     filter.getExtensionPath(),
                     filter.getExtensionPathMatch(),
-                    filter.getLearningResourceId());
+                    filter.getLearningResourceId(),
+                    filter.getRecordStatus());
     }
 }

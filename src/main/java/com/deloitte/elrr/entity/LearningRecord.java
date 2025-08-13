@@ -45,6 +45,9 @@ import lombok.Setter;
     -- by learning resource id
     AND (CAST(:learningResourceId AS uuid[]) IS NULL OR
         lr.learning_resource_id = ANY(:learningResourceId))
+    -- by record status
+    AND (CAST(:recordStatus AS text[]) IS NULL OR
+        lr.record_status::text = ANY(:recordStatus))
     """,
     resultClass = LearningRecord.class
 )
@@ -95,6 +98,11 @@ public class LearningRecord extends Extensible<String> {
          * Optional filter for learning resource IDs.
          */
         private UUID[] learningResourceId;
+
+        /**
+         * Optional filter for record status.
+         */
+        private String[] recordStatus;
 
     }
 
