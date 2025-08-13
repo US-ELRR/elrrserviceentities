@@ -58,8 +58,10 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Sets the competencies for the goal from an array of competency IDs.
      *
-     * @param goal          The goal to set competencies for.
-     * @param competencyIds The array of competency IDs.
+     * @param goal
+     *            The goal to set competencies for.
+     * @param competencyIds
+     *            The array of competency IDs.
      * @return The updated goal with competencies set.
      */
     public Goal setCompetenciesFromIds(Goal goal, Set<UUID> competencyIds) {
@@ -80,8 +82,10 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Sets the credentials for the goal from an array of credential IDs.
      *
-     * @param goal          The goal to set credentials for.
-     * @param credentialIds The array of credential IDs.
+     * @param goal
+     *            The goal to set credentials for.
+     * @param credentialIds
+     *            The array of credential IDs.
      * @return The updated goal with credentials set.
      */
     public Goal setCredentialsFromIds(Goal goal, Set<UUID> credentialIds) {
@@ -103,8 +107,10 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
      * Sets the learning resources for the goal from an array of learning
      * resource IDs.
      *
-     * @param goal                The goal to set learning resources for.
-     * @param learningResourceIds The array of learning resource IDs.
+     * @param goal
+     *            The goal to set learning resources for.
+     * @param learningResourceIds
+     *            The array of learning resource IDs.
      * @return The updated goal with learning resources set.
      */
     public Goal setLearningResourcesFromIds(Goal goal,
@@ -112,11 +118,11 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
         if (learningResourceIds != null) {
             Set<LearningResource> learningResources = new HashSet<>();
             for (UUID learningResourceId : learningResourceIds) {
-                LearningResource learningResource = learningResourceSvc
-                        .get(learningResourceId)
-                        .orElseThrow(() -> new RuntimeServiceException(
-                                "Learning Resource not found for id: "
-                                        + learningResourceId));
+                LearningResource learningResource = learningResourceSvc.get(
+                        learningResourceId).orElseThrow(
+                                () -> new RuntimeServiceException(
+                                        "Learning Resource not found for id: "
+                                                + learningResourceId));
                 learningResources.add(learningResource);
             }
             goal.setLearningResources(learningResources);
@@ -127,7 +133,8 @@ public class GoalSvc implements CommonSvc<Goal, UUID> {
     /**
      * Find Goals with filters.
      *
-     * @param filter filter
+     * @param filter
+     *            filter
      * @return list
      */
     public java.util.List<Goal> findGoalsWithFilters(final Filter filter) {
