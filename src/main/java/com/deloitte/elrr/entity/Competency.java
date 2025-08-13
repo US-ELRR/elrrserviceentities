@@ -1,7 +1,5 @@
 package com.deloitte.elrr.entity;
 
-import java.util.UUID;
-
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.NamedNativeQuery;
@@ -37,7 +35,5 @@ import lombok.Setter;
 public class Competency extends AbstractQualification {
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter {
-        private UUID[] id;
-    }
+    public static class Filter extends Extensible.Filter { }
 }

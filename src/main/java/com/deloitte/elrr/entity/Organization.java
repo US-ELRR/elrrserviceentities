@@ -130,8 +130,6 @@ public class Organization extends Extensible<String> {
 
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter {
-        private java.util.UUID[] id;
-    }
+    public static class Filter extends Extensible.Filter { }
 
 }

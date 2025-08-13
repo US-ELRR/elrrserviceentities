@@ -3,7 +3,6 @@ package com.deloitte.elrr.entity;
 
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -128,8 +127,6 @@ public class EmploymentRecord extends Extensible<String> {
 
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter {
-        private UUID[] id;
-    }
+    public static class Filter extends Extensible.Filter { }
 
 }

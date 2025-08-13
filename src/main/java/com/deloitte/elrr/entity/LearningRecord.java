@@ -1,7 +1,6 @@
 package com.deloitte.elrr.entity;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
@@ -86,8 +85,6 @@ public class LearningRecord extends Extensible<String> {
      */
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter {
-        private UUID[] id;
-    }
+    public static class Filter extends Extensible.Filter { }
 
 }

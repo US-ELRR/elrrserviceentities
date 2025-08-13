@@ -198,7 +198,5 @@ import com.deloitte.elrr.entity.types.GoalType;
      */
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter {
-        private UUID[] id;
-    }
+    public static class Filter extends Extensible.Filter { }
 }
