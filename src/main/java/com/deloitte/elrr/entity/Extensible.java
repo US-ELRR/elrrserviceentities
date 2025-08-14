@@ -30,7 +30,7 @@ public abstract class Extensible<U> extends Auditable<U> {
      */
     @Getter
     @Setter
-    public abstract static class Filter {
+    public abstract static class Filter extends Auditable.Filter {
         /**
          * Optional filter for extension keys.
          */
