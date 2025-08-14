@@ -1,7 +1,7 @@
 package com.deloitte.elrr.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -37,10 +37,10 @@ public class AbstractQualification extends Extensible<String> {
     private String taxonomyId;
 
     @Column(name = "valid_start_date")
-    private LocalDateTime validStartDate;
+    private ZonedDateTime validStartDate;
 
     @Column(name = "valid_end_date")
-    private LocalDateTime validEndDate;
+    private ZonedDateTime validEndDate;
 
     @Column(name = "parent_id", length = 100)
     private String parentId;
