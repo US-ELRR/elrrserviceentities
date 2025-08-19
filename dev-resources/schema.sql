@@ -25,10 +25,12 @@ DROP TABLE IF EXISTS goal CASCADE;
 DROP TABLE IF EXISTS goal_credential CASCADE;
 DROP TABLE IF EXISTS goal_competency CASCADE;
 DROP TABLE IF EXISTS goal_learning_resource CASCADE;
+DROP TABLE IF EXISTS audit_log CASCADE;
 
 DROP TYPE IF EXISTS learning_status CASCADE;
 DROP TYPE IF EXISTS qualification_type CASCADE;
 DROP TYPE IF EXISTS goal_type CASCADE;
+DROP TYPE IF EXISTS action_type CASCADE;
 
 -- yes, we need this status
 DO $$ BEGIN
@@ -47,6 +49,15 @@ END $$;
 DO $$ BEGIN
     CREATE TYPE goal_type AS ENUM (
         'SELF', 'ASSIGNED'
+    );
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
+
+-- permission actions for audit log
+DO $$ BEGIN
+    CREATE TYPE action_type AS ENUM (
+        'CREATE', 'READ', 'UPDATE', 'DELETE', 'ASSOCIATE', 'DISASSOCIATE'
     );
 EXCEPTION
     WHEN duplicate_object THEN null;
@@ -369,4 +380,16 @@ CREATE TABLE IF NOT EXISTS goal_credential (
 CREATE TABLE IF NOT EXISTS goal_learning_resource (
     goal_id                     UUID NOT NULL REFERENCES goal (id) ON DELETE CASCADE,
     learning_resource_id        UUID NOT NULL REFERENCES learning_resource (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS audit_log (
+    id                          UUID PRIMARY KEY,
+    timestamp                   TIMESTAMP WITH TIME ZONE,
+    request_id                  UUID NOT NULL,
+    username                    VARCHAR(255) NOT NULL,
+    is_api_user                 BOOLEAN NOT NULL,
+    resource                    VARCHAR(255) NOT NULL,
+    action                      action_type NOT NULL,
+    entity_type                 VARCHAR(255) NOT NULL,
+    entity_id                   UUID NOT NULL
 );
