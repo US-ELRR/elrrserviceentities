@@ -6,6 +6,5 @@ package com.deloitte.elrr.entity.types;
 public enum SvcMethod {
     SAVE,
     SAVEALL,
-    DELETE,
-    DELETEALL
+    DELETE
 }

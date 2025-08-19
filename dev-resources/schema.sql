@@ -67,7 +67,7 @@ END $$;
 -- service methods for audit log
 DO $$ BEGIN
     CREATE TYPE svc_method AS ENUM (
-        'SAVE', 'SAVEALL', 'DELETE', 'DELETEALL'
+        'SAVE', 'SAVEALL', 'DELETE'
     );
 EXCEPTION
     WHEN duplicate_object THEN null;
