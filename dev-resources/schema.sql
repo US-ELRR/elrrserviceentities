@@ -31,6 +31,7 @@ DROP TYPE IF EXISTS learning_status CASCADE;
 DROP TYPE IF EXISTS qualification_type CASCADE;
 DROP TYPE IF EXISTS goal_type CASCADE;
 DROP TYPE IF EXISTS action_type CASCADE;
+DROP TYPE IF EXISTS svc_method CASCADE;
 
 -- yes, we need this status
 DO $$ BEGIN
@@ -58,6 +59,15 @@ END $$;
 DO $$ BEGIN
     CREATE TYPE action_type AS ENUM (
         'CREATE', 'READ', 'UPDATE', 'DELETE', 'ASSOCIATE', 'DISASSOCIATE'
+    );
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
+
+-- service methods for audit log
+DO $$ BEGIN
+    CREATE TYPE svc_method AS ENUM (
+        'SAVE', 'SAVEALL', 'DELETE', 'DELETEALL'
     );
 EXCEPTION
     WHEN duplicate_object THEN null;
@@ -391,5 +401,6 @@ CREATE TABLE IF NOT EXISTS audit_log (
     resource                    VARCHAR(255) NOT NULL,
     action                      action_type NOT NULL,
     entity_type                 VARCHAR(255) NOT NULL,
-    entity_id                   UUID NOT NULL
+    entity_id                   UUID NOT NULL,
+    svc_method                  svc_method NOT NULL
 );

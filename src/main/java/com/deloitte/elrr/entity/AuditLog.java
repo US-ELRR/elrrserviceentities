@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.deloitte.elrr.entity.types.ActionType;
+import com.deloitte.elrr.entity.types.SvcMethod;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,6 +47,10 @@ public class AuditLog extends com.deloitte.elrr.entity.Entity {
 
     @Column(name = "entity_id", nullable = false)
     private UUID entityId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "svc_method", nullable = false)
+    private SvcMethod svcMethod;
 
     @Override
     public String toString() {
