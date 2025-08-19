@@ -35,4 +35,42 @@ public class AuditLogSvc implements CommonSvc<AuditLog, UUID> {
     public AuditLog save(final AuditLog auditLog) {
         return CommonSvc.super.save(auditLog);
     }
+
+    /**
+     * Audit logs should never be deleted to maintain data integrity
+     * and compliance requirements.
+     *
+     * @param id the ID of the audit log entry
+     * @throws UnsupportedOperationException always thrown to prevent deletion
+     */
+    @Override
+    public void delete(final UUID id) {
+        throw new UnsupportedOperationException(
+                "Audit log entries cannot be deleted for compliance reasons");
+    }
+
+    /**
+     * Audit logs should never be deleted to maintain data integrity
+     * and compliance requirements.
+     *
+     * @throws UnsupportedOperationException always thrown to prevent deletion
+     */
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException(
+                "Audit log entries cannot be deleted for compliance reasons");
+    }
+
+    /**
+     * Audit logs should never be updated to maintain data integrity
+     * and compliance requirements. Once created, audit entries are immutable.
+     *
+     * @param auditLog the audit log entity
+     * @throws UnsupportedOperationException always thrown to prevent updates
+     */
+    @Override
+    public void update(final AuditLog auditLog) {
+        throw new UnsupportedOperationException(
+                "Audit log entries cannot be updated for compliance reasons");
+    }
 }
