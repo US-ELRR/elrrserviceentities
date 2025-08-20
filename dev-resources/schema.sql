@@ -58,7 +58,7 @@ END $$;
 -- permission actions for audit log
 DO $$ BEGIN
     CREATE TYPE action_type AS ENUM (
-        'CREATE', 'READ', 'UPDATE', 'DELETE', 'ASSOCIATE', 'DISASSOCIATE'
+        'CREATE', 'READ', 'UPDATE', 'DELETE', 'ASSOCIATE', 'DISASSOCIATE', 'ADMIN'
     );
 EXCEPTION
     WHEN duplicate_object THEN null;

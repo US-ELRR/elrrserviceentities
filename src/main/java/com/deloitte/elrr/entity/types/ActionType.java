@@ -6,5 +6,5 @@ package com.deloitte.elrr.entity.types;
  * in the database.
  */
 public enum ActionType {
-    CREATE, READ, UPDATE, DELETE, ASSOCIATE, DISASSOCIATE
+    CREATE, READ, UPDATE, DELETE, ASSOCIATE, DISASSOCIATE, ADMIN
 }
