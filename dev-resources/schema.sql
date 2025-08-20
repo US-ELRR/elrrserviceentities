@@ -402,5 +402,6 @@ CREATE TABLE IF NOT EXISTS audit_log (
     action                      action_type NOT NULL,
     entity_type                 VARCHAR(255) NOT NULL,
     entity_id                   UUID NOT NULL,
-    svc_method                  svc_method NOT NULL
+    svc_method                  svc_method NOT NULL,
+    jwt_id                      UUID
 );

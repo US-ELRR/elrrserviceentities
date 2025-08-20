@@ -3,6 +3,9 @@ package com.deloitte.elrr.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
+
 import com.deloitte.elrr.entity.types.ActionType;
 import com.deloitte.elrr.entity.types.SvcMethod;
 import jakarta.persistence.Column;
@@ -39,7 +42,10 @@ public class AuditLog extends com.deloitte.elrr.entity.Entity {
     private String resource;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "action", nullable = false)
+    @Column(name = "action",
+            nullable = false,
+            columnDefinition = "action_type")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     private ActionType action;
 
     @Column(name = "entity_type", nullable = false)
@@ -49,8 +55,14 @@ public class AuditLog extends com.deloitte.elrr.entity.Entity {
     private UUID entityId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "svc_method", nullable = false)
+    @Column(name = "svc_method",
+            nullable = false,
+            columnDefinition = "svc_method")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     private SvcMethod svcMethod;
+
+    @Column(name = "jwt_id")
+    private UUID jwtId;
 
     @Override
     public String toString() {
@@ -58,7 +70,8 @@ public class AuditLog extends com.deloitte.elrr.entity.Entity {
             + ", requestId=" + requestId + ", username=" + username
             + ", isApiUser=" + isApiUser + ", resource=" + resource
             + ", action=" + action + ", entityType=" + entityType
-            + ", entityId=" + entityId + "]";
+            + ", entityId=" + entityId + ", svcMethod=" + svcMethod
+            + ", jwtId=" + jwtId + "]";
     }
 
 }
