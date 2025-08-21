@@ -55,7 +55,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LearningRecord extends Extensible<String> {
+public class LearningRecord extends Extensible {
 
     @ManyToOne
     @JoinColumn(name = "learning_resource_id")

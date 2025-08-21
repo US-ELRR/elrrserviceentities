@@ -46,7 +46,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Organization extends Extensible<String> {
+public class Organization extends Extensible {
 
     @Column(name = "name")
     private String name;

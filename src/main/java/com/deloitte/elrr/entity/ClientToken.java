@@ -22,7 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ClientToken extends Auditable<String> {
+public class ClientToken extends Auditable {
 
     @Column(name = "jwt_id")
     private UUID jwtId;

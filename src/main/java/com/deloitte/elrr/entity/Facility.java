@@ -39,7 +39,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Facility extends Extensible<String> {
+public class Facility extends Extensible {
 
     @Column(name = "name")
     private String name;

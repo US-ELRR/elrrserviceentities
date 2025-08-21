@@ -30,7 +30,7 @@ class ExtensibleTest {
     /**
      * Concrete implementation of Extensible for testing purposes
      */
-    private static class TestExtensible extends Extensible<String> {
+    private static class TestExtensible extends Extensible {
         // Simple concrete implementation for testing
     }
 

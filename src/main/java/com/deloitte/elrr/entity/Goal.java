@@ -60,7 +60,7 @@ import com.deloitte.elrr.entity.types.GoalType;
  @AllArgsConstructor
  @Getter
  @Setter
- public class Goal extends Extensible<String> {
+ public class Goal extends Extensible {
 
     /**
      * The Person who owns the Goal.

@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Identity extends Auditable<String> {
+public class Identity extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "person_id")
