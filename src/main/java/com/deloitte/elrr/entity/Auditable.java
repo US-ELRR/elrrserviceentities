@@ -20,7 +20,6 @@ import lombok.Setter;
 
 /**
  * @author mnelakurti
- * @param <U>
  * This Entity class is
  *
  */
@@ -30,7 +29,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public abstract class Auditable<U> extends Entity {
+public abstract class Auditable extends Entity {
 
     @Column(name = "inserted_date", updatable = false)
     @CreationTimestamp
@@ -38,7 +37,7 @@ public abstract class Auditable<U> extends Entity {
 
     @Column(name = "updated_by", length = 20)
     @LastModifiedBy
-    private U updatedBy;
+    private String updatedBy;
 
     @Column(name = "last_modified")
     @UpdateTimestamp

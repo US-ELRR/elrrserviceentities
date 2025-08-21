@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Email extends Auditable<String> {
+public class Email extends Auditable {
 
     @Column(name = "email_address")
     private String emailAddress;
