@@ -31,29 +31,34 @@ import lombok.Setter;
  * Competencies, Credentials, and Learning Resources.
  */
 
-@Entity
-@Table(name = "goal")
-@NamedNativeQuery(name = "Goal.findGoalsWithFilters", query = """
-        SELECT DISTINCT g.* FROM {h-schema}goal g
-        -- by ID
-        WHERE (CAST(:id AS uuid[]) IS NULL OR g.id = ANY(:id))
-        -- by presence of (all) extension keys
-        AND (CAST(:hasExtension AS text[]) IS NULL OR
-            g.extensions \\?\\?& CAST(:hasExtension AS text[]))
-        -- by returning items from all jsonpath queries
-        AND (CAST(:extensionPath AS text[]) IS NULL OR
-            (SELECT bool_and(g.extensions @\\?\\? path::jsonpath)
-             FROM unnest(CAST(:extensionPath AS text[])) AS path))
-        -- by returning items from all jsonpath predicates
-        AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
-            (SELECT bool_and(g.extensions @@ path::jsonpath)
-             FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
-        """, resultClass = Goal.class)
-@RequiredArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-public class Goal extends Extensible<String> {
+ @Entity
+ @Table(name = "goal")
+ @NamedNativeQuery(
+    name = "Goal.findGoalsWithFilters",
+    query =
+    """
+    SELECT DISTINCT g.* FROM {h-schema}goal g
+    -- by ID
+    WHERE (CAST(:id AS uuid[]) IS NULL OR g.id = ANY(:id))
+    -- by presence of (all) extension keys
+    AND (CAST(:hasExtension AS text[]) IS NULL OR
+        g.extensions \\?\\?& CAST(:hasExtension AS text[]))
+    -- by returning items from all jsonpath queries
+    AND (CAST(:extensionPath AS text[]) IS NULL OR
+        (SELECT bool_and(g.extensions @\\?\\? path::jsonpath)
+         FROM unnest(CAST(:extensionPath AS text[])) AS path))
+    -- by returning items from all jsonpath predicates
+    AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
+        (SELECT bool_and(g.extensions @@ path::jsonpath)
+         FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    """,
+    resultClass = Goal.class
+ )
+ @RequiredArgsConstructor
+ @AllArgsConstructor
+ @Getter
+ @Setter
+ public class Goal extends Extensible {
 
     /**
      * The Person who owns the Goal.

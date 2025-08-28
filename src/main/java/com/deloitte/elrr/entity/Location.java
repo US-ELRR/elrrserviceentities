@@ -37,7 +37,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Location extends Extensible<String> {
+public class Location extends Extensible {
 
     @Column(name = "street_number_and_name")
     private String streetNumberAndName;
