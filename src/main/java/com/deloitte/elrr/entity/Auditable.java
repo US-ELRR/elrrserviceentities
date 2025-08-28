@@ -43,4 +43,6 @@ public abstract class Auditable<U> extends Entity {
     @Column(name = "last_modified")
     @UpdateTimestamp
     private LocalDateTime lastModified;
+
+    public abstract static class Filter extends Entity.Filter { }
 }

@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.NamedNativeQuery;
 
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +32,13 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(lr.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by iri
+    AND (CAST(:iri AS text[]) IS NULL OR lr.iri = ANY(:iri))
+    -- by title
+    AND (CAST(:title AS text[]) IS NULL OR lr.title ILIKE ANY(:title))
+    -- by subject matter
+    AND (CAST(:subjectMatter AS text[]) IS NULL OR
+        lr.subject_matter ILIKE ANY(:subjectMatter))
     """,
     resultClass = LearningResource.class
 )
@@ -87,15 +93,6 @@ public class LearningResource extends Extensible<String> {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    /**
-     * Filter object for LearningResource queries (id + extension filters).
-     */
-    @Getter
-    @Setter
-    public static class Filter extends Extensible.Filter {
-        private UUID[] id;
-    }
-
     @Override
     public String toString() {
         return "LearningResource [iri=" + iri + ", title=" + title + ", id="
@@ -108,5 +105,27 @@ public class LearningResource extends Extensible<String> {
                 + gradeScaleCode + ", metadataRepository=" + metadataRepository
                 + ", lrsEndpoint=" + lrsEndpoint + ", description="
                 + description + "]";
+    }
+
+    /**
+     * Filter object for LearningResource queries.
+     */
+    @Getter
+    @Setter
+    public static class Filter extends Extensible.Filter {
+        /**
+         * Filter by specific IRIs.
+         */
+        private String[] iri;
+
+        /**
+         * Search filter by title.
+         */
+        private String[] title;
+
+        /**
+         * Search filter by subject matter.
+         */
+        private String[] subjectMatter;
     }
 }

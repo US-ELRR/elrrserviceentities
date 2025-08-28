@@ -303,11 +303,6 @@ public class Person extends Extensible<String> {
     public static class Filter extends Extensible.Filter {
 
         /**
-         * Optional person ID filter.
-         */
-        private UUID[] id;
-
-        /**
          * Optional IFI (Inverse Functional Identifier) filter.
          */
         private String[] ifi;

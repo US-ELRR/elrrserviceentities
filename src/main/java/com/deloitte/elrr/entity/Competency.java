@@ -1,7 +1,5 @@
 package com.deloitte.elrr.entity;
 
-import java.util.UUID;
-
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.NamedNativeQuery;
@@ -29,6 +27,15 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(q.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by identifier
+    AND (CAST(:identifier AS text[]) IS NULL OR
+        q.identifier ILIKE ANY(CAST(:identifier AS text[])))
+    -- by identifier URL
+    AND (CAST(:identifierUrl AS text[]) IS NULL OR
+        q.identifier_url = ANY(CAST(:identifierUrl AS text[])))
+    -- by code
+    AND (CAST(:code AS text[]) IS NULL OR
+        q.code = ANY(CAST(:code AS text[])))
     """,
     resultClass = Competency.class
 )
@@ -37,7 +44,5 @@ import lombok.Setter;
 public class Competency extends AbstractQualification {
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter {
-        private UUID[] id;
-    }
+    public static class Filter extends AbstractQualification.Filter { }
 }

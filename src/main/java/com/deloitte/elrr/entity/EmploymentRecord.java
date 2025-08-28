@@ -38,6 +38,18 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(er.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by employer organization ID
+    AND (CAST(:employerOrgId AS uuid[]) IS NULL OR
+        er.employer_organization = ANY(:employerOrgId))
+    -- by position
+    AND (CAST(:position AS text[]) IS NULL OR
+        er.position ILIKE ANY(:position))
+    -- by position title
+    AND (CAST(:positionTitle AS text[]) IS NULL OR
+        er.position_title ILIKE ANY(:positionTitle))
+    -- by position description
+    AND (CAST(:positionDescription AS text[]) IS NULL OR
+        er.position_description ILIKE ANY(:positionDescription))
     """,
     resultClass = EmploymentRecord.class
 )
@@ -129,7 +141,25 @@ public class EmploymentRecord extends Extensible<String> {
     @Getter
     @Setter
     public static class Filter extends Extensible.Filter {
-        private UUID[] id;
+        /**
+         * Optional Employer Organization filter.
+         */
+        private UUID[] employerOrgId;
+
+        /**
+         * Optional position filter.
+         */
+        private String[] position;
+
+        /**
+         * Optional position title filter.
+         */
+        private String[] positionTitle;
+
+        /**
+         * Optional position description filter.
+         */
+        private String[] positionDescription;
     }
 
 }
