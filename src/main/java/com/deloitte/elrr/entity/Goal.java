@@ -1,12 +1,14 @@
 package com.deloitte.elrr.entity;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
-import java.util.Set;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.UUID;
+import com.deloitte.elrr.entity.types.GoalType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,14 +21,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-import com.deloitte.elrr.entity.types.GoalType;
-
 
 /**
  * A Goal represents a relationship between a Person and a number of
@@ -70,10 +68,16 @@ import com.deloitte.elrr.entity.types.GoalType;
     private Person person;
 
     /**
+     * The id of the Goal.
+     */
+    @Column(name = "goal_id", nullable = false)
+    private String goalId;
+
+    /**
      * The type of the Goal, enum of SELF or ASSIGNED.
      */
-    @Column(
-        name = "type", nullable = false, columnDefinition = "elrr.goal_type")
+    @Column(name = "type", nullable = false,
+            columnDefinition = "elrr.goal_type")
     @Enumerated(EnumType.STRING)
     @JdbcType(PostgreSQLEnumJdbcType.class)
     private GoalType type;
@@ -94,57 +98,50 @@ import com.deloitte.elrr.entity.types.GoalType;
      * The start date of the Goal.
      */
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     /**
      * The achieved-by date of the Goal.
      */
     @Column(name = "achieved_by_date")
-    private LocalDate achievedByDate;
+    private LocalDateTime achievedByDate;
 
     /**
      * The expiration date of the Goal.
      */
     @Column(name = "expiration_date")
-    private LocalDate expirationDate;
+    private LocalDateTime expirationDate;
 
     /**
      * The Competencies associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(
-        name = "goal_competency",
-        joinColumns = @JoinColumn(name = "goal_id"),
-        inverseJoinColumns = @JoinColumn(name = "qualification_id")
-    )
+    @JoinTable(name = "goal_competency",
+    joinColumns = @JoinColumn(name = "goal_id"),
+    inverseJoinColumns = @JoinColumn(name = "qualification_id"))
     private Set<Competency> competencies;
 
     /**
      * The Credentials associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(
-        name = "goal_credential",
-        joinColumns = @JoinColumn(name = "goal_id"),
-        inverseJoinColumns = @JoinColumn(name = "qualification_id")
-    )
+    @JoinTable(name = "goal_credential",
+    joinColumns = @JoinColumn(name = "goal_id"),
+    inverseJoinColumns = @JoinColumn(name = "qualification_id"))
     private Set<Credential> credentials;
 
     /**
      * The Learning Resources associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(
-        name = "goal_learning_resource",
-        joinColumns = @JoinColumn(name = "goal_id"),
-        inverseJoinColumns = @JoinColumn(name = "learning_resource_id")
-    )
+    @JoinTable(name = "goal_learning_resource",
+    joinColumns = @JoinColumn(name = "goal_id"),
+    inverseJoinColumns = @JoinColumn(name = "learning_resource_id"))
     private Set<LearningResource> learningResources;
 
     @Override
     public String toString() {
-        return "Goal [id=" + id + ", person=" + person
-        + "]";
+        return "Goal [id=" + id + ", person=" + person + "]";
     }
 
     /**
@@ -162,6 +159,7 @@ import com.deloitte.elrr.entity.types.GoalType;
         }
         return competencyIds;
     }
+
     /**
      * Get the IDs of any credentials associated with this Goal.
      *
@@ -177,6 +175,7 @@ import com.deloitte.elrr.entity.types.GoalType;
         }
         return credentialIds;
     }
+
     /**
      * Get the IDs of any learning resources associated with this Goal.
      *
