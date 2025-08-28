@@ -1,6 +1,6 @@
 package com.deloitte.elrr.entity;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.JdbcType;
@@ -27,7 +27,7 @@ import lombok.Setter;
 public class AuditLog extends com.deloitte.elrr.entity.Entity {
 
     @Column(name = "timestamp")
-    private LocalDateTime timestamp;
+    private ZonedDateTime timestamp;
 
     @Column(name = "request_id", nullable = false)
     private UUID requestId;
