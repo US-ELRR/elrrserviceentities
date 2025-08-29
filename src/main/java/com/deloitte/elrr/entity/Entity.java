@@ -23,4 +23,9 @@ public abstract class Entity {
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected UUID id;
 
+    @Getter
+    @Setter
+    public abstract static class Filter {
+        private UUID[] id;
+    }
 }

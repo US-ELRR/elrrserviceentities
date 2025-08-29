@@ -3,6 +3,8 @@ package com.deloitte.elrr.entity;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
@@ -41,6 +43,12 @@ import lombok.Setter;
     AND (CAST(:extensionPathMatch AS text[]) IS NULL OR
         (SELECT bool_and(lr.extensions @@ path::jsonpath)
          FROM unnest(CAST(:extensionPathMatch AS text[])) AS path))
+    -- by learning resource id
+    AND (CAST(:learningResourceId AS uuid[]) IS NULL OR
+        lr.learning_resource_id = ANY(:learningResourceId))
+    -- by record status
+    AND (CAST(:recordStatus AS text[]) IS NULL OR
+        lr.record_status::text = ANY(:recordStatus))
     """,
     resultClass = LearningRecord.class
 )
@@ -87,7 +95,16 @@ public class LearningRecord extends Extensible<String> {
     @Getter
     @Setter
     public static class Filter extends Extensible.Filter {
-        private UUID[] id;
+        /**
+         * Optional filter for learning resource IDs.
+         */
+        private UUID[] learningResourceId;
+
+        /**
+         * Optional filter for record status.
+         */
+        private String[] recordStatus;
+
     }
 
 }
