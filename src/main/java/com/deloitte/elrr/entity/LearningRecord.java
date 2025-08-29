@@ -1,5 +1,6 @@
 package com.deloitte.elrr.entity;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import java.time.LocalDateTime;
@@ -66,7 +67,7 @@ public class LearningRecord extends Extensible<String> {
     private Person person;
 
     @Column(name = "enrollment_date")
-    private LocalDateTime enrollmentDate;
+    private ZonedDateTime enrollmentDate;
 
     @Column(name = "record_status", columnDefinition = "learning_status")
     @Enumerated(EnumType.STRING)
@@ -77,7 +78,7 @@ public class LearningRecord extends Extensible<String> {
     private String academicGrade;
 
     @Column(name = "event_time")
-    private LocalDateTime eventTime;
+    private ZonedDateTime eventTime;
 
     @Override
     public String toString() {
