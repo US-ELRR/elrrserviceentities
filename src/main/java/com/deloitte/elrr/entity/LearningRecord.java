@@ -3,8 +3,6 @@ package com.deloitte.elrr.entity;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-import java.time.LocalDateTime;
-
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
