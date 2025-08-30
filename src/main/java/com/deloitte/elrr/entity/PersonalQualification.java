@@ -1,6 +1,6 @@
 package com.deloitte.elrr.entity;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -32,5 +32,5 @@ public class PersonalQualification extends Auditable<String> {
 
     @Column(name = "expires")
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected LocalDateTime expires;
+    protected ZonedDateTime expires;
 }
