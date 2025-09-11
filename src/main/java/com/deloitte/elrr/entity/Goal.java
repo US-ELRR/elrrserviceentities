@@ -1,6 +1,6 @@
 package com.deloitte.elrr.entity;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -93,45 +93,45 @@ public class Goal extends Extensible<String> {
      * The start date of the Goal.
      */
     @Column(name = "start_date")
-    private LocalDateTime startDate;
+    private ZonedDateTime startDate;
 
     /**
      * The achieved-by date of the Goal.
      */
     @Column(name = "achieved_by_date")
-    private LocalDateTime achievedByDate;
+    private ZonedDateTime achievedByDate;
 
     /**
      * The expiration date of the Goal.
      */
     @Column(name = "expiration_date")
-    private LocalDateTime expirationDate;
+    private ZonedDateTime expirationDate;
 
     /**
      * The Competencies associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_competency",
-    joinColumns = @JoinColumn(name = "goal_id"),
-    inverseJoinColumns = @JoinColumn(name = "qualification_id"))
+    @JoinTable(name = "goal_competency", joinColumns = @JoinColumn(
+            name = "goal_id"), inverseJoinColumns = @JoinColumn(
+                    name = "qualification_id"))
     private Set<Competency> competencies;
 
     /**
      * The Credentials associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_credential",
-    joinColumns = @JoinColumn(name = "goal_id"),
-    inverseJoinColumns = @JoinColumn(name = "qualification_id"))
+    @JoinTable(name = "goal_credential", joinColumns = @JoinColumn(
+            name = "goal_id"), inverseJoinColumns = @JoinColumn(
+                    name = "qualification_id"))
     private Set<Credential> credentials;
 
     /**
      * The Learning Resources associated with the Goal.
      */
     @ManyToMany
-    @JoinTable(name = "goal_learning_resource",
-    joinColumns = @JoinColumn(name = "goal_id"),
-    inverseJoinColumns = @JoinColumn(name = "learning_resource_id"))
+    @JoinTable(name = "goal_learning_resource", joinColumns = @JoinColumn(
+            name = "goal_id"), inverseJoinColumns = @JoinColumn(
+                    name = "learning_resource_id"))
     private Set<LearningResource> learningResources;
 
     @Override
@@ -192,5 +192,6 @@ public class Goal extends Extensible<String> {
      */
     @Getter
     @Setter
-    public static class Filter extends Extensible.Filter { }
+    public static class Filter extends Extensible.Filter {
+    }
 }
