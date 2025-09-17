@@ -22,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AbstractQualification extends Extensible<String> {
+public class AbstractQualification extends Extensible {
 
     @Column(name = "identifier", length = 100)
     private String identifier;

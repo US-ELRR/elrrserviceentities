@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public abstract class Extensible<U> extends Auditable<U> {
+public abstract class Extensible extends Auditable {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "extensions", columnDefinition = "JSONB")

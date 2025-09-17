@@ -19,7 +19,7 @@ import lombok.Setter;
 @DiscriminatorColumn(name = "type")
 @Getter
 @Setter
-public class PersonalQualification extends Auditable<String> {
+public class PersonalQualification extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "person_id")

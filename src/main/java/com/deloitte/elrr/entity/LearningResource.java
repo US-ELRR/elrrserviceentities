@@ -46,7 +46,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LearningResource extends Extensible<String> {
+public class LearningResource extends Extensible {
 
     @Column(name = "iri")
     private String iri;

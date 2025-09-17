@@ -21,4 +21,5 @@ TRUNCATE TABLE client_token CASCADE;
 TRUNCATE TABLE goal CASCADE;
 TRUNCATE TABLE goal_credential CASCADE;
 TRUNCATE TABLE goal_competency CASCADE;
-TRUNCATE TABLE goal_learning_resource CASCADE
+TRUNCATE TABLE goal_learning_resource CASCADE;
+TRUNCATE TABLE audit_log CASCADE;
